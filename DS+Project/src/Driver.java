@@ -122,6 +122,7 @@ public class Driver {
 		textField.setBounds(544, 61, 86, 22);
 		frame.getContentPane().add(textField);
 	}//End of initialize()
+	
 }//End of class
 
 
