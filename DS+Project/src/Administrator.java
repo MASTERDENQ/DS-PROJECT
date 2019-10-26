@@ -175,12 +175,6 @@ public class Administrator extends JFrame {
 		btnRent.setBounds(353, 385, 347, 57);
 		contentPane.add(btnRent);
 		
-		textField = new JTextField();
-		textField.setText("copyright 2019");
-		textField.setColumns(10);
-		textField.setBounds(309, 440, 93, 28);
-		contentPane.add(textField);
-		
 		//Add Record to existing Places
 		JButton btnAddPlace = new JButton("Add Place");
 		btnAddPlace.setBounds(10, 385, 347, 57);
@@ -192,6 +186,13 @@ public class Administrator extends JFrame {
 			}
 		});
 		btnAddPlace.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		
+		textField = new JTextField();
+		textField.setText("Copyright \u00A9 2019");
+		textField.setEditable(false);
+		textField.setColumns(10);
+		textField.setBounds(291, 448, 116, 28);
+		contentPane.add(textField);
 	}
 	
 	

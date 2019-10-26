@@ -159,9 +159,10 @@ public class Visitor extends JFrame {
 		contentPane.add(separator_2);
 		
 		textField = new JTextField();
-		textField.setText("copyright 2019");
+		textField.setText("Copyright \u00A9 2019");
+		textField.setEditable(false);
 		textField.setColumns(10);
-		textField.setBounds(327, 435, 93, 28);
+		textField.setBounds(303, 435, 116, 28);
 		contentPane.add(textField);
 	}
 	

@@ -21,7 +21,7 @@ public class Driver {
 	
 	private static JFrame frame;
 	private static JTextField txtCopyright;
-	private static JTextField textField;
+	private static JTextField dateTextField;
 	
 
 	/**
@@ -105,8 +105,9 @@ public class Driver {
 		frame.getContentPane().add(separator_2);
 		
 		txtCopyright = new JTextField();
-		txtCopyright.setText("copyright 2019");
-		txtCopyright.setBounds(300, 418, 93, 28);
+		txtCopyright.setEditable(false);
+		txtCopyright.setText("Copyright © 2019");
+		txtCopyright.setBounds(277, 418, 116, 28);
 		frame.getContentPane().add(txtCopyright);
 		txtCopyright.setColumns(10);
 		
@@ -115,12 +116,12 @@ public class Driver {
 		label.setBounds(544, 24, 50, 36);
 		frame.getContentPane().add(label);
 		
-		textField = new JTextField();
-		textField.setText("10/21/2019");
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBounds(544, 61, 86, 22);
-		frame.getContentPane().add(textField);
+		dateTextField = new JTextField();
+		dateTextField.setText("10/21/2019");
+		dateTextField.setEditable(false);
+		dateTextField.setColumns(10);
+		dateTextField.setBounds(544, 61, 86, 22);
+		frame.getContentPane().add(dateTextField);
 	}//End of initialize()
 	
 }//End of class
