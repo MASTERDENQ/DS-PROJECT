@@ -135,7 +135,7 @@ public class Visitor extends JFrame {
 		
 		//Holds table
 		Panel tablePanel = new Panel();
-		tablePanel.setBackground(Color.GREEN);
+		tablePanel.setBackground(Color.LIGHT_GRAY);
 		tablePanel.setBounds(10, 147, 690, 278);
 		contentPane.add(tablePanel);
 		GroupLayout gl_tablePanel = new GroupLayout(tablePanel);

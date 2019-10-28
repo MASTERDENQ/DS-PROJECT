@@ -10,6 +10,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -62,8 +64,7 @@ public class Driver {
 		lblDiGoodPlaceDem.setForeground(Color.BLACK);
 		lblDiGoodPlaceDem.setBounds(10, 24, 533, 64);
 		frame.getContentPane().add(lblDiGoodPlaceDem);
-		
-		//Calls signIn Functions 
+			
 		JButton btnVisitor = new JButton("VISITOR");
 		btnVisitor.setFont(new Font("Tahoma", Font.PLAIN, 48));
 		btnVisitor.addActionListener(new ActionListener() {
@@ -79,7 +80,11 @@ public class Driver {
 		btnAdministrator.setFont(new Font("Tahoma", Font.PLAIN, 48));
 		btnAdministrator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Administrator.start();
+				try {
+					Administrator.signIn();
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
 				frame.dispose();
 				
 			}
