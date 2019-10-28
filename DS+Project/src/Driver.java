@@ -1,8 +1,8 @@
 /**
  * Written By :
  * Tyrone Wallace - 1706903
- * Dimitri Russell - 
- * Reinaldo Peno - 
+ * Dimitri Russell - 160
+ * Reinaldo Peno - 160
  */
 
 import java.awt.Color;
@@ -86,7 +86,6 @@ public class Driver {
 					e1.printStackTrace();
 				}
 				frame.dispose();
-				
 			}
 		});
 		btnAdministrator.setBounds(52, 291, 544, 106);

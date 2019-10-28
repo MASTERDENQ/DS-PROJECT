@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
 
 @SuppressWarnings({ "serial", "unused" })
 public class Visitor extends JFrame {
@@ -37,6 +38,8 @@ public class Visitor extends JFrame {
 	private JPanel contentPane;
 	private JTextField dateBox;
 	private JTextField textField;
+	private JTextField txtPleaseSelectCre;
+	private JTextField textField_1;
 	
 
 	/**
@@ -133,37 +136,53 @@ public class Visitor extends JFrame {
 		btnMakeRequest.setBounds(344, 0, 346, 47);
 		panel.add(btnMakeRequest);
 		
-		//Holds table
-		Panel tablePanel = new Panel();
-		tablePanel.setBackground(Color.LIGHT_GRAY);
-		tablePanel.setBounds(10, 147, 690, 278);
-		contentPane.add(tablePanel);
-		GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
-		gl_tablePanel.setHorizontalGroup(
-			gl_tablePanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 690, Short.MAX_VALUE)
-		);
-		gl_tablePanel.setVerticalGroup(
-			gl_tablePanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 278, Short.MAX_VALUE)
-		);
-		
-		tablePanel.setLayout(gl_tablePanel);
-		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(42, 139, 624, 2);
 		contentPane.add(separator_1);
 		
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(35, 431, 624, 2);
+		separator_2.setBounds(42, 397, 624, 2);
 		contentPane.add(separator_2);
 		
 		textField = new JTextField();
 		textField.setText("Copyright \u00A9 2019");
 		textField.setEditable(false);
 		textField.setColumns(10);
-		textField.setBounds(303, 435, 116, 28);
+		textField.setBounds(302, 446, 116, 28);
 		contentPane.add(textField);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(10, 177, 690, 47);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(10, 218, 690, 47);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		btnNewButton_2.setBounds(10, 263, 690, 39);
+		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("New button");
+		btnNewButton_3.setBounds(14, 300, 686, 36);
+		contentPane.add(btnNewButton_3);
+		
+		txtPleaseSelectCre = new JTextField();
+		txtPleaseSelectCre.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtPleaseSelectCre.setText("PLEASE SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY.");
+		txtPleaseSelectCre.setEditable(true);
+		txtPleaseSelectCre.setColumns(10);
+		txtPleaseSelectCre.setBounds(22, 149, 659, 28);
+		contentPane.add(txtPleaseSelectCre);
+		
+		JButton btnNewButton_5 = new JButton("New button");
+		btnNewButton_5.setBounds(14, 337, 686, 47);
+		contentPane.add(btnNewButton_5);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(10, 406, 686, 37);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
 	}
 	
 	
