@@ -40,7 +40,6 @@ public class Administrator extends JFrame {
 	private JPanel contentPane;
 	private JTextField dateBox;
 	private JTextField textField;
-	private static JTable table;
 	
 	/**
 	 * Launch the Admin Frame.
@@ -148,39 +147,6 @@ public class Administrator extends JFrame {
 		btnViewProcessLog.setBounds(463, 0, 227, 47);
 		panel.add(btnViewProcessLog);
 		
-		//Holds table
-		Panel tablePanel = new Panel();
-		tablePanel.setBackground(Color.LIGHT_GRAY);
-		tablePanel.setBounds(10, 147, 690, 232);
-		contentPane.add(tablePanel);
-		
-		table = new JTable();
-		table.setFillsViewportHeight(true);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-			}
-		));
-		
-		GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
-		gl_tablePanel.setHorizontalGroup(
-			gl_tablePanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_tablePanel.createSequentialGroup()
-					.addGap(328)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(343, Short.MAX_VALUE))
-		);
-		gl_tablePanel.setVerticalGroup(
-			gl_tablePanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_tablePanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(205, Short.MAX_VALUE))
-		);
-		
-		tablePanel.setLayout(gl_tablePanel);
-		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(42, 139, 624, 2);
 		contentPane.add(separator_1);
@@ -214,6 +180,13 @@ public class Administrator extends JFrame {
 		textField.setColumns(10);
 		textField.setBounds(291, 448, 116, 28);
 		contentPane.add(textField);
+		
+		Panel panel_1 = new Panel();
+		panel_1.setBackground(Color.LIGHT_GRAY);
+		panel_1.setForeground(Color.CYAN);
+		panel_1.setLayout(null);
+		panel_1.setBounds(10, 146, 690, 233);
+		contentPane.add(panel_1);
 	}
 	
 	

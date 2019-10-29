@@ -64,7 +64,7 @@ public class Visitor extends JFrame {
 	 */
 	public Visitor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 726, 523);
+		setBounds(100, 100, 888, 627);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.CYAN);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,7 +77,7 @@ public class Visitor extends JFrame {
 		lblDIGoodPlaceDem.setForeground(Color.BLACK);
 		lblDIGoodPlaceDem.setFont(new Font("Tahoma", Font.PLAIN, 48));
 		lblDIGoodPlaceDem.setBackground(Color.WHITE);
-		lblDIGoodPlaceDem.setBounds(35, 14, 548, 68);
+		lblDIGoodPlaceDem.setBounds(141, 14, 595, 68);
 		contentPane.add(lblDIGoodPlaceDem);
 		
 		//Date: Display Current Date
@@ -88,24 +88,24 @@ public class Visitor extends JFrame {
 		dateBox.setText(dateFormat.format(currentDate));
 	
 		dateBox.setColumns(10);
-		dateBox.setBounds(595, 50, 86, 22);
+		dateBox.setBounds(772, 51, 86, 22);
 		contentPane.add(dateBox);
 		
 		//Date: Label
 		JLabel label = new JLabel("DATE");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		label.setBounds(595, 13, 50, 36);
+		label.setBounds(772, 14, 50, 36);
 		contentPane.add(label);
 		
 		
 		//Separates sections of display with  a line
 		JSeparator separator = new JSeparator();
-		separator.setBounds(42, 78, 624, 2);
+		separator.setBounds(10, 78, 848, 2);
 		contentPane.add(separator);
 		
 		//Panel in Window		
 		Panel panel = new Panel();
-		panel.setBounds(10, 86, 690, 47);
+		panel.setBounds(10, 86, 848, 47);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -123,7 +123,7 @@ public class Visitor extends JFrame {
 
 		});
 		btnUseCreole.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnUseCreole.setBounds(0, 0, 344, 47);
+		btnUseCreole.setBounds(0, 0, 411, 47);
 		panel.add(btnUseCreole);
 		
 		JButton btnMakeRequest = new JButton("Make Request");
@@ -133,56 +133,87 @@ public class Visitor extends JFrame {
 			}
 		});
 		btnMakeRequest.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnMakeRequest.setBounds(344, 0, 346, 47);
+		btnMakeRequest.setBounds(409, 0, 439, 47);
 		panel.add(btnMakeRequest);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(42, 139, 624, 2);
+		separator_1.setBounds(10, 139, 848, 2);
 		contentPane.add(separator_1);
 		
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(42, 397, 624, 2);
+		separator_2.setBounds(10, 552, 846, 2);
 		contentPane.add(separator_2);
 		
 		textField = new JTextField();
 		textField.setText("Copyright \u00A9 2019");
 		textField.setEditable(false);
 		textField.setColumns(10);
-		textField.setBounds(302, 446, 116, 28);
+		textField.setBounds(377, 552, 116, 28);
 		contentPane.add(textField);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(10, 177, 690, 47);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(10, 218, 690, 47);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(10, 263, 690, 39);
-		contentPane.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("New button");
-		btnNewButton_3.setBounds(14, 300, 686, 36);
-		contentPane.add(btnNewButton_3);
-		
 		txtPleaseSelectCre = new JTextField();
+		txtPleaseSelectCre.setHorizontalAlignment(SwingConstants.CENTER);
 		txtPleaseSelectCre.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtPleaseSelectCre.setText("PLEASE SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY.");
-		txtPleaseSelectCre.setEditable(true);
+		txtPleaseSelectCre.setText("PLEASE SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
+		txtPleaseSelectCre.setEditable(false);
 		txtPleaseSelectCre.setColumns(10);
-		txtPleaseSelectCre.setBounds(22, 149, 659, 28);
+		txtPleaseSelectCre.setBounds(10, 149, 848, 28);
 		contentPane.add(txtPleaseSelectCre);
 		
-		JButton btnNewButton_5 = new JButton("New button");
-		btnNewButton_5.setBounds(14, 337, 686, 47);
-		contentPane.add(btnNewButton_5);
+		Panel hostPanel = new Panel();
+		hostPanel.setLayout(null);
+		hostPanel.setBounds(10, 183, 848, 363);
+		contentPane.add(hostPanel);
+		
+		JButton command1 = new JButton("Gimmi all a di place dem inna [Parish Name]- (Eng: Give me all the places in [Parish Name])");
+		command1.setToolTipText("");
+		command1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		command1.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		command1.setBounds(0, 0, 848, 61);
+		hostPanel.add(command1);
+		
+		JButton command2 = new JButton("Which part have di cheapest [Attraction Name]- (Eng: Which location has the cheapest [Attraction Name])");
+		command2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		command2.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		command2.setBounds(0, 57, 848, 54);
+		hostPanel.add(command2);
+		
+		JButton btnWehDiPaati = new JButton("Weh di paati deh inna [Parish Name]- (Eng: Where is the party in [Parish Name])");
+		btnWehDiPaati.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnWehDiPaati.setBounds(0, 107, 848, 61);
+		hostPanel.add(btnWehDiPaati);
+		
+		JButton btnHowDahPlace = new JButton("How dah place ere [Attraction Name] inna [Parish Name] stay");
+		btnHowDahPlace.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnHowDahPlace.setBounds(0, 161, 848, 53);
+		hostPanel.add(btnHowDahPlace);
+		
+		JButton btnTellMiBout = new JButton("Tell mi bout [Attraction Name] inna [Parish Name]- (Eng: Tell me about [Attraction Name] in [Parish Name])");
+		btnTellMiBout.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnTellMiBout.setBounds(0, 213, 848, 54);
+		hostPanel.add(btnTellMiBout);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(10, 406, 686, 37);
-		contentPane.add(textField_1);
+		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_1.setBounds(0, 268, 848, 53);
+		hostPanel.add(textField_1);
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		textField_1.setColumns(10);
+		
+		JButton button = new JButton("ENTER");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(352, 319, 151, 44);
+		hostPanel.add(button);
 	}
 	
 	

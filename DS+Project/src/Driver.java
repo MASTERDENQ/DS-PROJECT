@@ -22,9 +22,7 @@ import javax.swing.JTextField;
 public class Driver {
 	
 	private static JFrame frame;
-	
 	private static JTextField txtCopyright;
-	
 	private static JTextField dateTextField;
 	
 
@@ -113,7 +111,7 @@ public class Driver {
 		txtCopyright = new JTextField();
 		txtCopyright.setEditable(false);
 		txtCopyright.setText("Copyright © 2019");
-		txtCopyright.setBounds(277, 418, 116, 28);
+		txtCopyright.setBounds(269, 431, 116, 28);
 		frame.getContentPane().add(txtCopyright);
 		txtCopyright.setColumns(10);
 		
