@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 public class Driver {
 	
 	private static JFrame frame;
+	
 	private static JTextField txtCopyright;
 	private static JTextField dateTextField;
 	
