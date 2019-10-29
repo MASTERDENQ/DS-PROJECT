@@ -38,8 +38,9 @@ public class Visitor extends JFrame {
 	private JPanel contentPane;
 	private JTextField dateBox;
 	private JTextField textField;
-	private JTextField txtPleaseSelectCre;
-	private JTextField textField_1;
+	private JTextField txtInstructions;
+	private static JTextField commandTextField;
+	private static Panel hostPanel;
 	
 
 	/**
@@ -145,30 +146,39 @@ public class Visitor extends JFrame {
 		contentPane.add(separator_2);
 		
 		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setText("Copyright \u00A9 2019");
 		textField.setEditable(false);
 		textField.setColumns(10);
 		textField.setBounds(377, 552, 116, 28);
 		contentPane.add(textField);
 		
-		txtPleaseSelectCre = new JTextField();
-		txtPleaseSelectCre.setHorizontalAlignment(SwingConstants.CENTER);
-		txtPleaseSelectCre.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtPleaseSelectCre.setText("PLEASE SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
-		txtPleaseSelectCre.setEditable(false);
-		txtPleaseSelectCre.setColumns(10);
-		txtPleaseSelectCre.setBounds(10, 149, 848, 28);
-		contentPane.add(txtPleaseSelectCre);
+		txtInstructions = new JTextField();
+		txtInstructions.setHorizontalAlignment(SwingConstants.CENTER);
+		txtInstructions.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtInstructions.setText("PLEASE SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
+		txtInstructions.setEditable(false);
+		txtInstructions.setColumns(10);
+		txtInstructions.setBounds(10, 149, 848, 28);
+		contentPane.add(txtInstructions);
 		
-		Panel hostPanel = new Panel();
+		hostPanel = new Panel();
 		hostPanel.setLayout(null);
 		hostPanel.setBounds(10, 183, 848, 363);
 		contentPane.add(hostPanel);
-		
+	}
+	
+	
+	/**
+	 * Utilities	.
+	 */
+	
+	protected static void viewCreoleList() {
 		JButton command1 = new JButton("Gimmi all a di place dem inna [Parish Name]- (Eng: Give me all the places in [Parish Name])");
 		command1.setToolTipText("");
 		command1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				commandTextField.setText("Gimmi all a di place dem inna ");
 			}
 		});
 		command1.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -178,56 +188,67 @@ public class Visitor extends JFrame {
 		JButton command2 = new JButton("Which part have di cheapest [Attraction Name]- (Eng: Which location has the cheapest [Attraction Name])");
 		command2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				commandTextField.setText("Which part have di cheapest ");
 			}
 		});
 		command2.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		command2.setBounds(0, 57, 848, 54);
 		hostPanel.add(command2);
 		
-		JButton btnWehDiPaati = new JButton("Weh di paati deh inna [Parish Name]- (Eng: Where is the party in [Parish Name])");
-		btnWehDiPaati.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnWehDiPaati.setBounds(0, 107, 848, 61);
-		hostPanel.add(btnWehDiPaati);
+		JButton command3 = new JButton("Gi mi all a di infamation fi [Attraction Name- (Eng: Give me all the information for [Attraction Name])");
+		command3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				commandTextField.setText("Gi mi all a di infamation fi ");
+			}
+		});
+		command3.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		command3.setBounds(0, 107, 848, 61);
+		hostPanel.add(command3);
 		
-		JButton btnHowDahPlace = new JButton("How dah place ere [Attraction Name] inna [Parish Name] stay");
-		btnHowDahPlace.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnHowDahPlace.setBounds(0, 161, 848, 53);
-		hostPanel.add(btnHowDahPlace);
+		JButton command4 = new JButton("Tell mi bout [Place Name]- (Eng: Tell me about [Place Name])");
+		command4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				commandTextField.setText("Tell mi bout ");
+			}
+		});
+		command4.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		command4.setBounds(0, 161, 848, 61);
+		hostPanel.add(command4);
 		
-		JButton btnTellMiBout = new JButton("Tell mi bout [Attraction Name] inna [Parish Name]- (Eng: Tell me about [Attraction Name] in [Parish Name])");
-		btnTellMiBout.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnTellMiBout.setBounds(0, 213, 848, 54);
-		hostPanel.add(btnTellMiBout);
+		JButton command5 = new JButton("A wah time di place dem open inna [Parish Name]- "
+				+ "(Eng: What at the opening hours for the places in [Parish Name])");
+		command5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				commandTextField.setText("A wah time di place dem open inna ");
+			}
+		});
+		command5.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		command5.setBounds(0, 215, 848, 54);
+		hostPanel.add(command5);
 		
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setBounds(0, 268, 848, 53);
-		hostPanel.add(textField_1);
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		textField_1.setColumns(10);
+		commandTextField = new JTextField();
+		commandTextField.setHorizontalAlignment(SwingConstants.CENTER);
+		commandTextField.setBounds(0, 268, 848, 53);
+		hostPanel.add(commandTextField);
+		commandTextField.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		commandTextField.setColumns(10);
 		
-		JButton button = new JButton("ENTER");
-		button.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		button.addActionListener(new ActionListener() {
+		JButton btnCommandEnter = new JButton("ENTER");
+		btnCommandEnter.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnCommandEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		button.setBounds(352, 319, 151, 44);
-		hostPanel.add(button);
-	}
-	
-	
-	/**
-	 * Utilities	.
-	 */
-	
-	protected void viewCreoleList() {
-		// TODO Auto-generated method stub
+		btnCommandEnter.setBounds(352, 319, 151, 44);
+		hostPanel.add(btnCommandEnter);
 		
 	}
 	
 	protected void makeRequest() {
-		// TODO Auto-generated method stub
+		
+	}
+	
+	protected void onEnterClick() {
 		
 	}
 }// end of class
