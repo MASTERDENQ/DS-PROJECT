@@ -87,7 +87,7 @@ public class Administrator extends JFrame {
 		dateBox.setText(dateFormat.format(currentDate));
 	
 		dateBox.setColumns(10);
-		dateBox.setBounds(42, 5, 86, 22);
+		dateBox.setBounds(52, 4, 86, 22);
 		contentPane.add(dateBox);
 		
 		//Date: Label

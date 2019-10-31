@@ -246,6 +246,7 @@ public class Visitor extends JFrame {
 	
 	protected void makeRequest() {
 		
+		
 	}
 	
 	protected void onEnterClick() {
