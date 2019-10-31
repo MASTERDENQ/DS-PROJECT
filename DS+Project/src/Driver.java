@@ -1,8 +1,8 @@
 /**
  * Written By :
  * Tyrone Wallace - 1706903
- * Dimitri Russell - 160
- * Reinaldo Peno - 160
+ * Dimitri Russell - 180
+ * Reinaldo Peno - 180
  */
 
 import java.awt.Color;
@@ -52,7 +52,7 @@ public class Driver {
 	 */
 	public static void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.CYAN);
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.setBounds(100, 100, 660, 506);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -62,7 +62,7 @@ public class Driver {
 		lblDiGoodPlaceDem.setFont(new Font("Tahoma", Font.PLAIN, 48));
 		lblDiGoodPlaceDem.setBackground(Color.YELLOW);
 		lblDiGoodPlaceDem.setForeground(Color.BLACK);
-		lblDiGoodPlaceDem.setBounds(10, 24, 533, 64);
+		lblDiGoodPlaceDem.setBounds(63, 26, 533, 64);
 		frame.getContentPane().add(lblDiGoodPlaceDem);
 			
 		JButton btnVisitor = new JButton("VISITOR");
@@ -116,15 +116,15 @@ public class Driver {
 		txtCopyright.setColumns(10);
 		
 		JLabel label = new JLabel("DATE");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		label.setBounds(544, 24, 50, 36);
+		label.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label.setBounds(0, 0, 51, 28);
 		frame.getContentPane().add(label);
 		
 		dateTextField = new JTextField();
 		dateTextField.setText("10/21/2019");
 		dateTextField.setEditable(false);
 		dateTextField.setColumns(10);
-		dateTextField.setBounds(544, 61, 86, 22);
+		dateTextField.setBounds(44, 4, 86, 22);
 		frame.getContentPane().add(dateTextField);
 	}//End of initialize()
 	

@@ -38,7 +38,7 @@ public class Visitor extends JFrame {
 	private JPanel contentPane;
 	private JTextField dateBox;
 	private JTextField textField;
-	private JTextField txtInstructions;
+	private static JTextField txtInstructions;
 	private static JTextField commandTextField;
 	private static Panel hostPanel;
 	
@@ -67,13 +67,13 @@ public class Visitor extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 888, 627);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.CYAN);
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		//Main Header
-		JLabel lblDIGoodPlaceDem = new JLabel("!!! DI Good Place Dem !!!");
+		JLabel lblDIGoodPlaceDem = new JLabel("!!! Di Good Place Dem !!!");
 		lblDIGoodPlaceDem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDIGoodPlaceDem.setForeground(Color.BLACK);
 		lblDIGoodPlaceDem.setFont(new Font("Tahoma", Font.PLAIN, 48));
@@ -89,13 +89,13 @@ public class Visitor extends JFrame {
 		dateBox.setText(dateFormat.format(currentDate));
 	
 		dateBox.setColumns(10);
-		dateBox.setBounds(772, 51, 86, 22);
+		dateBox.setBounds(57, 14, 86, 22);
 		contentPane.add(dateBox);
 		
 		//Date: Label
 		JLabel label = new JLabel("DATE");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		label.setBounds(772, 14, 50, 36);
+		label.setBounds(10, 13, 51, 28);
 		contentPane.add(label);
 		
 		
@@ -153,19 +153,14 @@ public class Visitor extends JFrame {
 		textField.setBounds(377, 552, 116, 28);
 		contentPane.add(textField);
 		
-		txtInstructions = new JTextField();
-		txtInstructions.setHorizontalAlignment(SwingConstants.CENTER);
-		txtInstructions.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtInstructions.setText("PLEASE SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
-		txtInstructions.setEditable(false);
-		txtInstructions.setColumns(10);
-		txtInstructions.setBounds(10, 149, 848, 28);
-		contentPane.add(txtInstructions);
-		
 		hostPanel = new Panel();
+		hostPanel.setBackground(Color.GRAY);
 		hostPanel.setLayout(null);
-		hostPanel.setBounds(10, 183, 848, 363);
+		hostPanel.setBounds(10, 147, 848, 399);
 		contentPane.add(hostPanel);
+		
+		//testing
+		
 	}
 	
 	
@@ -181,8 +176,17 @@ public class Visitor extends JFrame {
 				commandTextField.setText("Gimmi all a di place dem inna ");
 			}
 		});
+		
+		txtInstructions = new JTextField();
+		txtInstructions.setBounds(0, 0, 848, 28);
+		hostPanel.add(txtInstructions);
+		txtInstructions.setHorizontalAlignment(SwingConstants.CENTER);
+		txtInstructions.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtInstructions.setText("PLEASE SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
+		txtInstructions.setEditable(false);
+		txtInstructions.setColumns(10);
 		command1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command1.setBounds(0, 0, 848, 61);
+		command1.setBounds(0, 27, 848, 56);
 		hostPanel.add(command1);
 		
 		JButton command2 = new JButton("Which part have di cheapest [Attraction Name]- (Eng: Which location has the cheapest [Attraction Name])");
@@ -192,7 +196,7 @@ public class Visitor extends JFrame {
 			}
 		});
 		command2.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command2.setBounds(0, 57, 848, 54);
+		command2.setBounds(0, 82, 848, 56);
 		hostPanel.add(command2);
 		
 		JButton command3 = new JButton("Gi mi all a di infamation fi [Attraction Name- (Eng: Give me all the information for [Attraction Name])");
@@ -202,7 +206,7 @@ public class Visitor extends JFrame {
 			}
 		});
 		command3.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command3.setBounds(0, 107, 848, 61);
+		command3.setBounds(0, 138, 848, 61);
 		hostPanel.add(command3);
 		
 		JButton command4 = new JButton("Tell mi bout [Place Name]- (Eng: Tell me about [Place Name])");
@@ -212,7 +216,7 @@ public class Visitor extends JFrame {
 			}
 		});
 		command4.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command4.setBounds(0, 161, 848, 61);
+		command4.setBounds(0, 196, 848, 56);
 		hostPanel.add(command4);
 		
 		JButton command5 = new JButton("A wah time di place dem open inna [Parish Name]- "
@@ -223,12 +227,12 @@ public class Visitor extends JFrame {
 			}
 		});
 		command5.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command5.setBounds(0, 215, 848, 54);
+		command5.setBounds(0, 249, 848, 56);
 		hostPanel.add(command5);
 		
 		commandTextField = new JTextField();
 		commandTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		commandTextField.setBounds(0, 268, 848, 53);
+		commandTextField.setBounds(0, 304, 848, 53);
 		hostPanel.add(commandTextField);
 		commandTextField.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		commandTextField.setColumns(10);
@@ -237,15 +241,14 @@ public class Visitor extends JFrame {
 		btnCommandEnter.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnCommandEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
-		btnCommandEnter.setBounds(352, 319, 151, 44);
-		hostPanel.add(btnCommandEnter);
-		
-	}
+		btnCommandEnter.setBounds(352, 355, 151, 44);
+		hostPanel.add(btnCommandEnter);	
+	}//end of viewCreoleList()
 	
 	protected void makeRequest() {
-		
 		
 	}
 	
