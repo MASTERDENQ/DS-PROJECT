@@ -63,20 +63,20 @@ public class Administrator extends JFrame {
 	 */
 	public Administrator() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 727, 524);
+		setBounds(100, 100, 727, 549);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.CYAN);
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		//Main Header
-		JLabel lblDIGoodPlaceDem = new JLabel("!!! DI Good Place Dem !!!");
+		JLabel lblDIGoodPlaceDem = new JLabel("!!! Di Good Place Dem !!!");
 		lblDIGoodPlaceDem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDIGoodPlaceDem.setForeground(Color.BLACK);
-		lblDIGoodPlaceDem.setFont(new Font("Tahoma", Font.PLAIN, 48));
+		lblDIGoodPlaceDem.setFont(new Font("Tw Cen MT Condensed", Font.PLAIN, 44));
 		lblDIGoodPlaceDem.setBackground(Color.WHITE);
-		lblDIGoodPlaceDem.setBounds(35, 14, 548, 68);
+		lblDIGoodPlaceDem.setBounds(81, 33, 548, 58);
 		contentPane.add(lblDIGoodPlaceDem);
 		
 		//Date: Display Current Date
@@ -87,24 +87,24 @@ public class Administrator extends JFrame {
 		dateBox.setText(dateFormat.format(currentDate));
 	
 		dateBox.setColumns(10);
-		dateBox.setBounds(595, 50, 86, 22);
+		dateBox.setBounds(42, 5, 86, 22);
 		contentPane.add(dateBox);
 		
 		//Date: Label
 		JLabel label = new JLabel("DATE");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		label.setBounds(595, 13, 50, 36);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label.setBounds(0, 0, 51, 28);
 		contentPane.add(label);
 		
 		
 		//Separates sections of display with  a line
 		JSeparator separator = new JSeparator();
-		separator.setBounds(42, 78, 624, 2);
+		separator.setBounds(42, 92, 624, 2);
 		contentPane.add(separator);
 		
 		//Panel in Window		
 		Panel panel = new Panel();
-		panel.setBounds(10, 86, 690, 47);
+		panel.setBounds(10, 100, 690, 47);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -122,7 +122,7 @@ public class Administrator extends JFrame {
 
 		});
 		btnViewAllPlace.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnViewAllPlace.setBounds(0, 0, 217, 47);
+		btnViewAllPlace.setBounds(0, 0, 227, 47);
 		panel.add(btnViewAllPlace);
 		
 		//Display 
@@ -133,7 +133,7 @@ public class Administrator extends JFrame {
 			}
 		});
 		btnViewRequest.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnViewRequest.setBounds(216, 0, 248, 47);
+		btnViewRequest.setBounds(227, 0, 237, 47);
 		panel.add(btnViewRequest);
 		
 		//Display 
@@ -148,7 +148,7 @@ public class Administrator extends JFrame {
 		panel.add(btnViewProcessLog);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(42, 139, 624, 2);
+		separator_1.setBounds(42, 153, 624, 2);
 		contentPane.add(separator_1);
 		
 		JButton btnProcess = new JButton("Checked");
@@ -157,13 +157,13 @@ public class Administrator extends JFrame {
 				
 			}
 		});
-		btnProcess.setFont(new Font("Tahoma", Font.PLAIN, 45));
-		btnProcess.setBounds(353, 385, 347, 57);
+		btnProcess.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnProcess.setBounds(353, 395, 347, 47);
 		contentPane.add(btnProcess);
 		
 		//Add Record to existing Places
 		JButton btnAddPlace = new JButton("Add Place");
-		btnAddPlace.setBounds(10, 385, 347, 57);
+		btnAddPlace.setBounds(10, 395, 347, 47);
 		contentPane.add(btnAddPlace);
 		btnAddPlace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -172,7 +172,7 @@ public class Administrator extends JFrame {
 					addPlace();				
 			}
 		});
-		btnAddPlace.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		btnAddPlace.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		textField = new JTextField();
 		textField.setText("Copyright \u00A9 2019");
@@ -182,10 +182,10 @@ public class Administrator extends JFrame {
 		contentPane.add(textField);
 		
 		Panel panel_1 = new Panel();
-		panel_1.setBackground(Color.LIGHT_GRAY);
+		panel_1.setBackground(Color.GRAY);
 		panel_1.setForeground(Color.CYAN);
 		panel_1.setLayout(null);
-		panel_1.setBounds(10, 146, 690, 233);
+		panel_1.setBounds(10, 161, 690, 233);
 		contentPane.add(panel_1);
 	}
 	
