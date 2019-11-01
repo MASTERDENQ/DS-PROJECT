@@ -1,36 +1,24 @@
 
 import java.awt.Color;
-
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingConstants;
-import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings({ "serial", "unused" })
 public class Visitor extends JFrame {
@@ -42,9 +30,20 @@ public class Visitor extends JFrame {
 	private static JTextField commandTextField;
 	private static Panel hostPanel;
 	
+	private String attractionID;
+	private String reqID;
+	private String fName;
+	private String lName;
+	private String email;
+	private String attractionName;
+	private String message;
+	private String dateAndTime;
+	
+	
+	
 
 	/**
-	 * Launch the Admin Frame.
+	 * Launch the Visitor Frame.
 	 * Default constructors are the main display.
 	 */
 	public static void start() {
@@ -76,7 +75,7 @@ public class Visitor extends JFrame {
 		JLabel lblDIGoodPlaceDem = new JLabel("!!! Di Good Place Dem !!!");
 		lblDIGoodPlaceDem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDIGoodPlaceDem.setForeground(Color.BLACK);
-		lblDIGoodPlaceDem.setFont(new Font("Tahoma", Font.PLAIN, 48));
+		lblDIGoodPlaceDem.setFont(new Font("Tw Cen MT Condensed", Font.BOLD | Font.ITALIC, 44));
 		lblDIGoodPlaceDem.setBackground(Color.WHITE);
 		lblDIGoodPlaceDem.setBounds(141, 14, 595, 68);
 		contentPane.add(lblDIGoodPlaceDem);
@@ -104,7 +103,7 @@ public class Visitor extends JFrame {
 		separator.setBounds(10, 78, 848, 2);
 		contentPane.add(separator);
 		
-		//Panel in Window		
+		//Panel in Frame		
 		Panel panel = new Panel();
 		panel.setBounds(10, 86, 848, 47);
 		contentPane.add(panel);
@@ -159,10 +158,7 @@ public class Visitor extends JFrame {
 		hostPanel.setBounds(10, 147, 848, 399);
 		contentPane.add(hostPanel);
 		
-		//testing
-		
-	}
-	
+	}//end of Visitor
 	
 	/**
 	 * Utilities	.
@@ -241,7 +237,7 @@ public class Visitor extends JFrame {
 		btnCommandEnter.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnCommandEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				onEnter();
 			}
 		});
 		btnCommandEnter.setBounds(352, 355, 151, 44);
@@ -249,12 +245,36 @@ public class Visitor extends JFrame {
 	}//end of viewCreoleList()
 	
 	protected void makeRequest() {
+		//NB: An generated ID show be included here one for request and one for attraction.
+		fName = JOptionPane.showInputDialog("PLEASE ENTER YOUR FIRST NAME: ");
+		lName = JOptionPane.showInputDialog("PLEASE ENTER YOUR LAST NAME: ");
+		email = JOptionPane.showInputDialog("PLEASE ENTER YOU EMAIL: ");
+		attractionName = JOptionPane.showInputDialog("PLEASE ENTER NEW ATTRACTION NAME: ");
+		message = JOptionPane.showInputDialog("PLEASE ENTER ATTRACTION DETAIL: ");
+		dateAndTime = dateBox.getText();
+		//System.out.println(dateAndTime);
+		saveRequestMade();
 		
 	}
 	
-	protected void onEnterClick() {
+	private void saveRequestMade() {
+		FileWriter rMade;
+		try {
+			rMade = new FileWriter("requestMade.txt", true);
+			
+			rMade.write(attractionID + " " + reqID + " " + fName + " " + lName + " " + 
+			email + " " + attractionName + " " + message + " " + dateAndTime);
+			
+		}catch(IOException e) {
+			JOptionPane.showConfirmDialog(null, "UNABLE TO STORE INFORMATION. "
+					+ "PLEASE CONTACT SYSTEM ADMINISTRATOR THANK YOU");
+			e.printStackTrace();
+		}//end of try and catch exception handling
+	}//end of saveRequestMade()
+
+	protected static void onEnter() {
 		
-	}
+	}//end of on
 }// end of class
 
 
