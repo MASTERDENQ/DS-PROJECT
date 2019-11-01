@@ -120,7 +120,6 @@ public class Visitor extends JFrame {
 					e.printStackTrace();
 				}//Catches Exception if thrown from function
 			}
-
 		});
 		btnUseCreole.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnUseCreole.setBounds(0, 0, 411, 47);
@@ -132,6 +131,7 @@ public class Visitor extends JFrame {
 				makeRequest();
 			}
 		});
+		
 		btnMakeRequest.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnMakeRequest.setBounds(409, 0, 439, 47);
 		panel.add(btnMakeRequest);
