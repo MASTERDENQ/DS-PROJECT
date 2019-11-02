@@ -1,18 +1,24 @@
 
+import java.io.*;
+import java.applet.*;
 import java.awt.Color;
+import java.io.File;
 
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.MediaTracker;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +26,10 @@ import java.util.logging.Logger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -39,16 +49,15 @@ import javax.swing.SwingConstants;
 public class Administrator extends JFrame {
 	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placePhotoName, placeMain;
-	
-	
+
 	private JPanel contentPane;
 	private JTextField dateBox;
 	private JTextField textField;
 
-	
-
-
-	/*** Launch the Admin Frame. Default constructor Administrator() is the main display. ***/
+	/***
+	 * Launch the Admin Frame. Default constructor Administrator() is the main
+	 * display.
+	 ***/
 
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
@@ -64,10 +73,10 @@ public class Administrator extends JFrame {
 	}
 
 	public Administrator(String defaultValue) {
-		this(defaultValue,defaultValue,defaultValue,defaultValue,defaultValue,defaultValue,
-				defaultValue,defaultValue,defaultValue,defaultValue,defaultValue);
+		this(defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue,
+				defaultValue, defaultValue, defaultValue, defaultValue);
 	}
-	
+
 	public Administrator(String placeID, String placeName, String placeDescription, String placeAddress,
 			String placeParishCode, String placeCost, String placeOpeningHours, String placeContact,
 			String placePhotoLink, String placePhotoName, String placeMain) throws HeadlessException {
@@ -85,7 +94,6 @@ public class Administrator extends JFrame {
 		this.placeMain = placeMain;
 	}
 
-	
 	/*** Create the frame ***/
 	public Administrator() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

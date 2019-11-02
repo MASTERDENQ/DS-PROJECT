@@ -10,11 +10,16 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
@@ -36,11 +41,24 @@ public class Driver {
 					@SuppressWarnings("unused")
 					Driver window = new Driver();
 					Driver.frame.setVisible(true);
+					playMusic();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+	
+	public static void playMusic() {
+		try {
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("goodtingdem.wav").getAbsoluteFile());
+			Clip clip = AudioSystem.getClip();
+			clip.open(ais);
+			clip.start();
+		}
+		catch(Exception e){
+			JOptionPane.showMessageDialog(null, "Song nah play");
+		}
 	}
 	
 	public Driver() {
