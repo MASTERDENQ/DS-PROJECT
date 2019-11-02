@@ -49,6 +49,7 @@ import javax.swing.SwingConstants;
 public class Administrator extends JFrame {
 	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placePhotoName, placeMain;
+	private AdminList list = new AdminList();
 
 	private JPanel contentPane;
 	private JTextField dateBox;
@@ -250,10 +251,14 @@ public class Administrator extends JFrame {
 		placePhotoLink = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO LINK: ");
 		placePhotoName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO NAME: ");
 		placeMain = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE MAIN ATTRACTION: ");
+		
+		
+		list.enqueue(new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
+				placeOpeningHours, placeContact, placePhotoLink, placePhotoName, placeMain));
 	}
 
 	protected static void viewAllPlaces() {
-
+		
 	}
 
 	public static void signIn() throws FileNotFoundException {

@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 public class AdminList {
 	private AdminNode head, tail;
 
@@ -33,7 +35,7 @@ public class AdminList {
 		}
 	}
 	
-	public void insert(Administrator data) {
+	public void enqueue(Administrator data) {
 		if(isFull()) {
 			System.out.println("List is Full, unable to add item");
 		}
@@ -49,6 +51,15 @@ public class AdminList {
 				tail.setNext(nextItem);
 				tail = tail.getNext();
 			}
+		}
+	}
+	
+	public void display() {
+		if(isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No places have been added to the system");
+		}
+		else {
+			
 		}
 	}
 	
