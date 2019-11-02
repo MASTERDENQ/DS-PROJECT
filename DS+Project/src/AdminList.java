@@ -57,21 +57,22 @@ public class AdminList {
 			JOptionPane.showMessageDialog(null, "No places have been added to the system");
 			return null;
 		} else {
-			Object[] columnNames = { "placeID", "placeName", "placeDescription", "placeAddress", "placeParishCode",
-					"placeCost", "placeOpeningHours", "placeContact", "placePhotoLink", "placePhotoName", "placeMain" };
+			Object[] columnNames = { "ID #", "Name", "Description", "Address", "Parish Code", "Cost", "Opening Hours",
+					"Contact #", "Photo Link", "placePhotoName", "Main Attraction" };
 			Object[][] rowData = {};
 			DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames);
-			
+
 			AdminNode current = head;
-			while(current.getNext()!=null) {
+			while (current.getNext() != null) {
 				Administrator data = current.getData();
-				tableModel.addRow(new Object[] {data.getPlaceID(), data.getPlaceName(), data.getPlaceDescription(), 
-						data.getPlaceAddress(), data.getPlaceParishCode(), data.getPlaceCost(), data.getPlaceOpeningHours(), 
-						data.getPlaceContact(), data.getPlacePhotoLink(), data.getPlaceName(), data.getPlaceMain()});
+				tableModel.addRow(new Object[] { data.getPlaceID(), data.getPlaceName(), data.getPlaceDescription(),
+						data.getPlaceAddress(), data.getPlaceParishCode(), data.getPlaceCost(),
+						data.getPlaceOpeningHours(), data.getPlaceContact(), data.getPlacePhotoLink(),
+						data.getPlaceMain() });
 			}
-			
+
 			JTable table = new JTable(tableModel);
-			
+
 			return table;
 		}
 	}

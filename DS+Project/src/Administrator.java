@@ -50,7 +50,7 @@ import javax.swing.SwingConstants;
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
 	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
-			placeContact, placePhotoLink, placePhotoName, placeMain;
+			placeContact, placePhotoLink, placeMain;
 	private AdminList list = new AdminList();
 
 	private JPanel contentPane;
@@ -78,12 +78,12 @@ public class Administrator extends JFrame {
 
 	public Administrator(String defaultValue) {
 		this(defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue,
-				defaultValue, defaultValue, defaultValue, defaultValue);
+				defaultValue, defaultValue, defaultValue);
 	}
 
 	public Administrator(String placeID, String placeName, String placeDescription, String placeAddress,
 			String placeParishCode, String placeCost, String placeOpeningHours, String placeContact,
-			String placePhotoLink, String placePhotoName, String placeMain) throws HeadlessException {
+			String placePhotoLink, String placeMain) throws HeadlessException {
 		super();
 		this.placeID = placeID;
 		this.placeName = placeName;
@@ -94,7 +94,6 @@ public class Administrator extends JFrame {
 		this.placeOpeningHours = placeOpeningHours;
 		this.placeContact = placeContact;
 		this.placePhotoLink = placePhotoLink;
-		this.placePhotoName = placePhotoName;
 		this.placeMain = placeMain;
 	}
 
@@ -252,11 +251,10 @@ public class Administrator extends JFrame {
 		placeOpeningHours = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE OPENING HOURS: ");
 		placeContact = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE CONTACT NUMBER: ");
 		placePhotoLink = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO LINK: ");
-		placePhotoName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO NAME: ");
 		placeMain = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE MAIN ATTRACTION: ");
 
 		list.enqueue(new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
-				placeOpeningHours, placeContact, placePhotoLink, placePhotoName, placeMain));
+				placeOpeningHours, placeContact, placePhotoLink, placeMain));
 	}
 
 	public void viewAllPlaces() {
@@ -368,14 +366,6 @@ public class Administrator extends JFrame {
 
 	public void setPlacePhotoLink(String placePhotoLink) {
 		this.placePhotoLink = placePhotoLink;
-	}
-
-	public String getPlacePhotoName() {
-		return placePhotoName;
-	}
-
-	public void setPlacePhotoName(String placePhotoName) {
-		this.placePhotoName = placePhotoName;
 	}
 
 	public String getPlaceMain() {
