@@ -1,6 +1,7 @@
 
 import java.io.*;
 import java.applet.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.io.File;
 
@@ -37,6 +38,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -52,6 +54,7 @@ public class Administrator extends JFrame {
 	private AdminList list = new AdminList();
 
 	private JPanel contentPane;
+	private JPanel mainView;
 	private JTextField dateBox;
 	private JTextField textField;
 
@@ -214,29 +217,29 @@ public class Administrator extends JFrame {
 		textField.setBounds(291, 455, 116, 28);
 		contentPane.add(textField);
 
-		Panel panel_1 = new Panel();
-		panel_1.setBackground(Color.GRAY);
-		panel_1.setForeground(Color.CYAN);
-		panel_1.setLayout(null);
-		panel_1.setBounds(10, 161, 690, 233);
-		contentPane.add(panel_1);
+		mainView = new JPanel();
+		mainView.setBackground(Color.GRAY);
+		mainView.setForeground(Color.CYAN);
+		mainView.setLayout(null);
+		mainView.setBounds(10, 161, 690, 233);
+		contentPane.add(mainView);
 	}
 
 	/**
 	 * Utilities .
 	 */
 
-	protected void viewProcess() {
+	public void viewProcess() {
 		// TODO Auto-generated method stub
 
 	}
 
-	protected void viewRequest() {
+	public void viewRequest() {
 		// TODO Auto-generated method stub
 
 	}
 
-	protected void addPlace() {
+	public void addPlace() {
 		placeID = JOptionPane.showInputDialog("\nPLEASE ENTER USERNAME: ");
 		placeName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE NAME: ");
 		placeDescription = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE DESCRIPTION: ");
@@ -251,14 +254,20 @@ public class Administrator extends JFrame {
 		placePhotoLink = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO LINK: ");
 		placePhotoName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO NAME: ");
 		placeMain = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE MAIN ATTRACTION: ");
-		
-		
+
 		list.enqueue(new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
 				placeOpeningHours, placeContact, placePhotoLink, placePhotoName, placeMain));
 	}
 
-	protected static void viewAllPlaces() {
-		
+	public void viewAllPlaces() {
+		JTable table = list.display();
+
+		JScrollPane tableContainer = new JScrollPane(table);
+        
+		mainView.removeAll();
+		mainView.setLayout(new BorderLayout());
+		mainView.add(tableContainer, BorderLayout.CENTER);
+		mainView.revalidate();
 	}
 
 	public static void signIn() throws FileNotFoundException {
@@ -288,4 +297,92 @@ public class Administrator extends JFrame {
 		}
 		scan.close();
 	}// end of signIn
+
+	public String getPlaceID() {
+		return placeID;
+	}
+
+	public void setPlaceID(String placeID) {
+		this.placeID = placeID;
+	}
+
+	public String getPlaceName() {
+		return placeName;
+	}
+
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+
+	public String getPlaceDescription() {
+		return placeDescription;
+	}
+
+	public void setPlaceDescription(String placeDescription) {
+		this.placeDescription = placeDescription;
+	}
+
+	public String getPlaceAddress() {
+		return placeAddress;
+	}
+
+	public void setPlaceAddress(String placeAddress) {
+		this.placeAddress = placeAddress;
+	}
+
+	public String getPlaceParishCode() {
+		return placeParishCode;
+	}
+
+	public void setPlaceParishCode(String placeParishCode) {
+		this.placeParishCode = placeParishCode;
+	}
+
+	public String getPlaceCost() {
+		return placeCost;
+	}
+
+	public void setPlaceCost(String placeCost) {
+		this.placeCost = placeCost;
+	}
+
+	public String getPlaceOpeningHours() {
+		return placeOpeningHours;
+	}
+
+	public void setPlaceOpeningHours(String placeOpeningHours) {
+		this.placeOpeningHours = placeOpeningHours;
+	}
+
+	public String getPlaceContact() {
+		return placeContact;
+	}
+
+	public void setPlaceContact(String placeContact) {
+		this.placeContact = placeContact;
+	}
+
+	public String getPlacePhotoLink() {
+		return placePhotoLink;
+	}
+
+	public void setPlacePhotoLink(String placePhotoLink) {
+		this.placePhotoLink = placePhotoLink;
+	}
+
+	public String getPlacePhotoName() {
+		return placePhotoName;
+	}
+
+	public void setPlacePhotoName(String placePhotoName) {
+		this.placePhotoName = placePhotoName;
+	}
+
+	public String getPlaceMain() {
+		return placeMain;
+	}
+
+	public void setPlaceMain(String placeMain) {
+		this.placeMain = placeMain;
+	}
 }// end of class
