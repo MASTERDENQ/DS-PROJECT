@@ -3,6 +3,7 @@ import java.awt.Color;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,18 +37,24 @@ import javax.swing.SwingConstants;
 
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
-
+	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
+			placeContact, placePhotoLink, placePhotoName, placeMain;
+	
+	
 	private JPanel contentPane;
 	private JTextField dateBox;
 	private JTextField textField;
 
-	/*** Launch the Admin Frame. Default constructors are the main display.***/
+	
+
+
+	/*** Launch the Admin Frame. Default constructor Administrator() is the main display. ***/
 
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Administrator frame = new Administrator();
+					JFrame frame = new Administrator();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,8 +63,30 @@ public class Administrator extends JFrame {
 		});
 	}
 
-	/*** Create the frame ***/
+	public Administrator(String defaultValue) {
+		this(defaultValue,defaultValue,defaultValue,defaultValue,defaultValue,defaultValue,
+				defaultValue,defaultValue,defaultValue,defaultValue,defaultValue);
+	}
+	
+	public Administrator(String placeID, String placeName, String placeDescription, String placeAddress,
+			String placeParishCode, String placeCost, String placeOpeningHours, String placeContact,
+			String placePhotoLink, String placePhotoName, String placeMain) throws HeadlessException {
+		super();
+		this.placeID = placeID;
+		this.placeName = placeName;
+		this.placeDescription = placeDescription;
+		this.placeAddress = placeAddress;
+		this.placeParishCode = placeParishCode;
+		this.placeCost = placeCost;
+		this.placeOpeningHours = placeOpeningHours;
+		this.placeContact = placeContact;
+		this.placePhotoLink = placePhotoLink;
+		this.placePhotoName = placePhotoName;
+		this.placeMain = placeMain;
+	}
 
+	
+	/*** Create the frame ***/
 	public Administrator() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 727, 549);
@@ -199,54 +228,33 @@ public class Administrator extends JFrame {
 	}
 
 	protected void addPlace() {
-		String placeID = JOptionPane.showInputDialog("\nPLEASE ENTER USERNAME: ");
-		String placeName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE NAME: ");
-		String placeDescription = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE DESCRIPTION: ");
-		String placeAddress = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE Address: ");
-		String placeParishCode = JOptionPane.showInputDialog("\n" + "1 Kingston & St. Andrew\r\n" + "2 St. Thomas\r\n"
+		placeID = JOptionPane.showInputDialog("\nPLEASE ENTER USERNAME: ");
+		placeName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE NAME: ");
+		placeDescription = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE DESCRIPTION: ");
+		placeAddress = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE Address: ");
+		placeParishCode = JOptionPane.showInputDialog("\n" + "1 Kingston & St. Andrew\r\n" + "2 St. Thomas\r\n"
 				+ "3 Portland\r\n" + "4 St. Mary\r\n" + "5 St. Catherine\r\n" + "6 Clarendon\r\n" + "7 Manchester\r\n"
 				+ "8 St. Ann\r\n" + "9 St. Elizabeth\r\n" + "10 St. James\r\n" + "11 Hanover\r\n"
 				+ "12 Westmoreland\r\n" + "13 Trelawny\r\n" + "\n" + "PLEASE ENTER PLACE PARISH CODE: ");
-		String placeCost = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE COST OF ENTRY: ");
-		String placeOpeningHours = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE OPENING HOURS: ");
-		String placeContact = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE CONTACT NUMBER: ");
-		String placePhotoLink = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO LINK: ");
-		String placePhotoName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO NAME: ");
-		String placeMain = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE MAIN ATTRACTION: ");
-
-		FileWriter pList;
-		try {
-			pList = new FileWriter("placeList.txt", true);
-
-			pList.write(placeID + " ");
-			pList.write(placeName + " ");
-			pList.write(placeDescription + " ");
-			pList.write(placeAddress + " ");
-			pList.write(placeParishCode + " ");
-			pList.write(placeCost + " ");
-			pList.write(placeOpeningHours + " ");
-			pList.write(placeContact + " ");
-			pList.write(placePhotoLink + " ");
-			pList.write(placePhotoName + " ");
-			pList.write(placeMain + " ");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		placeCost = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE COST OF ENTRY: ");
+		placeOpeningHours = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE OPENING HOURS: ");
+		placeContact = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE CONTACT NUMBER: ");
+		placePhotoLink = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO LINK: ");
+		placePhotoName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO NAME: ");
+		placeMain = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE MAIN ATTRACTION: ");
 	}
 
 	protected static void viewAllPlaces() {
-		File pList = new File("placeList.txt");
 
 	}
 
 	public static void signIn() throws FileNotFoundException {
 
 		String uName = JOptionPane.showInputDialog("PLEASE ENTER USERNAME: ");
-		String pCode = JOptionPane.showInputDialog("PLEASE ENTER PASSWORD: ");
+		String pWord = JOptionPane.showInputDialog("PLEASE ENTER PASSWORD: ");
 
-		File aFile = new File("adminFile.txt");
-		Scanner scan = new Scanner(aFile);
+		File adminFile = new File("adminFile.txt");
+		Scanner scan = new Scanner(adminFile);
 
 		boolean found = false;
 
@@ -254,7 +262,7 @@ public class Administrator extends JFrame {
 			String username = scan.next();
 			String password = scan.next();
 
-			if (uName.equals(username) && pCode.equals(password)) {
+			if (uName.equals(username) && pWord.equals(password)) {
 				found = true;
 				Administrator.start();
 				break;
