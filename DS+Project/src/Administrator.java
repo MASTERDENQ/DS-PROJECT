@@ -52,6 +52,7 @@ public class Administrator extends JFrame {
 	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placeMain;
 	private AdminList list = new AdminList();
+	private boolean ran = false;
 
 	private JPanel contentPane;
 	private JPanel mainView;
@@ -258,8 +259,12 @@ public class Administrator extends JFrame {
 	}
 
 	public void viewAllPlaces() {
+		if(!ran) {
+			list.loadFiles();
+			ran = true;
+		}
+		
 		JTable table = list.display();
-
 		JScrollPane tableContainer = new JScrollPane(table);
         
 		mainView.removeAll();

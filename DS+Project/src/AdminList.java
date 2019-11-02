@@ -52,6 +52,10 @@ public class AdminList {
 		}
 	}
 
+	public void loadFiles() {
+		
+	}
+	
 	public JTable display() {
 		if (isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No places have been added to the system");
