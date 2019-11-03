@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -35,7 +39,7 @@ public class AdminList {
 		}
 	}
 
-	public void enqueue(Administrator data) {
+	public void addToBack(Administrator data) {
 		if (isFull()) {
 			System.out.println("List is Full, unable to add item");
 		} else {
@@ -53,7 +57,35 @@ public class AdminList {
 	}
 
 	public void loadFiles() {
-		
+		if(isEmpty()) {
+			try {
+				File file = new File("placeList.txt");
+				Scanner fileReader;
+				fileReader = new Scanner(file);
+				Administrator adminData = new Administrator();
+				while(fileReader.hasNextLine()) {
+					adminData.setPlaceID(fileReader.next());
+					adminData.setPlaceName(fileReader.next());
+					adminData.setPlaceDescription(fileReader.next());
+					adminData.setPlaceAddress(fileReader.next());
+					adminData.setPlaceParishCode(fileReader.next());
+					adminData.setPlaceCost(fileReader.next());
+					adminData.setPlaceOpeningHours(fileReader.next());
+					adminData.setPlaceContact(fileReader.next());
+					adminData.setPlacePhotoLink(fileReader.next());
+					adminData.setPlaceMain(fileReader.next());
+					
+					addToBack(adminData);
+				}
+				fileReader.close();
+				
+			} catch (FileNotFoundException e) {
+				JOptionPane.showMessageDialog(null,"Failed to read from file");
+			}
+		}
+		else {
+			
+		}
 	}
 	
 	public JTable display() {
@@ -62,7 +94,7 @@ public class AdminList {
 			return null;
 		} else {
 			Object[] columnNames = { "ID #", "Name", "Description", "Address", "Parish Code", "Cost", "Opening Hours",
-					"Contact #", "Photo Link", "placePhotoName", "Main Attraction" };
+					"Contact #", "Photo Link", "Main Attraction" };
 			Object[][] rowData = {};
 			DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames);
 
@@ -77,6 +109,7 @@ public class AdminList {
 			}
 
 			JTable table = new JTable(tableModel);
+			table.setRowHeight(20);
 
 			return table;
 		}

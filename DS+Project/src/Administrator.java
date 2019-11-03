@@ -254,18 +254,25 @@ public class Administrator extends JFrame {
 		placePhotoLink = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO LINK: ");
 		placeMain = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE MAIN ATTRACTION: ");
 
-		list.enqueue(new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
+		list.addToBack(new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
 				placeOpeningHours, placeContact, placePhotoLink, placeMain));
 	}
 
 	public void viewAllPlaces() {
+		if(!ran) {
+			list.loadFiles();
+			ran = true;
+		}
+		
 		JTable table = list.display();
-		JScrollPane tableContainer = new JScrollPane(table);
-        
-		mainView.removeAll();
-		mainView.setLayout(new BorderLayout());
-		mainView.add(tableContainer, BorderLayout.CENTER);
-		mainView.revalidate();
+		if(table != null) {
+			JScrollPane tableContainer = new JScrollPane(table);
+	        
+			mainView.removeAll();
+			mainView.setLayout(new BorderLayout());
+			mainView.add(tableContainer, BorderLayout.CENTER);
+			mainView.revalidate();
+		}
 	}
 
 	public static void signIn() throws FileNotFoundException {

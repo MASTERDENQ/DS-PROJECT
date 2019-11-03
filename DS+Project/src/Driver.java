@@ -41,7 +41,7 @@ public class Driver {
 					@SuppressWarnings("unused")
 					Driver window = new Driver();
 					Driver.frame.setVisible(true);
-					playMusic();
+					//playMusic();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
