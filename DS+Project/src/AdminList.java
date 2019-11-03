@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -109,12 +110,13 @@ public class AdminList {
 			}
 
 			JTable table = new JTable(tableModel);
-			/*for(int i=0; i<10; i++) {
+			for(int i=0; i<10; i++) {
 				table.getColumnModel().getColumn(i).setMinWidth(300);
-				table.getColumnModel().getColumn(i).setPreferredWidth(1000);
-			}*/
+			}
 			table.setRowHeight(25);
-
+			//scrollPane wont work without this
+		    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			
 			return table;
 		}
 	}

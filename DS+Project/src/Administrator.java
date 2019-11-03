@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.io.File;
 
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.MediaTracker;
@@ -41,6 +42,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -267,9 +269,9 @@ public class Administrator extends JFrame {
 		JTable table = list.display();
 		
 		if(table != null) {
+			//JTextArea text = new JTextArea(1000,1000);
 			JScrollPane tableContainer = new JScrollPane(table);
-			//tableContainer.setBounds(10, 161, 690, 233);
-			//tableContainer.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+			
 			mainView.removeAll();
 			mainView.setLayout(new BorderLayout());
 			mainView.add(tableContainer, BorderLayout.CENTER);

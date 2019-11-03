@@ -1,7 +1,7 @@
 /**
  * Written By :
  * Tyrone Wallace - 1706903
- * Dimitri Russell - 180
+ * Dimitri Russell - 1801488
  * Reinaldo Peno - 180
  */
 
@@ -31,9 +31,7 @@ public class Driver {
 	private static JTextField dateTextField;
 	
 
-	/**
-	 * Launch the application.
-	 */
+	/*** Launch the application ***/
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,7 +39,7 @@ public class Driver {
 					@SuppressWarnings("unused")
 					Driver window = new Driver();
 					Driver.frame.setVisible(true);
-					playMusic();
+					//playMusic();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
