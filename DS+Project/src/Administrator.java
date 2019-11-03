@@ -259,11 +259,6 @@ public class Administrator extends JFrame {
 	}
 
 	public void viewAllPlaces() {
-		if(!ran) {
-			list.loadFiles();
-			ran = true;
-		}
-		
 		JTable table = list.display();
 		JScrollPane tableContainer = new JScrollPane(table);
         

@@ -67,12 +67,13 @@ public class AdminList {
 			DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames);
 
 			AdminNode current = head;
-			while (current.getNext() != null) {
+			while (current != null) {
 				Administrator data = current.getData();
 				tableModel.addRow(new Object[] { data.getPlaceID(), data.getPlaceName(), data.getPlaceDescription(),
 						data.getPlaceAddress(), data.getPlaceParishCode(), data.getPlaceCost(),
 						data.getPlaceOpeningHours(), data.getPlaceContact(), data.getPlacePhotoLink(),
 						data.getPlaceMain() });
+				current = current.getNext();
 			}
 
 			JTable table = new JTable(tableModel);
