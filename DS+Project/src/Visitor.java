@@ -243,7 +243,7 @@ public class Visitor extends JFrame {
 		attractionName = JOptionPane.showInputDialog("PLEASE ENTER NEW ATTRACTION NAME: ");
 		message = JOptionPane.showInputDialog("PLEASE ENTER ATTRACTION DETAIL: ");
 		dateAndTime = dateBox.getText();
-		// System.out.println(dateAndTime);
+		//System.out.println(dateAndTime);
 		saveRequestMade();
 
 	}

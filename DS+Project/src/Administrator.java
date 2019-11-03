@@ -265,9 +265,11 @@ public class Administrator extends JFrame {
 		}
 		
 		JTable table = list.display();
+		
 		if(table != null) {
 			JScrollPane tableContainer = new JScrollPane(table);
-	        
+			//tableContainer.setBounds(10, 161, 690, 233);
+			//tableContainer.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			mainView.removeAll();
 			mainView.setLayout(new BorderLayout());
 			mainView.add(tableContainer, BorderLayout.CENTER);
