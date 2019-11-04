@@ -56,6 +56,7 @@ public class Administrator extends JFrame {
 			placeContact, placePhotoLink, placeMain;
 	private static AdminList adminList = new AdminList();
 	private static VisitorList visitorList = new VisitorList();
+	private VisitorStack visitorStack = new VisitorStack();
 
 	private JPanel contentPane;
 	private JPanel mainView;
@@ -236,31 +237,39 @@ public class Administrator extends JFrame {
 	 */
 
 	public void processRecord() {
-		JOptionPane.showMessageDialog(null, "You will only be allowed to process the most recently made visitor request");
-		adminList.displayHead();
-		if(JOptionPane.showConfirmDialog(null, "Do you wish to process this record?") == JOptionPane.YES_OPTION) {
-			
+		if(visitorList.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No processed records found");
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "Record processing canceled");
-			Visitor data = visitorList.dequeue();
+			JOptionPane.showMessageDialog(null, "You are only able to process the most recently made visitor request");
+			JTable table = visitorList.displayHead();
+			
+			addToPanel(table);
+			
+			if(JOptionPane.showConfirmDialog(null, "Do you wish to process this record?") == JOptionPane.YES_OPTION) {
+				Visitor data = visitorList.dequeue();
+				visitorStack.push(data);
+				JOptionPane.showMessageDialog(null, "Record successfully added");
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Record processing canceled");
+			}
 		}
 	}
 	
 	public void viewProcessed() {
+		JTable table = visitorStack.display();
 		
+		if(table != null) {
+			addToPanel(table);
+		}
 	}
 
 	public void viewRequest() {
 		JTable table = visitorList.display();
 
 		if (table != null) {
-			JScrollPane tableContainer = new JScrollPane(table);
-
-			mainView.removeAll();
-			mainView.setLayout(new BorderLayout());
-			mainView.add(tableContainer, BorderLayout.CENTER);
-			mainView.revalidate();
+			addToPanel(table);
 		}
 	}
 
@@ -287,13 +296,17 @@ public class Administrator extends JFrame {
 		JTable table = adminList.display();
 
 		if (table != null) {
-			JScrollPane tableContainer = new JScrollPane(table);
-
-			mainView.removeAll();
-			mainView.setLayout(new BorderLayout());
-			mainView.add(tableContainer, BorderLayout.CENTER);
-			mainView.revalidate();
+			addToPanel(table);
 		}
+	}
+	
+	public void addToPanel(JTable table) {
+		JScrollPane tableContainer = new JScrollPane(table);
+
+		mainView.removeAll();
+		mainView.setLayout(new BorderLayout());
+		mainView.add(tableContainer, BorderLayout.CENTER);
+		mainView.revalidate();
 	}
 	
 	//throws exception if all values are cancel

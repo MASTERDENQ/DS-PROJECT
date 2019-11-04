@@ -55,21 +55,24 @@ public class VisitorList {
 			}
 		}
 	}
-	
+
+	@SuppressWarnings("unused")
 	public Visitor dequeue() {
 		Visitor deletedData = head.getData();
 		VisitorNode toBeDeleted = head;
-		if(head.getNext() == null) {
+
+		if (head.getNext() == null) {
 			head = null;
 			tail = null;
+		} else {
+			head = head.getNext();
 		}
-		else {
-			
-		}
-		
+
+		toBeDeleted = null;
+
 		return deletedData;
 	}
-	
+
 	public void loadFiles() {
 		if (isEmpty()) {
 			try {
@@ -100,6 +103,26 @@ public class VisitorList {
 		} else {
 
 		}
+	}
+
+	public JTable displayHead() {
+		Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID", "Attraction Name",
+				"Message", "Date and Time" };
+
+		Visitor data = head.getData();
+		Object[][] rowData = { { data.getReqID(), data.getfName(), data.getlName(), data.getEmail(),
+				data.getAttractionID(), data.getAttractionName(), data.getMessage(), data.getDateAndTime() } };
+
+		JTable table = new JTable(rowData, columnNames);
+
+		for (int i = 0; i < 8; i++) {
+			table.getColumnModel().getColumn(i).setMinWidth(300);
+		}
+		table.setRowHeight(25);
+		// scrollPane wont work without this
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+		return table;
 	}
 
 	public JTable display() {
