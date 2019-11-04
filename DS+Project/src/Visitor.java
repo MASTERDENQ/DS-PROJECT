@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,6 +53,25 @@ public class Visitor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+	public Visitor(String defaultValue) {
+		this(defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue,
+				defaultValue);
+	}
+
+	public Visitor(String attractionID, String reqID, String fName, String lName, String email, String attractionName,
+			String message, String dateAndTime) throws HeadlessException {
+		super();
+		this.attractionID = attractionID;
+		this.reqID = reqID;
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.attractionName = attractionName;
+		this.message = message;
+		this.dateAndTime = dateAndTime;
+	}
+
 	public Visitor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 888, 627);
@@ -238,7 +258,7 @@ public class Visitor extends JFrame {
 	protected void makeRequest() {
 		// NB: An generated ID show be included here one for request and one for
 		// attraction.
-		reqID = "200";//make into something unique 
+		reqID = "200";// make into something unique
 		fName = JOptionPane.showInputDialog("PLEASE ENTER YOUR FIRST NAME: ");
 		lName = JOptionPane.showInputDialog("PLEASE ENTER YOUR LAST NAME: ");
 		email = JOptionPane.showInputDialog("PLEASE ENTER YOUR EMAIL: ");
@@ -246,7 +266,7 @@ public class Visitor extends JFrame {
 		attractionName = JOptionPane.showInputDialog("PLEASE ENTER NEW ATTRACTION NAME: ");
 		message = JOptionPane.showInputDialog("PLEASE ENTER ATTRACTION DETAIL: ");
 		dateAndTime = dateBox.getText();
-		//System.out.println(dateAndTime);
+		// System.out.println(dateAndTime);
 		saveRequestMade();
 	}
 
@@ -256,7 +276,7 @@ public class Visitor extends JFrame {
 			File file = new File("requestMade.txt");
 			rMade = new FileWriter(file, true);
 
-			rMade.write(attractionID + " " + reqID + " " + fName + " " + lName + " " + email + " " + attractionName
+			rMade.write(reqID + " " + fName + " " + lName + " " + email + " " + attractionID + " " + attractionName
 					+ " " + message + " " + dateAndTime);
 
 			rMade.close();
@@ -265,11 +285,76 @@ public class Visitor extends JFrame {
 					"UNABLE TO STORE INFORMATION. " + "PLEASE CONTACT SYSTEM ADMINISTRATOR THANK YOU");
 			e.printStackTrace();
 		} // end of try and catch exception handling
-		
+
 		JOptionPane.showMessageDialog(null, "Request successfully saved");
 	}// end of saveRequestMade()
 
+	
 	protected static void onEnter() {
 
 	}// end of on
+	
+	public String getAttractionID() {
+		return attractionID;
+	}
+
+	public void setAttractionID(String attractionID) {
+		this.attractionID = attractionID;
+	}
+
+	public String getReqID() {
+		return reqID;
+	}
+
+	public void setReqID(String reqID) {
+		this.reqID = reqID;
+	}
+
+	public String getfName() {
+		return fName;
+	}
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+	public String getlName() {
+		return lName;
+	}
+
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAttractionName() {
+		return attractionName;
+	}
+
+	public void setAttractionName(String attractionName) {
+		this.attractionName = attractionName;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getDateAndTime() {
+		return dateAndTime;
+	}
+
+	public void setDateAndTime(String dateAndTime) {
+		this.dateAndTime = dateAndTime;
+	}
 }// end of class

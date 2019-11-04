@@ -54,8 +54,9 @@ public class Administrator extends JFrame {
 	private int startID = 100;
 	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placeMain;
-	private AdminList list = new AdminList();
-	private boolean ran = false;
+	private AdminList adminList = new AdminList();
+	private VisitorList visitorList = new VisitorList();
+	private boolean loadedAdminFile = false, loadedRequestMade = false;
 
 	private JPanel contentPane;
 	private JPanel mainView;
@@ -234,16 +235,28 @@ public class Administrator extends JFrame {
 
 	public void viewProcess() {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void viewRequest() {
-		
+		if (!loadedRequestMade) {
+			visitorList.loadFiles();
+			loadedRequestMade = true;
+		}
 
+		JTable table = visitorList.display();
+
+		if (table != null) {
+			JScrollPane tableContainer = new JScrollPane(table);
+
+			mainView.removeAll();
+			mainView.setLayout(new BorderLayout());
+			mainView.add(tableContainer, BorderLayout.CENTER);
+			mainView.revalidate();
+		}
 	}
 
 	public void addPlace() {
-		placeID = "100";//make into something unique
+		placeID = "100";// make into something unique
 		placeName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE NAME: ");
 		placeDescription = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE DESCRIPTION: ");
 		placeAddress = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE Address: ");
@@ -257,22 +270,21 @@ public class Administrator extends JFrame {
 		placePhotoLink = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO LINK: ");
 		placeMain = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE MAIN ATTRACTION: ");
 
-		list.addToBack(new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
-				placeOpeningHours, placeContact, placePhotoLink, placeMain));
+		adminList.addToBack(new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode,
+				placeCost, placeOpeningHours, placeContact, placePhotoLink, placeMain));
 	}
 
 	public void viewAllPlaces() {
-		if(!ran) {
-			list.loadFiles();
-			ran = true;
+		if (!loadedAdminFile) {
+			adminList.loadFiles();
+			loadedAdminFile = true;
 		}
-		
-		JTable table = list.display();
-		
-		if(table != null) {
-			//JTextArea text = new JTextArea(1000,1000);
+
+		JTable table = adminList.display();
+
+		if (table != null) {
 			JScrollPane tableContainer = new JScrollPane(table);
-			
+
 			mainView.removeAll();
 			mainView.setLayout(new BorderLayout());
 			mainView.add(tableContainer, BorderLayout.CENTER);

@@ -28,13 +28,4 @@ public class AdminNode {
 	public void setNext(AdminNode next) {
 		this.next = next;
 	}
-
-	@Override
-	public String toString() {
-		return "AdminNode [data=" + data + ", next=" + next + "]";
-	}
-	
-	public void display() {
-		System.out.println(toString());
-	}
 }
