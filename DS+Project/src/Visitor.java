@@ -357,4 +357,26 @@ public class Visitor extends JFrame {
 	public void setDateAndTime(String dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
+	
+	public String parseCommand() {
+		String command = commandTextField.getText();//receives the input fromt the text field
+		String[] commandSplit = command.split(" ");//separates the input into smaller string
+		int commandNum = 0, locationString, commandLen = commandSplit.length;//gets the length of words in the command
+		
+		if(commandSplit[0] == "Gimmi") {
+			commandNum = 1;
+		}else if(commandSplit[0] == "Which") {
+			commandNum = 2;
+		}else if(commandSplit[0] == "Gi") {
+			commandNum = 3;
+		}else if(commandSplit[0] == "Tell") {
+			commandNum = 4;
+		}else if(commandSplit[0] == "A") {
+			commandNum = 5;
+		}//this nested-if is to derive which function has been inputted by the user
+		
+		return(commandSplit[commandLen - 1] + " " + commandNum);/* the Parish || Attraction || Place name is returned 
+																along with the command number in string format to better 
+																aid in function processing*/
+	}// end of parseCommand
 }// end of class
