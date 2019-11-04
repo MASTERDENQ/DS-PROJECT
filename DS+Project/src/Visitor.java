@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -237,30 +238,35 @@ public class Visitor extends JFrame {
 	protected void makeRequest() {
 		// NB: An generated ID show be included here one for request and one for
 		// attraction.
+		reqID = "200";//make into something unique 
 		fName = JOptionPane.showInputDialog("PLEASE ENTER YOUR FIRST NAME: ");
 		lName = JOptionPane.showInputDialog("PLEASE ENTER YOUR LAST NAME: ");
-		email = JOptionPane.showInputDialog("PLEASE ENTER YOU EMAIL: ");
+		email = JOptionPane.showInputDialog("PLEASE ENTER YOUR EMAIL: ");
+		attractionID = JOptionPane.showInputDialog("PLEASE ENTER THE ATTRACTION ID: ");
 		attractionName = JOptionPane.showInputDialog("PLEASE ENTER NEW ATTRACTION NAME: ");
 		message = JOptionPane.showInputDialog("PLEASE ENTER ATTRACTION DETAIL: ");
 		dateAndTime = dateBox.getText();
 		//System.out.println(dateAndTime);
 		saveRequestMade();
-
 	}
 
 	private void saveRequestMade() {
 		FileWriter rMade;
 		try {
-			rMade = new FileWriter("requestMade.txt", true);
+			File file = new File("requestMade.txt");
+			rMade = new FileWriter(file, true);
 
 			rMade.write(attractionID + " " + reqID + " " + fName + " " + lName + " " + email + " " + attractionName
 					+ " " + message + " " + dateAndTime);
 
+			rMade.close();
 		} catch (IOException e) {
 			JOptionPane.showConfirmDialog(null,
 					"UNABLE TO STORE INFORMATION. " + "PLEASE CONTACT SYSTEM ADMINISTRATOR THANK YOU");
 			e.printStackTrace();
 		} // end of try and catch exception handling
+		
+		JOptionPane.showMessageDialog(null, "Request successfully saved");
 	}// end of saveRequestMade()
 
 	protected static void onEnter() {

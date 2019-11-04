@@ -51,6 +51,7 @@ import javax.swing.SwingConstants;
 
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
+	private int startID = 100;
 	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placeMain;
 	private AdminList list = new AdminList();
@@ -237,12 +238,12 @@ public class Administrator extends JFrame {
 	}
 
 	public void viewRequest() {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	public void addPlace() {
-		placeID = JOptionPane.showInputDialog("\nPLEASE ENTER USERNAME: ");
+		placeID = "100";//make into something unique
 		placeName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE NAME: ");
 		placeDescription = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE DESCRIPTION: ");
 		placeAddress = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE Address: ");
