@@ -54,9 +54,8 @@ public class Administrator extends JFrame {
 	private int startID = 100;
 	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placeMain;
-	private AdminList adminList = new AdminList();
-	private VisitorList visitorList = new VisitorList();
-	private boolean loadedAdminFile = false, loadedRequestMade = false;
+	private static AdminList adminList = new AdminList();
+	private static VisitorList visitorList = new VisitorList();
 
 	private JPanel contentPane;
 	private JPanel mainView;
@@ -73,14 +72,17 @@ public class Administrator extends JFrame {
 			public void run() {
 				try {
 					JFrame frame = new Administrator();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
+					visitorList.loadFiles();
+					adminList.loadFiles();
 				} catch (Exception e) {
 					e.printStackTrace();
 				} // Exception Handling
 			}
 		});
 	}
-
+	
 	public Administrator(String defaultValue) {
 		this(defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue,
 				defaultValue, defaultValue, defaultValue);
@@ -180,7 +182,7 @@ public class Administrator extends JFrame {
 		JButton btnViewProcessLog = new JButton("View Proceed Places");
 		btnViewProcessLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				viewProcess();
+				viewProcessed();
 			}
 		});
 		btnViewProcessLog.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -194,7 +196,7 @@ public class Administrator extends JFrame {
 		JButton btnProcess = new JButton("Checked");
 		btnProcess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				processRecord();
 			}
 		});
 		btnProcess.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -233,16 +235,16 @@ public class Administrator extends JFrame {
 	 * Utilities .
 	 */
 
-	public void viewProcess() {
-		// TODO Auto-generated method stub
+	public void processRecord() {
+		JOptionPane.showMessageDialog(null, "You will only be allowed to process the most recently made visitor request");
+		adminList.displayHead();
+	}
+	
+	public void viewProcessed() {
+		
 	}
 
 	public void viewRequest() {
-		if (!loadedRequestMade) {
-			visitorList.loadFiles();
-			loadedRequestMade = true;
-		}
-
 		JTable table = visitorList.display();
 
 		if (table != null) {
@@ -275,11 +277,6 @@ public class Administrator extends JFrame {
 	}
 
 	public void viewAllPlaces() {
-		if (!loadedAdminFile) {
-			adminList.loadFiles();
-			loadedAdminFile = true;
-		}
-
 		JTable table = adminList.display();
 
 		if (table != null) {
@@ -291,7 +288,8 @@ public class Administrator extends JFrame {
 			mainView.revalidate();
 		}
 	}
-
+	
+	//throws exception if all values are cancel
 	public static void signIn() throws FileNotFoundException {
 
 		String uName = JOptionPane.showInputDialog("PLEASE ENTER USERNAME: ");
@@ -308,7 +306,7 @@ public class Administrator extends JFrame {
 
 			if (uName.equals(username) && pWord.equals(password)) {
 				found = true;
-				Administrator.start();
+				start();
 				break;
 			}
 		} // end of while

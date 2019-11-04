@@ -30,7 +30,6 @@ public class Driver {
 	private static JTextField txtCopyright;
 	private static JTextField dateTextField;
 	
-
 	/*** Launch the application ***/
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -39,7 +38,7 @@ public class Driver {
 					@SuppressWarnings("unused")
 					Driver window = new Driver();
 					Driver.frame.setVisible(true);
-					//playMusic();
+					playMusic();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
