@@ -64,15 +64,18 @@ public class VisitorList {
 				fileReader = new Scanner(file);
 				Visitor visitorData = new Visitor();
 				while (fileReader.hasNextLine()) {
-					visitorData.setReqID(fileReader.next());
-					visitorData.setfName(fileReader.next());
-					visitorData.setlName(fileReader.next());
-					visitorData.setEmail(fileReader.next());
-					visitorData.setAttractionID(fileReader.next());
-					visitorData.setAttractionName(fileReader.next());
-					visitorData.setMessage(fileReader.next());
-					visitorData.setDateAndTime(fileReader.next());
-					
+					String reqID = fileReader.next();
+					String fName = fileReader.next();
+					String lName = fileReader.next();
+					String email = fileReader.next();
+					String attractionID = fileReader.next();
+					String attractionName = fileReader.next();
+					String message = fileReader.next();
+					String dateAndTime = fileReader.next();
+
+					visitorData = new Visitor(reqID, fName, lName, email, attractionID, attractionName, message,
+							dateAndTime);
+
 					enqueue(visitorData);
 				}
 				fileReader.close();
@@ -90,19 +93,18 @@ public class VisitorList {
 			JOptionPane.showMessageDialog(null, "No places have been added to the system");
 			return null;
 		} else {
-			Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID", 
-					"Attraction Name", "Message", "Date and Time"};
+			Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID",
+					"Attraction Name", "Message", "Date and Time" };
 			Object[][] rowData = {};
 			DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames);
 
 			VisitorNode current = head;
 			while (current != null) {
 				Visitor data = current.getData();
-				
-				tableModel.addRow(new Object[] { data.getReqID(), data.getfName(), data.getlName(),
-						data.getEmail(), data.getAttractionID(), data.getAttractionName(),
-						data.getMessage(), data.getDateAndTime()});
-				
+
+				tableModel.addRow(new Object[] { data.getReqID(), data.getfName(), data.getlName(), data.getEmail(),
+						data.getAttractionID(), data.getAttractionName(), data.getMessage(), data.getDateAndTime() });
+
 				current = current.getNext();
 			}
 
