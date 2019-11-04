@@ -55,7 +55,21 @@ public class VisitorList {
 			}
 		}
 	}
-
+	
+	public Visitor dequeue() {
+		Visitor deletedData = head.getData();
+		VisitorNode toBeDeleted = head;
+		if(head.getNext() == null) {
+			head = null;
+			tail = null;
+		}
+		else {
+			
+		}
+		
+		return deletedData;
+	}
+	
 	public void loadFiles() {
 		if (isEmpty()) {
 			try {

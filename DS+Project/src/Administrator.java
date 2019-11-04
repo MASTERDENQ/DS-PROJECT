@@ -238,6 +238,13 @@ public class Administrator extends JFrame {
 	public void processRecord() {
 		JOptionPane.showMessageDialog(null, "You will only be allowed to process the most recently made visitor request");
 		adminList.displayHead();
+		if(JOptionPane.showConfirmDialog(null, "Do you wish to process this record?") == JOptionPane.YES_OPTION) {
+			
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Record processing canceled");
+			Visitor data = visitorList.dequeue();
+		}
 	}
 	
 	public void viewProcessed() {
