@@ -42,6 +42,7 @@ public class Visitor extends JFrame {
 			public void run() {
 				try {
 					Visitor frame = new Visitor();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

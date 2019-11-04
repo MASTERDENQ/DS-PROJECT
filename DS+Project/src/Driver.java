@@ -37,8 +37,9 @@ public class Driver {
 				try {
 					@SuppressWarnings("unused")
 					Driver window = new Driver();
+					Driver.frame.setLocationRelativeTo(null);
 					Driver.frame.setVisible(true);
-					playMusic();
+					//playMusic();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
