@@ -277,7 +277,7 @@ public class Visitor extends JFrame {
 			rMade = new FileWriter(file, true);
 
 			rMade.write(reqID + " " + fName + " " + lName + " " + email + " " + attractionID + " " + attractionName
-					+ " " + message + " " + dateAndTime);
+					+ " " + message + " " + dateAndTime + "\n");
 
 			rMade.close();
 		} catch (IOException e) {

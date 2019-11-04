@@ -41,7 +41,7 @@ public class VisitorList {
 
 	public void enqueue(Visitor data) {
 		if (isFull()) {
-			System.out.println("List is Full, unable to add item");
+			JOptionPane.showMessageDialog(null, "List is Full, unable to add item");
 		} else {
 			VisitorNode nextItem = new VisitorNode();
 			nextItem.setData(data);

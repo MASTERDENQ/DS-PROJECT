@@ -42,7 +42,7 @@ public class AdminList {
 
 	public void addToBack(Administrator data) {
 		if (isFull()) {
-			System.out.println("List is Full, unable to add item");
+			JOptionPane.showMessageDialog(null, "List is Full, unable to add item");
 		} else {
 			AdminNode nextItem = new AdminNode();
 			nextItem.setData(data);
