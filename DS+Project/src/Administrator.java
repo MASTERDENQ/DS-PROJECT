@@ -321,32 +321,29 @@ public class Administrator extends JFrame {
 				"Username", userName,
 				"Password", passWord
 		};
-		
-		int option = 
-		String uName = JOptionPane.showInputDialog("PLEASE ENTER USERNAME: ");
-		String pWord = JOptionPane.showInputDialog("PLEASE ENTER PASSWORD: ");
 
-		File adminFile = new File("adminFile.txt");
-		Scanner scan = new Scanner(adminFile);
+		int option = JOptionPane.showConfirmDialog(null, message, "User Login Form", JOptionPane.OK_CANCEL_OPTION);
 
-		boolean found = false;
+		if(option == JOptionPane.OK_OPTION) {
+			File adminFile = new File("adminFile.txt");
+			Scanner scan = new Scanner(adminFile);
+			String username="", password="";
+			//boolean found = false;
 
-		while (!found && scan.hasNext()) {
-			String username = scan.next();
-			String password = scan.next();
-
-			if (uName.equals(username) && pWord.equals(password)) {
-				found = true;
-				start();
-				break;
+			while (scan.hasNext()) {
+				username = scan.next();
+				password = scan.next();
 			}
-		} // end of while
-
-		if (found == false) {
-			JOptionPane.showMessageDialog(null, "I'M SORRY YOUR ATTEMPT IS INVALID");
-			Driver.initialize();
+			scan.close();
+			
+			if (userName.getText().equals(username) && passWord.getText().equals(password)) {
+				start();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "I'M SORRY YOUR ATTEMPT IS INVALID");
+				Driver.initialize();
+			}
 		}
-		scan.close();
 	}// end of signIn
 
 	public String getPlaceID() {
