@@ -91,7 +91,6 @@ public class AdminList {
 		}
 	}
 	
-	
 	public JTable display() {
 		if (isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No places have been added to the system");

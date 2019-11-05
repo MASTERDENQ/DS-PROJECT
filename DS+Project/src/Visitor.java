@@ -73,7 +73,6 @@ public class Visitor extends JFrame {
 		this.dateAndTime = dateAndTime;
 	}
 
-	
 	public Visitor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 888, 627);
