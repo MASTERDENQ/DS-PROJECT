@@ -39,6 +39,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
@@ -313,6 +314,15 @@ public class Administrator extends JFrame {
 	//throws exception if all values are cancel
 	public static void signIn() throws FileNotFoundException {
 
+		JTextField userName = new JTextField();
+		JTextField passWord = new JPasswordField();
+		
+		Object message [] = {
+				"Username", userName,
+				"Password", passWord
+		};
+		
+		int option = 
 		String uName = JOptionPane.showInputDialog("PLEASE ENTER USERNAME: ");
 		String pWord = JOptionPane.showInputDialog("PLEASE ENTER PASSWORD: ");
 
