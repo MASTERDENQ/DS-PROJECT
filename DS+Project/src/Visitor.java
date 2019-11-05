@@ -61,6 +61,7 @@ public class Visitor extends JFrame {
 	 * Create the frame.
 	 */
 
+	
 	public Visitor(String defaultValue) {
 		this(defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue,
 				defaultValue);

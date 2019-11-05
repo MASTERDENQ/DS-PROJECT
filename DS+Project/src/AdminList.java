@@ -91,30 +91,6 @@ public class AdminList {
 		}
 	}
 	
-	public JTable displayHead() {
-		if (isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No places have been added to the system");
-			return null;
-		} else {
-			Object[] columnNames = { "ID #", "Name", "Description", "Address", "Parish Code", "Cost", "Opening Hours",
-					"Contact #", "Photo Link", "Main Attraction" };
-			
-			Administrator data = head.getData();
-			Object[][] rowData = {{data.getPlaceID(), data.getPlaceName(), data.getPlaceDescription(),
-				data.getPlaceAddress(), data.getPlaceParishCode(), data.getPlaceCost(),
-				data.getPlaceOpeningHours(), data.getPlaceContact(), data.getPlacePhotoLink(),
-				data.getPlaceMain()}};
-
-			JTable table = new JTable(rowData, columnNames);
-			
-			table.getColumnModel().getColumn(0).setMinWidth(300);
-			table.setRowHeight(25);
-			// scrollPane wont work without this
-			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-			return table;
-		}
-	}
 	
 	public JTable display() {
 		if (isEmpty()) {
