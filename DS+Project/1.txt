@@ -1,0 +1,3 @@
+Place_ID1 Place_Name1 Description1 Address1 Parish_Code1 Cost_for_Entry1 Opening_Hours1 Contact_Number1 Photo_Link1 Main_Attraction1
+Place_ID2 Place_Name2 Description2 Address2 Parish_Code2 Cost_for_Entry2 Opening_Hours2 Contact_Number2 Photo_Link2 Main_Attraction2
+Place_ID3 Place_Name3 Description3 Address3 Parish_Code3 Cost_for_Entry3 Opening_Hours3 Contact_Number3 Photo_Link3 Main_Attraction3

@@ -6,7 +6,10 @@ import java.awt.HeadlessException;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -17,10 +20,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings({ "serial", "unused" })
 public class Visitor extends JFrame {
@@ -207,7 +213,7 @@ public class Visitor extends JFrame {
 		hostPanel.add(command2);
 
 		JButton command3 = new JButton(
-				"Gi mi all a di infamation fi [Attraction Name- (Eng: Give me all the information for [Attraction Name])");
+				"Gi mi all a di infamation fi [Attraction Name]- (Eng: Give me all the information for [Attraction Name])");
 		command3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				commandTextField.setText("Gi mi all a di infamation fi ");
@@ -291,7 +297,7 @@ public class Visitor extends JFrame {
 	}// end of saveRequestMade()
 
 	protected static void onEnter() {
-
+		runCommand(parseCommand());
 	}// end of on
 
 	public String getAttractionID() {
@@ -358,27 +364,181 @@ public class Visitor extends JFrame {
 		this.dateAndTime = dateAndTime;
 	}
 
-	public String parseCommand() {
-		String command = commandTextField.getText();// receives the input fromt the text field
-		String[] commandSplit = command.split(" ");// separates the input into smaller string
-		int commandNum = 0, commandLen = commandSplit.length;// gets the length of words in the command
-
-		if (commandSplit[0] == "Gimmi") {
+	public static String parseCommand() {
+		String command = commandTextField.getText();//receives the input front the text field
+		String[] commandSplit = command.split(" ");//separates the input into smaller string
+		int commandNum = 0, parishCode = 0, commandLen = commandSplit.length;//gets the length of words in the command
+		String attractionString = "";
+		
+		if(commandSplit[0].equals("Gimmi")) {
 			commandNum = 1;
-		} else if (commandSplit[0] == "Which") {
+			
+			try {
+				if(commandSplit[7].equals("St") || commandSplit[7].equals("St.") || commandSplit[7].equals("st") || commandSplit[7].equals("st.")) {
+					commandSplit[7] = "St" + commandSplit[8];
+				}
+				
+				commandSplit[7] = commandSplit[7].toLowerCase();
+				
+				if(commandSplit[7].equals("kingston") || commandSplit[7].equals("standrew") || commandSplit[7].equals("st.andrew")) {
+					parishCode = 1;
+				}else if(commandSplit[7].equals("stthomas") || commandSplit[7].equals("st.thomas")) {
+					parishCode = 2;
+				}else if(commandSplit[7].equals("portland")) {
+					parishCode = 3;
+				}else if(commandSplit[7].equals("stmary") || commandSplit[7].equals("st.mary")) {
+					parishCode = 4;
+				}else if(commandSplit[7].equals("stcatherine") || commandSplit[7].equals("st.catherine")) {
+					parishCode = 5;
+				}else if(commandSplit[7].equals("clarendon")) {
+					parishCode = 6;
+				}else if(commandSplit[7].equals("manchester")) {
+					parishCode = 7;
+				}else if(commandSplit[7].equals("stann") || commandSplit[7].equals("st.ann")) {
+					parishCode = 8;
+				}else if(commandSplit[7].equals("stelizabeth") || commandSplit[7].equals("stelizabeth")) {
+					parishCode = 9;
+				}else if(commandSplit[7].equals("stjames") || commandSplit[7].equals("st.james")) {
+					parishCode = 10;
+				}else if(commandSplit[7].equals("hanover")) {
+					parishCode = 11;
+				}else if(commandSplit[7].equals("westmoreland")) {
+					parishCode = 12;
+				}else if(commandSplit[7].equals("trelawny")) {
+					parishCode = 13;
+				}//this is a nested-if to derive the parish code
+				
+				JOptionPane.showMessageDialog(null, commandSplit[0] + " | it finish parse | " + parishCode + " " + commandNum);
+				return(parishCode + " " + commandNum);/* the Parish name is returned 
+				  										 along with the command number in string format to better 
+				  										 aid in function processing*/
+			}catch(Exception e) {
+				System.out.println("Error in parish name parsing");
+			}
+		}else if(commandSplit[0].equals("Which")) {
 			commandNum = 2;
-		} else if (commandSplit[0] == "Gi") {
-			commandNum = 3;
-		} else if (commandSplit[0] == "Tell") {
-			commandNum = 4;
-		} else if (commandSplit[0] == "A") {
-			commandNum = 5;
-		} // this nested-if is to derive which function has been inputted by the user
+			try {
+				attractionString = command.replace("Which part have di cheapest ", "");
+				attractionString = attractionString.replace(" ", "");
+				attractionString = attractionString.toLowerCase();
+				
+				JOptionPane.showMessageDialog(null, commandSplit[0] + " | it finish parse | " + attractionString + " " + commandNum);
+				return(attractionString + " " + commandNum);/* the Attraction name is returned 
+															   along with the command number in string format to better 
+															   aid in function processing*/
+			}catch(Exception e) {
+				System.out.println("Error in attraction name parsing");
+			}
+		}//this nested-if is to derive which function has been inputed by the user	
+		return(attractionString + " " + 0);
+		
+	}// end of the parseCommand
+	
+	public static void runCommand(String commandInfo) {
+		String[] parameter = commandInfo.split(" ");
+		
+		switch(Integer.parseInt(parameter[1])) {//switches case dependent on the command
+		case 1: 
+			JOptionPane.showMessageDialog(null, "it reach case 1");
+			viewParishList(Integer.parseInt(parameter[0]));//view list of attractions in parish specified
+		break;
+		
+		case 2:
+			JOptionPane.showMessageDialog(null, "it reach case 2 " + parameter[0]);
+			viewAttraction(parameter[0]);//view attraction details for attraction specified
+		break;
+		
+		default:
+			JOptionPane.showMessageDialog(null, "Statement Incorrect...\n\nPlease re-check statement before pressing Enter again.");
+		break;
+		}
+	}//end of runCommand
+	
+	public static void viewParishList(int parishCode) {		
+		String line, fileName = parishCode + ".txt";
+		Object[][] rowData = {};
+        String[] singleRow, columnNames = {"ID#", "Name", "Description", "Address", "Parish Code", "Entry Cost", "Opening Hours", "Contact #", "Photo Link", "Main Attraction"};
 
-		return (commandSplit[commandLen - 1] + " "
-				+ commandNum);/*
-								 * the Parish or Attraction or Place name is returned along with the command
-								 * number in string format to better aid in function processing
-								 */
-	}// end of parseCommand
+		int i = 0;
+		JTable table;
+		JFrame frame = new JFrame();
+		DefaultTableModel defaultTable = new DefaultTableModel(rowData, columnNames);
+		
+		try {
+			
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+                
+                singleRow = line.split(" ");
+                defaultTable.addRow(singleRow);
+            } 
+            bufferedReader.close(); 
+            
+            table = new JTable(defaultTable);
+            JScrollPane scrollPane = new JScrollPane(table);
+            frame.add(scrollPane);
+            
+            frame.setVisible(true);
+            frame.setSize(300,300);
+            
+            JOptionPane.showMessageDialog(null, "it reach Table");
+        }
+		catch(FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + fileName + "'");                
+        }
+		catch(IOException ex) {
+            System.out.println("Error reading file '" + fileName + "'");                  
+        }
+	}//end of viewParishList
+	
+	
+	public static void viewAttraction(String attraction) {
+		attraction = attraction.toLowerCase();
+		String[] singleLine, columnNames = {"Name", "Address", "Contact #", "Main Attraction"};
+		Object[][] rowData = {};
+		String line, fileName = "placeList.txt";
+		
+		int parishCode = 0;
+		JTable table;
+		JFrame frame = new JFrame();
+		DefaultTableModel defaultTable = new DefaultTableModel(rowData, columnNames);
+		
+		try {
+			
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+                
+                singleLine = line.split(" ");
+                
+                if(singleLine[1] == attraction) {
+                	String[] singleRow = {singleLine[1], singleLine[3], singleLine[7], singleLine[9]};
+                	defaultTable.addRow(singleRow);
+                }
+            } 
+            bufferedReader.close(); 
+            
+            table = new JTable(defaultTable);
+            JScrollPane scrollPane = new JScrollPane(table);
+            frame.add(scrollPane);
+            
+            frame.setVisible(true);
+            frame.setSize(300,300);
+            
+            JOptionPane.showMessageDialog(null, "it reach Table");
+        }
+		catch(FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + fileName + "'");                
+        }
+		catch(IOException ex) {
+            System.out.println("Error reading file '" + fileName + "'");                  
+        }
+
+		
+	}//end of viewAttraction
 }// end of class
