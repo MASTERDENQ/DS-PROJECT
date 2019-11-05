@@ -413,7 +413,7 @@ public class Administrator extends JFrame {
 	public String getPlaceMain() {
 		return placeMain;
 	}
-
+	
 	public void setPlaceMain(String placeMain) {
 		this.placeMain = placeMain;
 	}
