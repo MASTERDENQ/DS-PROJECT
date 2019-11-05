@@ -3,6 +3,7 @@ public class AdminNode {
 	private AdminNode next;
 	
 	
+	
 	public AdminNode() {
 		this(new Administrator(""), null);
 	}

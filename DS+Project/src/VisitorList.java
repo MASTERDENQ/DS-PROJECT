@@ -113,6 +113,7 @@ public class VisitorList {
 		Object[][] rowData = { { data.getReqID(), data.getfName(), data.getlName(), data.getEmail(),
 				data.getAttractionID(), data.getAttractionName(), data.getMessage(), data.getDateAndTime() } };
 
+	
 		JTable table = new JTable(rowData, columnNames);
 
 		for (int i = 0; i < 8; i++) {

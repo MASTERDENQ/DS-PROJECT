@@ -236,6 +236,7 @@ public class Administrator extends JFrame {
 	 * Utilities .
 	 */
 
+	
 	public void processRecord() {
 		if(visitorList.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No processed records found");

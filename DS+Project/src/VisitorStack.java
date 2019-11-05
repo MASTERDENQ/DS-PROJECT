@@ -64,6 +64,7 @@ public class VisitorStack {
 
 				current = current.getNext();
 			}
+			
 
 			JTable table = new JTable(tableModel);
 			for (int i = 0; i < 8; i++) {
