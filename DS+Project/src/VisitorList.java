@@ -104,6 +104,7 @@ public class VisitorList {
 
 		}
 	}
+	
 
 	public JTable displayHead() {
 		Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID", "Attraction Name",

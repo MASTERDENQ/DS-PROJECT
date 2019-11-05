@@ -58,6 +58,7 @@ public class Administrator extends JFrame {
 	private static VisitorList visitorList = new VisitorList();
 	private VisitorStack visitorStack = new VisitorStack();
 
+	
 	private JPanel contentPane;
 	private JPanel mainView;
 	private JTextField dateBox;
