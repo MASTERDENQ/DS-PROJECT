@@ -3,7 +3,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class VisitorStack {
-	VisitorNode head;
+	private VisitorNode head;
 
 	VisitorStack() {
 		head = null;
