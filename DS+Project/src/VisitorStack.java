@@ -46,10 +46,7 @@ public class VisitorStack {
 	}
 
 	public JTable display() {
-		if (isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No records found");
-			return null;
-		} else {
+		if (!isEmpty()) {
 			Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID",
 					"Attraction Name", "Message", "Date and Time" };
 			Object[][] rowData = {};
@@ -68,7 +65,7 @@ public class VisitorStack {
 
 			JTable table = new JTable(tableModel);
 			for (int i = 0; i < 8; i++) {
-				table.getColumnModel().getColumn(i).setMinWidth(300);
+				table.getColumnModel().getColumn(i).setMinWidth(200);
 			}
 			table.setRowHeight(25);
 			// scrollPane wont work without this
@@ -76,5 +73,7 @@ public class VisitorStack {
 
 			return table;
 		}
+		
+		return null;
 	}
 }

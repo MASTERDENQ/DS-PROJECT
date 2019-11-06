@@ -211,8 +211,9 @@ public class Administrator extends JFrame {
 		contentPane.add(btnAddPlace);
 		btnAddPlace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int answer = JOptionPane.showConfirmDialog(null, "DO YOU WISH TO ADD A PLACE:");
-				if (answer == 0)
+				int answer = JOptionPane.showConfirmDialog(null, "Are you certain that you wish to add a place?",
+						"Confirmation form", JOptionPane.OK_CANCEL_OPTION);
+				if (answer == JOptionPane.OK_OPTION)
 					addPlace();
 			}
 		});
@@ -239,15 +240,16 @@ public class Administrator extends JFrame {
 
 	public void processRecord() {
 		if (visitorList.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No visitor records found");
-			mainView.removeAll();
+			JOptionPane.showMessageDialog(null, "No visitor requests found");
 		} else {
 			JOptionPane.showMessageDialog(null, "You are only able to process the most recently made visitor request");
 			JTable table = visitorList.displayHead();
-
+			
 			addToPanel(table);
 
-			if (JOptionPane.showConfirmDialog(null, "Do you wish to process this record?") == JOptionPane.YES_OPTION) {
+			int choice = JOptionPane.showConfirmDialog(null, "Do you wish to process this record?", "Confirmation Form",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (choice == JOptionPane.YES_OPTION) {
 				Visitor data = visitorList.dequeue();
 				visitorStack.push(data);
 				JOptionPane.showMessageDialog(null, "Record successfully added");
@@ -259,47 +261,64 @@ public class Administrator extends JFrame {
 
 	public void viewProcessed() {
 		JTable table = visitorStack.display();
-
-		if (table != null) {
-			addToPanel(table);
+		addToPanel(table);
+		if (table == null) {
+			JOptionPane.showMessageDialog(null, "No records found");
 		}
 	}
 
 	public void viewRequest() {
 		JTable table = visitorList.display();
+		addToPanel(table);
 
-		if (table != null) {
-			addToPanel(table);
+		if (table == null) {
+			JOptionPane.showMessageDialog(null, "No records found");
 		}
 	}
 
 	public void addPlace() {
 		JTextField placeName = new JTextField(), placeDescription = new JTextField(), placeAddress = new JTextField(),
-				placeParishCode = new JTextField(), placeCost = new JTextField(), placeOpeningHours = new JTextField(),
-				placeContact = new JTextField(), placePhotoLink = new JTextField(), placeMain = new JTextField();
+				placeCost = new JTextField(), placeOpeningHours = new JTextField(), placeContact = new JTextField(),
+				placePhotoLink = new JTextField(), placeMain = new JTextField();
 
 		placeID = "100";// make into something unique
 
-		Object message[] = { "Name", placeName, "Description", placeDescription, "Address", placeAddress, "Parish Code",
-				placeParishCode, "Cost", placeCost, "Opening Hours", placeOpeningHours, "Contact Number", placeContact,
-				"Location Photo Link", placePhotoLink, "Main Attraction", placeMain };
+		String[] parishCode = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" };
+
+		Object message[] = { "Name", placeName, "Description", placeDescription, "Address", placeAddress, "Cost",
+				placeCost, "Opening Hours", placeOpeningHours, "Contact Number", placeContact, "Location Photo Link",
+				placePhotoLink, "Main Attraction", placeMain };
+
+		placeParishCode = (String) JOptionPane.showInputDialog(null, "1. Kingston & St. Andrew\n" + 
+				"2. St. Thomas\n" + 
+				"3. Portland\n" + 
+				"4. St. Mary\n" + 
+				"5. St. Catherine\n" + 
+				"6. Clarendon\n" + 
+				"7. Manchester\n" + 
+				"8. St. Ann\n" + 
+				"9. St. Elizabeth\n" + 
+				"10. St. James\n" + 
+				"11. Hanover\n" + 
+				"12. Westmoreland\n" + 
+				"13. Trelawny\n", "Select the Location's Parish Code",
+				JOptionPane.QUESTION_MESSAGE, null, parishCode, parishCode[0]);
 
 		int choice = JOptionPane.showConfirmDialog(null, message, "Enter The Following Location Information",
 				JOptionPane.OK_CANCEL_OPTION);
 
 		if (choice == JOptionPane.OK_OPTION) {
 			if ((placeName.getText()).isEmpty() || (placeDescription.getText()).isEmpty()
-					|| (placeAddress.getText()).isEmpty() || (placeParishCode.getText()).isEmpty()
-					|| (placeCost.getText()).isEmpty() || (placeOpeningHours.getText()).isEmpty()
-					|| (placeContact.getText()).isEmpty() || (placePhotoLink.getText()).isEmpty()
-					|| (placeMain.getText()).isEmpty()) {
-				
+					|| (placeAddress.getText()).isEmpty() || (placeCost.getText()).isEmpty()
+					|| (placeOpeningHours.getText()).isEmpty() || (placeContact.getText()).isEmpty()
+					|| (placePhotoLink.getText()).isEmpty() || (placeMain.getText()).isEmpty()) {
+
 				JOptionPane.showMessageDialog(null, "Empty field detected, failed to add record");
-			} 
-			else {
+			} else {
 				adminList.addToBack(new Administrator(placeID, placeName.getText(), placeDescription.getText(),
-						placeAddress.getText(), placeParishCode.getText(), placeCost.getText(), placeOpeningHours.getText(),
+						placeAddress.getText(), placeParishCode, placeCost.getText(), placeOpeningHours.getText(),
 						placeContact.getText(), placePhotoLink.getText(), placeMain.getText()));
+				JOptionPane.showMessageDialog(null, "Place successfully added");
 			}
 
 		} else {
@@ -309,9 +328,10 @@ public class Administrator extends JFrame {
 
 	public void viewAllPlaces() {
 		JTable table = adminList.display();
+		addToPanel(table);
 
-		if (table != null) {
-			addToPanel(table);
+		if (table == null) {
+			JOptionPane.showMessageDialog(null, "No records found");
 		}
 	}
 

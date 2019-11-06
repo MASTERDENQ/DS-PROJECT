@@ -58,9 +58,9 @@ public class AdminList {
 	}
 
 	public void loadFiles() {
-		if (isEmpty()) {
-			try {
-				File file = new File("placeList.txt");
+		try {
+			File file = new File("placeList.txt");
+			if (file.exists()) {
 				Scanner fileReader;
 				fileReader = new Scanner(file);
 				Administrator adminData = new Administrator();
@@ -82,21 +82,65 @@ public class AdminList {
 					addToBack(adminData);
 				}
 				fileReader.close();
-
-			} catch (FileNotFoundException e) {
-				JOptionPane.showMessageDialog(null, "Failed to read from file");
 			}
-		} else {
-			// need to implement for when
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Failed to read from file");
 		}
 	}
-	
-	
+
+	public String getParishName(String parishCode) {
+		int choice = Integer.parseInt(parishCode);
+		String parish = "";
+		
+
+		switch (choice) {
+		case 1:
+			parish = "Kingston & St. Andrew";
+			break;
+
+		case 2:
+			parish = "St. Thomas";
+			break;
+		case 3:
+			parish = "Portland";
+			break;
+		case 4:
+			parish = "St. Mary";
+			break;
+		case 5:
+			parish = "St. Catherine";
+			break;
+		case 6:
+			parish = "Clarendon";
+			break;
+		case 7:
+			parish = "Manchester";
+			break;
+		case 8:
+			parish = "St. Ann";
+			break;
+		case 9:
+			parish = "St. Elizabeth";
+			break;
+		case 10:
+			parish = "St. James";
+			break;
+		case 11:
+			parish = "Hanover";
+			break;
+		case 12:
+			parish = "Westmoreland";
+			break;
+		case 13:
+			parish = "Trelawny";
+			break;
+		}
+
+		return parish;
+	}
+
 	public JTable display() {
-		if (isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No records found");
-			return null;
-		} else {
+		if (!isEmpty()) {
 			Object[] columnNames = { "ID #", "Name", "Description", "Address", "Parish Code", "Cost", "Opening Hours",
 					"Contact #", "Photo Link", "Main Attraction" };
 			Object[][] rowData = {};
@@ -106,7 +150,7 @@ public class AdminList {
 			while (current != null) {
 				Administrator data = current.getData();
 				tableModel.addRow(new Object[] { data.getPlaceID(), data.getPlaceName(), data.getPlaceDescription(),
-						data.getPlaceAddress(), data.getPlaceParishCode(), data.getPlaceCost(),
+						data.getPlaceAddress(), getParishName(data.getPlaceParishCode()), data.getPlaceCost(),
 						data.getPlaceOpeningHours(), data.getPlaceContact(), data.getPlacePhotoLink(),
 						data.getPlaceMain() });
 
@@ -115,7 +159,7 @@ public class AdminList {
 
 			JTable table = new JTable(tableModel);
 			for (int i = 0; i < 10; i++) {
-				table.getColumnModel().getColumn(i).setMinWidth(300);
+				table.getColumnModel().getColumn(i).setMinWidth(200);
 			}
 			table.setRowHeight(25);
 			// scrollPane wont work without this
@@ -123,6 +167,8 @@ public class AdminList {
 
 			return table;
 		}
+
+		return null;
 	}
 
 	public AdminNode getHead() {
