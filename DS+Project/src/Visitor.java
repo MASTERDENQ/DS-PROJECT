@@ -28,6 +28,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+
 @SuppressWarnings({ "serial", "unused" })
 public class Visitor extends JFrame {
 
