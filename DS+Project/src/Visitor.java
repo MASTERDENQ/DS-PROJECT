@@ -449,7 +449,7 @@ public class Visitor extends JFrame {
 		break;
 		
 		default:
-			JOptionPane.showMessageDialog(null, "Statement Incorrect...\n\nPlease re-check statement before pressing Enter again.");
+			JOptionPane.showMessageDialog(null, "Statement Incorrect...\n\nPlease re-check statement before pressing Enter again.");//error message
 		break;
 		}
 	}//end of runCommand
@@ -482,7 +482,7 @@ public class Visitor extends JFrame {
             frame.add(scrollPane);
             
             frame.setVisible(true);
-            frame.setSize(300,300);
+            frame.setSize(500,500);
             
             JOptionPane.showMessageDialog(null, "it reach Table");
         }
@@ -516,14 +516,15 @@ public class Visitor extends JFrame {
                 
                 singleLine = line.split(" ");
                 
-                if(singleLine[1] == attraction) {
+                if(singleLine[1].equals(attraction)) {
                 	String[] singleRow = {singleLine[1], singleLine[3], singleLine[7], singleLine[9]};
+                	JOptionPane.showMessageDialog(null, singleLine[1] + " " + singleLine[3] + " " + singleLine[7] + " " + singleLine[9]);
                 	defaultTable.addRow(singleRow);
                 }
             } 
             bufferedReader.close(); 
             
-            table = new JTable(defaultTable);
+            table = new JTable(defaultTable);            
             JScrollPane scrollPane = new JScrollPane(table);
             frame.add(scrollPane);
             
@@ -538,7 +539,5 @@ public class Visitor extends JFrame {
 		catch(IOException ex) {
             System.out.println("Error reading file '" + fileName + "'");                  
         }
-
-		
 	}//end of viewAttraction
 }// end of class
