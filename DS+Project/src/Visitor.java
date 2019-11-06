@@ -432,7 +432,7 @@ public class Visitor extends JFrame {
 		}//this nested-if is to derive which function has been inputed by the user	
 		return(attractionString + " " + 0);
 		
-	}// end of the parseCommand
+	}// end of parseCommand
 	
 	public static void runCommand(String commandInfo) {
 		String[] parameter = commandInfo.split(" ");
