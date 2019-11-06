@@ -313,7 +313,7 @@ public class Administrator extends JFrame {
 					|| (placeOpeningHours.getText()).isEmpty() || (placeContact.getText()).isEmpty()
 					|| (placePhotoLink.getText()).isEmpty() || (placeMain.getText()).isEmpty()) {
 
-				JOptionPane.showMessageDialog(null, "Empty field detected, failed to add record");
+				JOptionPane.showMessageDialog(null, "No field should be left empty, record adding canceled");
 			} else {
 				adminList.addToBack(new Administrator(placeID, placeName.getText(), placeDescription.getText(),
 						placeAddress.getText(), placeParishCode, placeCost.getText(), placeOpeningHours.getText(),
@@ -358,15 +358,14 @@ public class Administrator extends JFrame {
 			File adminFile = new File("adminFile.txt");
 			Scanner scan = new Scanner(adminFile);
 			String username = "", password = "";
-			// boolean found = false;
+		
+			username = scan.next();
+			password = scan.next();
 
-			while (scan.hasNext()) {
-				username = scan.next();
-				password = scan.next();
-			}
 			scan.close();
 
 			if (userName.getText().equals(username) && passWord.getText().equals(password)) {
+				JOptionPane.showMessageDialog(null, "Successful login");
 				start();
 			} else {
 				JOptionPane.showMessageDialog(null, "I'M SORRY YOUR ATTEMPT IS INVALID");

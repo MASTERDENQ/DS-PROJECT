@@ -92,7 +92,6 @@ public class AdminList {
 		int choice = Integer.parseInt(parishCode);
 		String parish = "";
 		
-
 		switch (choice) {
 		case 1:
 			parish = "Kingston & St. Andrew";
