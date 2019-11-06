@@ -47,7 +47,7 @@ public class VisitorStack {
 
 	public JTable display() {
 		if (isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No places have been added to the system");
+			JOptionPane.showMessageDialog(null, "No records found");
 			return null;
 		} else {
 			Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID",

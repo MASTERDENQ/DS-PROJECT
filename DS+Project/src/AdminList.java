@@ -94,7 +94,7 @@ public class AdminList {
 	
 	public JTable display() {
 		if (isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No places have been added to the system");
+			JOptionPane.showMessageDialog(null, "No records found");
 			return null;
 		} else {
 			Object[] columnNames = { "ID #", "Name", "Description", "Address", "Parish Code", "Cost", "Opening Hours",

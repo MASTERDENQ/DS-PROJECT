@@ -39,6 +39,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
@@ -58,7 +59,6 @@ public class Administrator extends JFrame {
 	private static VisitorList visitorList = new VisitorList();
 	private VisitorStack visitorStack = new VisitorStack();
 
-	
 	private JPanel contentPane;
 	private JPanel mainView;
 	private JTextField dateBox;
@@ -84,7 +84,7 @@ public class Administrator extends JFrame {
 			}
 		});
 	}
-	
+
 	public Administrator(String defaultValue) {
 		this(defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue,
 				defaultValue, defaultValue, defaultValue);
@@ -154,7 +154,7 @@ public class Administrator extends JFrame {
 		panel.setLayout(null);
 
 		// Display
-		JButton btnViewAllPlace = new JButton("View Place Listings");
+		JButton btnViewAllPlace = new JButton("Place Listings");
 		btnViewAllPlace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -170,7 +170,7 @@ public class Administrator extends JFrame {
 		panel.add(btnViewAllPlace);
 
 		// Display
-		JButton btnViewRequest = new JButton("View Requested Places");
+		JButton btnViewRequest = new JButton("Visitor Requests");
 		btnViewRequest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				viewRequest();
@@ -181,7 +181,7 @@ public class Administrator extends JFrame {
 		panel.add(btnViewRequest);
 
 		// Display
-		JButton btnViewProcessLog = new JButton("View Proceed Places");
+		JButton btnViewProcessLog = new JButton("View Processed Requests");
 		btnViewProcessLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				viewProcessed();
@@ -195,7 +195,7 @@ public class Administrator extends JFrame {
 		separator_1.setBounds(42, 153, 624, 2);
 		contentPane.add(separator_1);
 
-		JButton btnProcess = new JButton("Checked");
+		JButton btnProcess = new JButton("Process Visitor Request");
 		btnProcess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				processRecord();
@@ -236,32 +236,31 @@ public class Administrator extends JFrame {
 	/**
 	 * Utilities .
 	 */
-	
+
 	public void processRecord() {
-		if(visitorList.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No processed records found");
-		}
-		else {
+		if (visitorList.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No visitor records found");
+			mainView.removeAll();
+		} else {
 			JOptionPane.showMessageDialog(null, "You are only able to process the most recently made visitor request");
 			JTable table = visitorList.displayHead();
-			
+
 			addToPanel(table);
-			
-			if(JOptionPane.showConfirmDialog(null, "Do you wish to process this record?") == JOptionPane.YES_OPTION) {
+
+			if (JOptionPane.showConfirmDialog(null, "Do you wish to process this record?") == JOptionPane.YES_OPTION) {
 				Visitor data = visitorList.dequeue();
 				visitorStack.push(data);
 				JOptionPane.showMessageDialog(null, "Record successfully added");
-			}
-			else {
+			} else {
 				JOptionPane.showMessageDialog(null, "Record processing canceled");
 			}
 		}
 	}
-	
+
 	public void viewProcessed() {
 		JTable table = visitorStack.display();
-		
-		if(table != null) {
+
+		if (table != null) {
 			addToPanel(table);
 		}
 	}
@@ -275,22 +274,37 @@ public class Administrator extends JFrame {
 	}
 
 	public void addPlace() {
-		placeID = "100";// make into something unique
-		placeName = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE NAME: ");
-		placeDescription = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE DESCRIPTION: ");
-		placeAddress = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE Address: ");
-		placeParishCode = JOptionPane.showInputDialog("\n" + "1 Kingston & St. Andrew\r\n" + "2 St. Thomas\r\n"
-				+ "3 Portland\r\n" + "4 St. Mary\r\n" + "5 St. Catherine\r\n" + "6 Clarendon\r\n" + "7 Manchester\r\n"
-				+ "8 St. Ann\r\n" + "9 St. Elizabeth\r\n" + "10 St. James\r\n" + "11 Hanover\r\n"
-				+ "12 Westmoreland\r\n" + "13 Trelawny\r\n" + "\n" + "PLEASE ENTER PLACE PARISH CODE: ");
-		placeCost = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE COST OF ENTRY: ");
-		placeOpeningHours = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE OPENING HOURS: ");
-		placeContact = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE CONTACT NUMBER: ");
-		placePhotoLink = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE PHOTO LINK: ");
-		placeMain = JOptionPane.showInputDialog("\nPLEASE ENTER PLACE MAIN ATTRACTION: ");
+		JTextField placeName = new JTextField(), placeDescription = new JTextField(), placeAddress = new JTextField(),
+				placeParishCode = new JTextField(), placeCost = new JTextField(), placeOpeningHours = new JTextField(),
+				placeContact = new JTextField(), placePhotoLink = new JTextField(), placeMain = new JTextField();
 
-		adminList.addToBack(new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode,
-				placeCost, placeOpeningHours, placeContact, placePhotoLink, placeMain));
+		placeID = "100";// make into something unique
+
+		Object message[] = { "Name", placeName, "Description", placeDescription, "Address", placeAddress, "Parish Code",
+				placeParishCode, "Cost", placeCost, "Opening Hours", placeOpeningHours, "Contact Number", placeContact,
+				"Location Photo Link", placePhotoLink, "Main Attraction", placeMain };
+
+		int choice = JOptionPane.showConfirmDialog(null, message, "Enter The Following Location Information",
+				JOptionPane.OK_CANCEL_OPTION);
+
+		if (choice == JOptionPane.OK_OPTION) {
+			if ((placeName.getText()).isEmpty() || (placeDescription.getText()).isEmpty()
+					|| (placeAddress.getText()).isEmpty() || (placeParishCode.getText()).isEmpty()
+					|| (placeCost.getText()).isEmpty() || (placeOpeningHours.getText()).isEmpty()
+					|| (placeContact.getText()).isEmpty() || (placePhotoLink.getText()).isEmpty()
+					|| (placeMain.getText()).isEmpty()) {
+				
+				JOptionPane.showMessageDialog(null, "Empty field detected, failed to add record");
+			} 
+			else {
+				adminList.addToBack(new Administrator(placeID, placeName.getText(), placeDescription.getText(),
+						placeAddress.getText(), placeParishCode.getText(), placeCost.getText(), placeOpeningHours.getText(),
+						placeContact.getText(), placePhotoLink.getText(), placeMain.getText()));
+			}
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Operation Cancelled");
+		}
 	}
 
 	public void viewAllPlaces() {
@@ -300,7 +314,7 @@ public class Administrator extends JFrame {
 			addToPanel(table);
 		}
 	}
-	
+
 	public void addToPanel(JTable table) {
 		JScrollPane tableContainer = new JScrollPane(table);
 
@@ -309,34 +323,36 @@ public class Administrator extends JFrame {
 		mainView.add(tableContainer, BorderLayout.CENTER);
 		mainView.revalidate();
 	}
-	
-	//throws exception if all values are cancel
+
+	// throws exception if all values are cancel
 	public static void signIn() throws FileNotFoundException {
 
-		String uName = JOptionPane.showInputDialog("PLEASE ENTER USERNAME: ");
-		String pWord = JOptionPane.showInputDialog("PLEASE ENTER PASSWORD: ");
+		JTextField userName = new JTextField();
+		JTextField passWord = new JPasswordField();
 
-		File adminFile = new File("adminFile.txt");
-		Scanner scan = new Scanner(adminFile);
+		Object message[] = { "Username", userName, "Password", passWord };
 
-		boolean found = false;
+		int option = JOptionPane.showConfirmDialog(null, message, "User Login Form", JOptionPane.OK_CANCEL_OPTION);
 
-		while (!found && scan.hasNext()) {
-			String username = scan.next();
-			String password = scan.next();
+		if (option == JOptionPane.OK_OPTION) {
+			File adminFile = new File("adminFile.txt");
+			Scanner scan = new Scanner(adminFile);
+			String username = "", password = "";
+			// boolean found = false;
 
-			if (uName.equals(username) && pWord.equals(password)) {
-				found = true;
-				start();
-				break;
+			while (scan.hasNext()) {
+				username = scan.next();
+				password = scan.next();
 			}
-		} // end of while
+			scan.close();
 
-		if (found == false) {
-			JOptionPane.showMessageDialog(null, "I'M SORRY YOUR ATTEMPT IS INVALID");
-			Driver.initialize();
+			if (userName.getText().equals(username) && passWord.getText().equals(password)) {
+				start();
+			} else {
+				JOptionPane.showMessageDialog(null, "I'M SORRY YOUR ATTEMPT IS INVALID");
+				Driver.initialize();
+			}
 		}
-		scan.close();
 	}// end of signIn
 
 	public String getPlaceID() {
@@ -414,7 +430,7 @@ public class Administrator extends JFrame {
 	public String getPlaceMain() {
 		return placeMain;
 	}
-	
+
 	public void setPlaceMain(String placeMain) {
 		this.placeMain = placeMain;
 	}
