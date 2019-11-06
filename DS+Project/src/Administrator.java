@@ -274,15 +274,6 @@ public class Administrator extends JFrame {
 	}
 
 	public void addPlace() {
-		/*
-		 * JTextField userName = new JTextField(); JTextField passWord = new
-		 * JPasswordField();
-		 * 
-		 * Object message [] = { "Username", userName, "Password", passWord };
-		 * 
-		 * int option = JOptionPane.showConfirmDialog(null, message, "User Login Form",
-		 * JOptionPane.OK_CANCEL_OPTION);
-		 */
 		JTextField placeName = new JTextField(), placeDescription = new JTextField(), placeAddress = new JTextField(),
 				placeParishCode = new JTextField(), placeCost = new JTextField(), placeOpeningHours = new JTextField(),
 				placeContact = new JTextField(), placePhotoLink = new JTextField(), placeMain = new JTextField();
