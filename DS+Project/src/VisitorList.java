@@ -55,37 +55,42 @@ public class VisitorList {
 			}
 		}
 	}
-	
+
+	@SuppressWarnings("unused")
 	public Visitor dequeue() {
 		Visitor deletedData = head.getData();
 		VisitorNode toBeDeleted = head;
-		if(head.getNext() == null) {
+
+		if (head.getNext() == null) {
 			head = null;
 			tail = null;
+		} else {
+			head = head.getNext();
 		}
-		else {
-			
-		}
-		
+
+		toBeDeleted = null;
+
 		return deletedData;
 	}
-	
+
 	public void loadFiles() {
-		if (isEmpty()) {
-			try {
-				File file = new File("requestMade.txt");
+		try {
+			File file = new File("requestMade.txt");
+			if (file.exists()) {
 				Scanner fileReader;
 				fileReader = new Scanner(file);
 				Visitor visitorData = new Visitor();
+
+				String reqID, fName, lName, email, attractionID, attractionName, message, dateAndTime;
 				while (fileReader.hasNextLine()) {
-					String reqID = fileReader.next();
-					String fName = fileReader.next();
-					String lName = fileReader.next();
-					String email = fileReader.next();
-					String attractionID = fileReader.next();
-					String attractionName = fileReader.next();
-					String message = fileReader.next();
-					String dateAndTime = fileReader.next();
+					reqID = fileReader.next();
+					fName = fileReader.next();
+					lName = fileReader.next();
+					email = fileReader.next();
+					attractionID = fileReader.next();
+					attractionName = fileReader.next();
+					message = fileReader.next();
+					dateAndTime = fileReader.next();
 
 					visitorData = new Visitor(reqID, fName, lName, email, attractionID, attractionName, message,
 							dateAndTime);
@@ -93,20 +98,34 @@ public class VisitorList {
 					enqueue(visitorData);
 				}
 				fileReader.close();
-
-			} catch (FileNotFoundException e) {
-				JOptionPane.showMessageDialog(null, "Failed to read from file");
 			}
-		} else {
-
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Failed to read from file");
 		}
 	}
 
+	public JTable displayHead() {
+		Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID", "Attraction Name",
+				"Message", "Date and Time" };
+
+		Visitor data = head.getData();
+		Object[][] rowData = { { data.getReqID(), data.getfName(), data.getlName(), data.getEmail(),
+				data.getAttractionID(), data.getAttractionName(), data.getMessage(), data.getDateAndTime() } };
+
+		JTable table = new JTable(rowData, columnNames);
+
+		for (int i = 0; i < 8; i++) {
+			table.getColumnModel().getColumn(i).setMinWidth(200);
+		}
+		table.setRowHeight(25);
+		// scrollPane wont work without this
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+		return table;
+	}
+
 	public JTable display() {
-		if (isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No places have been added to the system");
-			return null;
-		} else {
+		if (!isEmpty()) {
 			Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID",
 					"Attraction Name", "Message", "Date and Time" };
 			Object[][] rowData = {};
@@ -124,7 +143,7 @@ public class VisitorList {
 
 			JTable table = new JTable(tableModel);
 			for (int i = 0; i < 8; i++) {
-				table.getColumnModel().getColumn(i).setMinWidth(300);
+				table.getColumnModel().getColumn(i).setMinWidth(200);
 			}
 			table.setRowHeight(25);
 			// scrollPane wont work without this
@@ -132,6 +151,8 @@ public class VisitorList {
 
 			return table;
 		}
+
+		return null;
 	}
 
 	public VisitorNode getHead() {

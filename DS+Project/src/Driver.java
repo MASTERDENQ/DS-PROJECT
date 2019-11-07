@@ -23,7 +23,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
-
 public class Driver {
 	
 	private static JFrame frame;
@@ -72,6 +71,7 @@ public class Driver {
 		frame.setBounds(100, 100, 660, 506);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
 		
 		//Welcome Greetings
 		JLabel lblDiGoodPlaceDem = new JLabel("!!! Di Good Place Dem !!!");
