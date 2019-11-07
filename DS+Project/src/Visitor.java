@@ -529,7 +529,7 @@ public class Visitor extends JFrame {
             frame.add(scrollPane);
             
             frame.setVisible(true);
-            frame.setSize(300,300);
+            frame.setSize(500,300);
             
             JOptionPane.showMessageDialog(null, "it reach Table");
         }
