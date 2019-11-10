@@ -1,6 +1,8 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -57,6 +59,50 @@ public class AdminList {
 		}
 	}
 
+	public void saveToSubFile(String parishCode, Administrator adminData) {
+		try {
+			File file = new File(parishCode + ".txt");
+			FileWriter fileWriter = new FileWriter(file, true);
+
+			fileWriter.write("\n" + adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
+					+ adminData.getPlaceDescription() + " " + adminData.getPlaceAddress() + " "
+					+ adminData.getPlaceParishCode() + " " + adminData.getPlaceCost() + " "
+					+ adminData.getPlaceOpeningHours() + " " + adminData.getPlaceContact() + " "
+					+ adminData.getPlacePhotoLink() + " " + adminData.getPlaceMain());
+
+			fileWriter.close();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error saving to sub-file");
+		}
+	}
+
+	public void saveFiles(AdminNode pastTail) {
+		try {
+			File file = new File("placeList.txt");
+			FileWriter fileWriter = new FileWriter(file, true);
+
+			AdminNode current = pastTail.getNext();
+			while (current != null) {
+				Administrator adminData = current.getData();
+
+				fileWriter.write("\n" + adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
+						+ adminData.getPlaceDescription() + " " + adminData.getPlaceAddress() + " "
+						+ adminData.getPlaceParishCode() + " " + adminData.getPlaceCost() + " "
+						+ adminData.getPlaceOpeningHours() + " " + adminData.getPlaceContact() + " "
+						+ adminData.getPlacePhotoLink() + " " + adminData.getPlaceMain());
+
+				saveToSubFile(adminData.getPlaceParishCode(), adminData);
+
+				current = current.getNext();
+			}
+
+			fileWriter.close();
+			System.exit(0);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error saving to file");
+		}
+	}
+
 	public void loadFiles() {
 		try {
 			File file = new File("placeList.txt");
@@ -91,7 +137,7 @@ public class AdminList {
 	public String getParishName(String parishCode) {
 		int choice = Integer.parseInt(parishCode);
 		String parish = "";
-		
+
 		switch (choice) {
 		case 1:
 			parish = "Kingston & St. Andrew";

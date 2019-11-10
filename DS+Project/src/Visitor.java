@@ -283,8 +283,8 @@ public class Visitor extends JFrame {
 			File file = new File("requestMade.txt");
 			rMade = new FileWriter(file, true);
 
-			rMade.write(reqID + " " + fName + " " + lName + " " + email + " " + attractionID + " " + attractionName
-					+ " " + message + " " + dateAndTime + "\n");
+			rMade.write("\n" + reqID + " " + fName + " " + lName + " " + email + " " + attractionID + " " + attractionName
+					+ " " + message + " " + dateAndTime);
 
 			rMade.close();
 		} catch (IOException e) {

@@ -52,7 +52,9 @@ import javax.swing.SwingConstants;
 
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
+	private static AdminNode pastTail = null;
 	private int startID = 100;
+	
 	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placeMain;
 	private static AdminList adminList = new AdminList();
@@ -78,6 +80,7 @@ public class Administrator extends JFrame {
 					frame.setVisible(true);
 					visitorList.loadFiles();
 					adminList.loadFiles();
+					pastTail = adminList.getTail();
 				} catch (Exception e) {
 					e.printStackTrace();
 				} // Exception Handling
@@ -202,12 +205,12 @@ public class Administrator extends JFrame {
 			}
 		});
 		btnProcess.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnProcess.setBounds(353, 400, 347, 47);
+		btnProcess.setBounds(241, 400, 231, 47);
 		contentPane.add(btnProcess);
 
 		// Add Record to existing Places
 		JButton btnAddPlace = new JButton("Add Place");
-		btnAddPlace.setBounds(10, 400, 347, 47);
+		btnAddPlace.setBounds(10, 400, 231, 47);
 		contentPane.add(btnAddPlace);
 		btnAddPlace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -232,6 +235,17 @@ public class Administrator extends JFrame {
 		mainView.setLayout(null);
 		mainView.setBounds(10, 161, 690, 233);
 		contentPane.add(mainView);
+		
+		//This is the exit button
+		JButton btnNewButton = new JButton("Save & Exit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				adminList.saveFiles(pastTail);
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton.setBounds(473, 400, 227, 47);
+		contentPane.add(btnNewButton);
 	}
 
 	/**
