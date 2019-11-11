@@ -172,7 +172,6 @@ public class Visitor extends JFrame {
 		hostPanel.setLayout(null);
 		hostPanel.setBounds(10, 147, 848, 399);
 		contentPane.add(hostPanel);
-
 	}// end of Visitor
 
 	/**
