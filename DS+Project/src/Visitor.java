@@ -189,7 +189,6 @@ public class Visitor extends JFrame {
 
 			Scanner fileReader;
 			fileReader = new Scanner(file);
-			Administrator adminData = new Administrator();
 
 			attractionID = fileReader.next();
 			reqID = fileReader.next();

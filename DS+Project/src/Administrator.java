@@ -240,6 +240,8 @@ public class Administrator extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				adminList.saveFiles(pastTail);
+				saveID();
+				System.exit(0);
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -251,6 +253,36 @@ public class Administrator extends JFrame {
 	 * Utilities .
 	 */
 
+	public void loadID() {
+		try {
+			File file = new File("startingID.txt");
+
+			Scanner fileReader;
+			fileReader = new Scanner(file);
+
+			placeID = fileReader.next();
+			
+			fileReader.close();
+
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Failed to read from file");
+		}
+	}
+	
+	public void saveID() {
+		try {
+			File file = new File("startingID.txt");
+			
+			FileWriter fileWriter = new FileWriter(file, false);
+
+			fileWriter.write(placeID + " " + (visitorList.getTail().getData().getReqID() + 1));
+
+			fileWriter.close();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error saving to file");
+		}
+	}
+	
 	public void processRecord() {
 		if (visitorList.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No visitor requests found");
@@ -331,6 +363,9 @@ public class Administrator extends JFrame {
 				adminList.addToBack(new Administrator(placeID, placeName.getText(), placeDescription.getText(),
 						placeAddress.getText(), placeParishCode, placeCost.getText(), placeOpeningHours.getText(),
 						placeContact.getText(), placePhotoLink.getText(), placeMain.getText()));
+				
+				Integer.toString(Integer.parseInt(placeID) + 1);
+
 				JOptionPane.showMessageDialog(null, "Place successfully added");
 			}
 

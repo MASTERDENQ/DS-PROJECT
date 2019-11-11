@@ -99,7 +99,7 @@ public class AdminList {
 			}
 
 			fileWriter.close();
-			System.exit(0);
+
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Error saving to file");
 		}
