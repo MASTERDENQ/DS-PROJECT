@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -82,7 +84,7 @@ public class VisitorList {
 				Visitor visitorData = new Visitor();
 
 				String reqID, fName, lName, email, attractionID, attractionName, message, dateAndTime;
-				while (fileReader.hasNextLine()) {
+				while (fileReader.hasNext()) {
 					reqID = fileReader.next();
 					fName = fileReader.next();
 					lName = fileReader.next();
@@ -102,6 +104,33 @@ public class VisitorList {
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Failed to read from file");
 		}
+	}
+
+	public void saveFiles() {
+		FileWriter rMade;
+		try {
+			File file = new File("requestMade.txt");
+			rMade = new FileWriter(file, true);
+
+			VisitorNode current = head;
+
+			while (current != null) {
+				Visitor data = current.getData();
+
+				rMade.write(data.getReqID() + " " + data.getfName() + " " + data.getlName() + " "
+						+ data.getEmail() + " " + data.getAttractionID() + " " + data.getAttractionName() + " "
+						+ data.getMessage() + " " + data.getDateAndTime()+"\n");
+
+				current = current.getNext();
+			}
+			rMade.close();
+		} catch (IOException e) {
+			JOptionPane.showConfirmDialog(null,
+					"UNABLE TO STORE INFORMATION. " + "PLEASE CONTACT SYSTEM ADMINISTRATOR THANK YOU");
+			e.printStackTrace();
+		} // end of try and catch exception handling
+
+		JOptionPane.showMessageDialog(null, "Request successfully saved");
 	}
 
 	public JTable displayHead() {

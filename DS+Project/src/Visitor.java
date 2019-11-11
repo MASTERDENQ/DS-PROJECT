@@ -299,8 +299,9 @@ public class Visitor extends JFrame {
 		Object form[] = { "First Name", fName, "Last Name", lName, "Email Address", email, "Attraction Name",
 				attractionName, "Message", message };
 
-		String requestAttractionID = (String) JOptionPane.showInputDialog(null, "Select attraction ID# from list below\n\n",
-				"Attraction ID's Found", JOptionPane.QUESTION_MESSAGE, null, availableID, availableID[0]);
+		String requestAttractionID = (String) JOptionPane.showInputDialog(null,
+				"Select attraction ID# from list below\n\n", "Attraction ID's Found", JOptionPane.QUESTION_MESSAGE,
+				null, availableID, availableID[0]);
 
 		int choice = JOptionPane.showConfirmDialog(null, form, "Enter The Following Location Information",
 				JOptionPane.OK_CANCEL_OPTION);
@@ -325,22 +326,7 @@ public class Visitor extends JFrame {
 	}
 
 	public void saveRequestMade() {
-		FileWriter rMade;
-		try {
-			File file = new File("requestMade.txt");
-			rMade = new FileWriter(file, true);
-
-			rMade.write("\n" + reqID + " " + fName + " " + lName + " " + email + " " + attractionID + " "
-					+ attractionName + " " + message + " " + dateAndTime);
-
-			rMade.close();
-		} catch (IOException e) {
-			JOptionPane.showConfirmDialog(null,
-					"UNABLE TO STORE INFORMATION. " + "PLEASE CONTACT SYSTEM ADMINISTRATOR THANK YOU");
-			e.printStackTrace();
-		} // end of try and catch exception handling
-
-		JOptionPane.showMessageDialog(null, "Request successfully saved");
+		
 	}// end of saveRequestMade()
 
 	public static void onEnter() {
