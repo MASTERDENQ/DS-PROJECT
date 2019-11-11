@@ -5,3 +5,6 @@ Place_ID4 placename4 Description4 Address4 3 Cost_for_Entry4 Opening_Hours4 Cont
 100 Baptist Church uptown 12 9000 9AM-6PM (876)504-1145 N/A praise
 100 Baptist Church uptown 12 9000 9AM-6PM (876)504-1145 N/A praise
 100 Hellshire Hellshire Hellshire 1 Hellshire Hellshire Hellshire Hellshire Hellshire
+100 fearow fearow fearow 6 fearow fearow fearow fearow fearow
+100 milk milk milk 2 milk milk milk milk v
+100 killa killa killa 1 killa killa killa killa v

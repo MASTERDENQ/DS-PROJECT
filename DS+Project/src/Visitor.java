@@ -13,7 +13,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -39,10 +41,12 @@ public class Visitor extends JFrame {
 	private static Panel hostPanel;
 
 	private String attractionID, reqID, fName, lName, email, attractionName, message, dateAndTime;
+	private VisitorList requestList = new VisitorList();
 
 	/**
 	 * Launch the Visitor Frame. Default constructors are the main display.
 	 */
+
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -50,6 +54,7 @@ public class Visitor extends JFrame {
 					Visitor frame = new Visitor();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
+					frame.loadID();
 				} catch (Exception e) {
 					e.printStackTrace();
 				} // Exception Handling
@@ -178,7 +183,25 @@ public class Visitor extends JFrame {
 	 * Utilities .
 	 */
 
-	protected static void viewCreoleList() {
+	public void loadID() {
+		try {
+			File file = new File("startingID.txt");
+
+			Scanner fileReader;
+			fileReader = new Scanner(file);
+			Administrator adminData = new Administrator();
+
+			attractionID = fileReader.next();
+			reqID = fileReader.next();
+
+			fileReader.close();
+
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Failed to read from file");
+		}
+	}
+
+	public static void viewCreoleList() {
 		JButton command1 = new JButton(
 				"Gimmi all a di place dem inna [Parish Name]- (Eng: Give me all the places in [Parish Name])");
 		command1.setToolTipText("");
@@ -261,29 +284,54 @@ public class Visitor extends JFrame {
 		hostPanel.add(btnCommandEnter);
 	}// end of viewCreoleList()
 
-	protected void makeRequest() {
-		// NB: An generated ID show be included here one for request and one for
-		// attraction.
-		reqID = "200";// make into something unique
-		fName = JOptionPane.showInputDialog("PLEASE ENTER YOUR FIRST NAME: ");
-		lName = JOptionPane.showInputDialog("PLEASE ENTER YOUR LAST NAME: ");
-		email = JOptionPane.showInputDialog("PLEASE ENTER YOUR EMAIL: ");
-		attractionID = JOptionPane.showInputDialog("PLEASE ENTER THE ATTRACTION ID: ");
-		attractionName = JOptionPane.showInputDialog("PLEASE ENTER NEW ATTRACTION NAME: ");
-		message = JOptionPane.showInputDialog("PLEASE ENTER ATTRACTION DETAIL: ");
-		dateAndTime = dateBox.getText();
-		// System.out.println(dateAndTime);
-		saveRequestMade();
+	public void makeRequest() {
+
+		JTextField fName = new JTextField(), lName = new JTextField(), email = new JTextField(),
+				attractionName = new JTextField(), message = new JTextField();
+
+		int arrSize = Integer.parseInt(attractionID) - 99;
+		String[] availableID = new String[arrSize];
+
+		for (int i = 0; i < arrSize; i++) {
+			availableID[i] = Integer.toString(100 + i);
+		}
+
+		Object form[] = { "First Name", fName, "Last Name", lName, "Email Address", email, "Attraction Name",
+				attractionName, "Message", message };
+
+		String requestAttractionID = (String) JOptionPane.showInputDialog(null, "Select attraction ID# from list below\n\n",
+				"Attraction ID's Found", JOptionPane.QUESTION_MESSAGE, null, availableID, availableID[0]);
+
+		int choice = JOptionPane.showConfirmDialog(null, form, "Enter The Following Location Information",
+				JOptionPane.OK_CANCEL_OPTION);
+
+		if (choice == JOptionPane.OK_OPTION) {
+			if ((fName.getText()).isEmpty() || (lName.getText()).isEmpty() || (email.getText()).isEmpty()
+					|| (attractionName.getText()).isEmpty() || (message.getText()).isEmpty()) {
+
+				JOptionPane.showMessageDialog(null, "No field should be left empty, request adding canceled");
+			} else {
+				Visitor data = new Visitor(reqID, fName.getText(), lName.getText(), email.getText(),
+						requestAttractionID, attractionName.getText(), message.getText(), dateBox.getText());
+				requestList.enqueue(data);
+
+				reqID = Integer.toString(Integer.parseInt(reqID) + 1);
+
+				JOptionPane.showMessageDialog(null, "Request successfully made");
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Operation Cancelled");
+		}
 	}
 
-	private void saveRequestMade() {
+	public void saveRequestMade() {
 		FileWriter rMade;
 		try {
 			File file = new File("requestMade.txt");
 			rMade = new FileWriter(file, true);
 
-			rMade.write("\n" + reqID + " " + fName + " " + lName + " " + email + " " + attractionID + " " + attractionName
-					+ " " + message + " " + dateAndTime);
+			rMade.write("\n" + reqID + " " + fName + " " + lName + " " + email + " " + attractionID + " "
+					+ attractionName + " " + message + " " + dateAndTime);
 
 			rMade.close();
 		} catch (IOException e) {
@@ -295,7 +343,7 @@ public class Visitor extends JFrame {
 		JOptionPane.showMessageDialog(null, "Request successfully saved");
 	}// end of saveRequestMade()
 
-	protected static void onEnter() {
+	public static void onEnter() {
 		runCommand(parseCommand());
 	}// end of on
 
@@ -364,179 +412,184 @@ public class Visitor extends JFrame {
 	}
 
 	public static String parseCommand() {
-		String command = commandTextField.getText();//receives the input front the text field
-		String[] commandSplit = command.split(" ");//separates the input into smaller string
-		int commandNum = 0, parishCode = 0, commandLen = commandSplit.length;//gets the length of words in the command
+		String command = commandTextField.getText();// receives the input front the text field
+		String[] commandSplit = command.split(" ");// separates the input into smaller string
+		int commandNum = 0, parishCode = 0, commandLen = commandSplit.length;// gets the length of words in the command
 		String attractionString = "";
-		
-		if(commandSplit[0].equals("Gimmi")) {
+
+		if (commandSplit[0].equals("Gimmi")) {
 			commandNum = 1;
-			
+
 			try {
-				if(commandSplit[7].equals("St") || commandSplit[7].equals("St.") || commandSplit[7].equals("st") || commandSplit[7].equals("st.")) {
+				if (commandSplit[7].equals("St") || commandSplit[7].equals("St.") || commandSplit[7].equals("st")
+						|| commandSplit[7].equals("st.")) {
 					commandSplit[7] = "St" + commandSplit[8];
 				}
-				
+
 				commandSplit[7] = commandSplit[7].toLowerCase();
-				
-				if(commandSplit[7].equals("kingston") || commandSplit[7].equals("standrew") || commandSplit[7].equals("st.andrew")) {
+
+				if (commandSplit[7].equals("kingston") || commandSplit[7].equals("standrew")
+						|| commandSplit[7].equals("st.andrew")) {
 					parishCode = 1;
-				}else if(commandSplit[7].equals("stthomas") || commandSplit[7].equals("st.thomas")) {
+				} else if (commandSplit[7].equals("stthomas") || commandSplit[7].equals("st.thomas")) {
 					parishCode = 2;
-				}else if(commandSplit[7].equals("portland")) {
+				} else if (commandSplit[7].equals("portland")) {
 					parishCode = 3;
-				}else if(commandSplit[7].equals("stmary") || commandSplit[7].equals("st.mary")) {
+				} else if (commandSplit[7].equals("stmary") || commandSplit[7].equals("st.mary")) {
 					parishCode = 4;
-				}else if(commandSplit[7].equals("stcatherine") || commandSplit[7].equals("st.catherine")) {
+				} else if (commandSplit[7].equals("stcatherine") || commandSplit[7].equals("st.catherine")) {
 					parishCode = 5;
-				}else if(commandSplit[7].equals("clarendon")) {
+				} else if (commandSplit[7].equals("clarendon")) {
 					parishCode = 6;
-				}else if(commandSplit[7].equals("manchester")) {
+				} else if (commandSplit[7].equals("manchester")) {
 					parishCode = 7;
-				}else if(commandSplit[7].equals("stann") || commandSplit[7].equals("st.ann")) {
+				} else if (commandSplit[7].equals("stann") || commandSplit[7].equals("st.ann")) {
 					parishCode = 8;
-				}else if(commandSplit[7].equals("stelizabeth") || commandSplit[7].equals("stelizabeth")) {
+				} else if (commandSplit[7].equals("stelizabeth") || commandSplit[7].equals("stelizabeth")) {
 					parishCode = 9;
-				}else if(commandSplit[7].equals("stjames") || commandSplit[7].equals("st.james")) {
+				} else if (commandSplit[7].equals("stjames") || commandSplit[7].equals("st.james")) {
 					parishCode = 10;
-				}else if(commandSplit[7].equals("hanover")) {
+				} else if (commandSplit[7].equals("hanover")) {
 					parishCode = 11;
-				}else if(commandSplit[7].equals("westmoreland")) {
+				} else if (commandSplit[7].equals("westmoreland")) {
 					parishCode = 12;
-				}else if(commandSplit[7].equals("trelawny")) {
+				} else if (commandSplit[7].equals("trelawny")) {
 					parishCode = 13;
-				}//this is a nested-if to derive the parish code
-				
-				JOptionPane.showMessageDialog(null, commandSplit[0] + " | it finish parse | " + parishCode + " " + commandNum);
-				return(parishCode + " " + commandNum);/* the Parish name is returned 
-				  										 along with the command number in string format to better 
-				  										 aid in function processing*/
-			}catch(Exception e) {
+				} // this is a nested-if to derive the parish code
+
+				JOptionPane.showMessageDialog(null,
+						commandSplit[0] + " | it finish parse | " + parishCode + " " + commandNum);
+				return (parishCode + " " + commandNum);/*
+														 * the Parish name is returned along with the command number in
+														 * string format to better aid in function processing
+														 */
+			} catch (Exception e) {
 				System.out.println("Error in parish name parsing");
 			}
-		}else if(commandSplit[0].equals("Which")) {
+		} else if (commandSplit[0].equals("Which")) {
 			commandNum = 2;
 			try {
 				attractionString = command.replace("Which part have di cheapest ", "");
 				attractionString = attractionString.replace(" ", "");
 				attractionString = attractionString.toLowerCase();
-				
-				JOptionPane.showMessageDialog(null, commandSplit[0] + " | it finish parse | " + attractionString + " " + commandNum);
-				return(attractionString + " " + commandNum);/* the Attraction name is returned 
-															   along with the command number in string format to better 
-															   aid in function processing*/
-			}catch(Exception e) {
+
+				JOptionPane.showMessageDialog(null,
+						commandSplit[0] + " | it finish parse | " + attractionString + " " + commandNum);
+				return (attractionString + " "
+						+ commandNum);/*
+										 * the Attraction name is returned along with the command number in string
+										 * format to better aid in function processing
+										 */
+			} catch (Exception e) {
 				System.out.println("Error in attraction name parsing");
 			}
-		}//this nested-if is to derive which function has been inputed by the user	
-		return(attractionString + " " + 0);
-		
+		} // this nested-if is to derive which function has been inputed by the user
+		return (attractionString + " " + 0);
+
 	}// end of parseCommand
-	
+
 	public static void runCommand(String commandInfo) {
 		String[] parameter = commandInfo.split(" ");
-		
-		switch(Integer.parseInt(parameter[1])) {//switches case dependent on the command
-		case 1: 
+
+		switch (Integer.parseInt(parameter[1])) {// switches case dependent on the command
+		case 1:
 			JOptionPane.showMessageDialog(null, "it reach case 1");
-			viewParishList(Integer.parseInt(parameter[0]));//view list of attractions in parish specified
-		break;
-		
+			viewParishList(Integer.parseInt(parameter[0]));// view list of attractions in parish specified
+			break;
+
 		case 2:
 			JOptionPane.showMessageDialog(null, "it reach case 2 " + parameter[0]);
-			viewAttraction(parameter[0]);//view attraction details for attraction specified
-		break;
-		
+			viewAttraction(parameter[0]);// view attraction details for attraction specified
+			break;
+
 		default:
-			JOptionPane.showMessageDialog(null, "Statement Incorrect...\n\nPlease re-check statement before pressing Enter again.");//error message
-		break;
+			JOptionPane.showMessageDialog(null,
+					"Statement Incorrect...\n\nPlease re-check statement before pressing Enter again.");// error message
+			break;
 		}
-	}//end of runCommand
-	
-	public static void viewParishList(int parishCode) {		
+	}// end of runCommand
+
+	public static void viewParishList(int parishCode) {
 		String line, fileName = parishCode + ".txt";
 		Object[][] rowData = {};
-        String[] singleRow, columnNames = {"ID#", "Name", "Description", "Address", "Parish Code", "Entry Cost", "Opening Hours", "Contact #", "Photo Link", "Main Attraction"};
+		String[] singleRow, columnNames = { "ID#", "Name", "Description", "Address", "Parish Code", "Entry Cost",
+				"Opening Hours", "Contact #", "Photo Link", "Main Attraction" };
 
 		int i = 0;
 		JTable table;
 		JFrame frame = new JFrame();
 		DefaultTableModel defaultTable = new DefaultTableModel(rowData, columnNames);
-		
-		try {
-			
-            FileReader fileReader = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-            while((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
-                
-                singleRow = line.split(" ");
-                defaultTable.addRow(singleRow);
-            } 
-            bufferedReader.close(); 
-            
-            table = new JTable(defaultTable);
-            JScrollPane scrollPane = new JScrollPane(table);
-            frame.add(scrollPane);
-            
-            frame.setVisible(true);
-            frame.setSize(500,500);
-            
-            JOptionPane.showMessageDialog(null, "it reach Table");
-        }
-		catch(FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + fileName + "'");                
-        }
-		catch(IOException ex) {
-            System.out.println("Error reading file '" + fileName + "'");                  
-        }
-	}//end of viewParishList
-	
-	
+		try {
+
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null) {
+				System.out.println(line);
+
+				singleRow = line.split(" ");
+				defaultTable.addRow(singleRow);
+			}
+			bufferedReader.close();
+
+			table = new JTable(defaultTable);
+			JScrollPane scrollPane = new JScrollPane(table);
+			frame.add(scrollPane);
+
+			frame.setVisible(true);
+			frame.setSize(500, 500);
+
+			JOptionPane.showMessageDialog(null, "it reach Table");
+		} catch (FileNotFoundException ex) {
+			System.out.println("Unable to open file '" + fileName + "'");
+		} catch (IOException ex) {
+			System.out.println("Error reading file '" + fileName + "'");
+		}
+	}// end of viewParishList
+
 	public static void viewAttraction(String attraction) {
 		attraction = attraction.toLowerCase();
-		String[] singleLine, columnNames = {"Name", "Address", "Contact #", "Main Attraction"};
+		String[] singleLine, columnNames = { "Name", "Address", "Contact #", "Main Attraction" };
 		Object[][] rowData = {};
 		String line, fileName = "placeList.txt";
-		
+
 		int parishCode = 0;
 		JTable table;
 		JFrame frame = new JFrame();
 		DefaultTableModel defaultTable = new DefaultTableModel(rowData, columnNames);
-		
-		try {
-			
-            FileReader fileReader = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-            while((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
-                
-                singleLine = line.split(" ");
-                
-                if(singleLine[1].equals(attraction)) {
-                	String[] singleRow = {singleLine[1], singleLine[3], singleLine[7], singleLine[9]};
-                	JOptionPane.showMessageDialog(null, singleLine[1] + " " + singleLine[3] + " " + singleLine[7] + " " + singleLine[9]);
-                	defaultTable.addRow(singleRow);
-                }
-            } 
-            bufferedReader.close(); 
-            
-            table = new JTable(defaultTable);            
-            JScrollPane scrollPane = new JScrollPane(table);
-            frame.add(scrollPane);
-            
-            frame.setVisible(true);
-            frame.setSize(500,300);
-            
-            JOptionPane.showMessageDialog(null, "it reach Table");
-        }
-		catch(FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + fileName + "'");                
-        }
-		catch(IOException ex) {
-            System.out.println("Error reading file '" + fileName + "'");                  
-        }
-	}//end of viewAttraction
+		try {
+
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null) {
+				System.out.println(line);
+
+				singleLine = line.split(" ");
+
+				if (singleLine[1].equals(attraction)) {
+					String[] singleRow = { singleLine[1], singleLine[3], singleLine[7], singleLine[9] };
+					JOptionPane.showMessageDialog(null,
+							singleLine[1] + " " + singleLine[3] + " " + singleLine[7] + " " + singleLine[9]);
+					defaultTable.addRow(singleRow);
+				}
+			}
+			bufferedReader.close();
+
+			table = new JTable(defaultTable);
+			JScrollPane scrollPane = new JScrollPane(table);
+			frame.add(scrollPane);
+
+			frame.setVisible(true);
+			frame.setSize(500, 300);
+
+			JOptionPane.showMessageDialog(null, "it reach Table");
+		} catch (FileNotFoundException ex) {
+			System.out.println("Unable to open file '" + fileName + "'");
+		} catch (IOException ex) {
+			System.out.println("Error reading file '" + fileName + "'");
+		}
+	}// end of viewAttraction
 }// end of class

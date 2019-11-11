@@ -53,7 +53,6 @@ import javax.swing.SwingConstants;
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
 	private static AdminNode pastTail = null;
-	private int startID = 100;
 	
 	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placeMain;

@@ -62,9 +62,13 @@ public class AdminList {
 	public void saveToSubFile(String parishCode, Administrator adminData) {
 		try {
 			File file = new File(parishCode + ".txt");
+			String skipLine = "";
+			if(file.exists()) {
+				skipLine = "\n";
+			}
 			FileWriter fileWriter = new FileWriter(file, true);
 
-			fileWriter.write("\n" + adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
+			fileWriter.write(skipLine + adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
 					+ adminData.getPlaceDescription() + " " + adminData.getPlaceAddress() + " "
 					+ adminData.getPlaceParishCode() + " " + adminData.getPlaceCost() + " "
 					+ adminData.getPlaceOpeningHours() + " " + adminData.getPlaceContact() + " "
@@ -79,13 +83,17 @@ public class AdminList {
 	public void saveFiles(AdminNode pastTail) {
 		try {
 			File file = new File("placeList.txt");
+			String skipLine = "";
+			if(file.exists()) {
+				skipLine = "\n";
+			}
 			FileWriter fileWriter = new FileWriter(file, true);
 
 			AdminNode current = pastTail.getNext();
 			while (current != null) {
 				Administrator adminData = current.getData();
 
-				fileWriter.write("\n" + adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
+				fileWriter.write(skipLine + adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
 						+ adminData.getPlaceDescription() + " " + adminData.getPlaceAddress() + " "
 						+ adminData.getPlaceParishCode() + " " + adminData.getPlaceCost() + " "
 						+ adminData.getPlaceOpeningHours() + " " + adminData.getPlaceContact() + " "
