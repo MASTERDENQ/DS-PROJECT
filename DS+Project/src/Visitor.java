@@ -247,15 +247,15 @@ public class Visitor extends JFrame {
 		try {
 			File image2 = new File("creolephrases.jpg");
 			image = ImageIO.read(image2);
-			
+
 			JFrame frame = new JFrame();
 			frame.setLayout(new FlowLayout());
 			frame.setSize(650, 490);
-			
+
 			ImageIcon icon = new ImageIcon(image);
 			JLabel lbl = new JLabel();
 			lbl.setIcon(icon);
-			
+
 			frame.add(lbl);
 			frame.setVisible(true);
 			frame.setLocationRelativeTo(null);
@@ -326,38 +326,44 @@ public class Visitor extends JFrame {
 				attractionName = new JTextField(), message = new JTextField();
 
 		int arrSize = Integer.parseInt(attractionID) - 99;
-		String[] availableID = new String[arrSize];
 
-		for (int i = 0; i < arrSize; i++) {
-			availableID[i] = Integer.toString(100 + i);
-		}
-
-		Object form[] = { "First Name", fName, "Last Name", lName, "Email Address", email, "Attraction Name",
-				attractionName, "Message", message };
-
-		String requestAttractionID = (String) JOptionPane.showInputDialog(null,
-				"Select attraction ID# from list below\n\n", "Attraction ID's Found", JOptionPane.QUESTION_MESSAGE,
-				null, availableID, availableID[0]);
-
-		int choice = JOptionPane.showConfirmDialog(null, form, "Enter The Following Location Information",
-				JOptionPane.OK_CANCEL_OPTION);
-
-		if (choice == JOptionPane.OK_OPTION) {
-			if ((fName.getText()).isEmpty() || (lName.getText()).isEmpty() || (email.getText()).isEmpty()
-					|| (attractionName.getText()).isEmpty() || (message.getText()).isEmpty()) {
-
-				JOptionPane.showMessageDialog(null, "No field should be left empty, request adding canceled");
-			} else {
-				Visitor data = new Visitor(reqID, fName.getText(), lName.getText(), email.getText(),
-						requestAttractionID, attractionName.getText(), message.getText(), dateBox.getText());
-				requestList.enqueue(data);
-
-				reqID = Integer.toString(Integer.parseInt(reqID) + 1);
-
-				JOptionPane.showMessageDialog(null, "Request successfully made");
-			}
+		if (arrSize == 1) {
+			JOptionPane.showMessageDialog(null, "No attractions have been added to the system");
+			return;
 		} else {
-			JOptionPane.showMessageDialog(null, "Operation Cancelled");
+			String[] availableID = new String[arrSize];
+
+			for (int i = 0; i < arrSize - 1; i++) {
+				availableID[i] = Integer.toString(100 + i);
+			}
+
+			Object form[] = { "First Name", fName, "Last Name", lName, "Email Address", email, "Attraction Name",
+					attractionName, "Message", message };
+
+			String requestAttractionID = (String) JOptionPane.showInputDialog(null,
+					"Select attraction ID# from list below\n\n", "Attraction ID's Found", JOptionPane.QUESTION_MESSAGE,
+					null, availableID, availableID[0]);
+
+			int choice = JOptionPane.showConfirmDialog(null, form, "Enter The Following Location Information",
+					JOptionPane.OK_CANCEL_OPTION);
+
+			if (choice == JOptionPane.OK_OPTION) {
+				if ((fName.getText()).isEmpty() || (lName.getText()).isEmpty() || (email.getText()).isEmpty()
+						|| (attractionName.getText()).isEmpty() || (message.getText()).isEmpty()) {
+
+					JOptionPane.showMessageDialog(null, "No field should be left empty, request adding canceled");
+				} else {
+					Visitor data = new Visitor(reqID, fName.getText(), lName.getText(), email.getText(),
+							requestAttractionID, attractionName.getText(), message.getText(), dateBox.getText());
+					requestList.enqueue(data);
+
+					reqID = Integer.toString(Integer.parseInt(reqID) + 1);
+
+					JOptionPane.showMessageDialog(null, "Request successfully made");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Operation Cancelled");
+			}
 		}
 	}
 
@@ -545,17 +551,17 @@ public class Visitor extends JFrame {
 			}
 			bufferedReader.close();
 
-			if(defaultTable.getRowCount() > 0) {
+			if (defaultTable.getRowCount() > 0) {
 				table = new JTable(defaultTable);
 				JScrollPane scrollPane = new JScrollPane(table);
 				frame.getContentPane().add(scrollPane);
-				
+
 				frame.setVisible(true);
 				frame.setSize(500, 300);
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
 			}
-			
+
 		} catch (FileNotFoundException ex) {
 			System.out.println("Unable to open file '" + fileName + "'");
 			JOptionPane.showMessageDialog(null, "File does not exist.");
@@ -595,17 +601,17 @@ public class Visitor extends JFrame {
 			}
 			bufferedReader.close();
 
-			if(defaultTable.getRowCount() > 0) {
+			if (defaultTable.getRowCount() > 0) {
 				table = new JTable(defaultTable);
 				JScrollPane scrollPane = new JScrollPane(table);
 				frame.getContentPane().add(scrollPane);
-				
+
 				frame.setVisible(true);
 				frame.setSize(500, 300);
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
 			}
-			
+
 		} catch (FileNotFoundException ex) {
 			System.out.println("Unable to open file '" + fileName + "'");
 			JOptionPane.showMessageDialog(null, "File does not exist.");

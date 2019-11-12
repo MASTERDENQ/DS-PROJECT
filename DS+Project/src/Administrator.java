@@ -55,7 +55,7 @@ import javax.swing.SwingConstants;
 public class Administrator extends JFrame {
 	private static AdminNode pastTail = null;
 	
-	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
+	private String placeID = "0", reqID = "0", placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placeMain;
 	private static AdminList adminList = new AdminList();
 	private static VisitorList visitorList = new VisitorList();
@@ -75,9 +75,11 @@ public class Administrator extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFrame frame = new Administrator();
+					Administrator frame = new Administrator();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
+					frame.loadID();
+					
 					visitorList.loadFiles();
 					adminList.loadFiles();
 					pastTail = adminList.getTail();
@@ -262,6 +264,7 @@ public class Administrator extends JFrame {
 			fileReader = new Scanner(file);
 
 			placeID = fileReader.next();
+			reqID = fileReader.next();
 			
 			fileReader.close();
 
@@ -276,7 +279,7 @@ public class Administrator extends JFrame {
 			
 			FileWriter fileWriter = new FileWriter(file, false);
 
-			fileWriter.write(placeID + " " + (visitorList.getTail().getData().getReqID() + 1));
+			fileWriter.write(placeID + " " + reqID);
 
 			fileWriter.close();
 		} catch (IOException e) {
@@ -327,7 +330,7 @@ public class Administrator extends JFrame {
 				placeCost = new JTextField(), placeOpeningHours = new JTextField(), placeContact = new JTextField(),
 				placePhotoLink = new JTextField(), placeMain = new JTextField();
 
-		placeID = "100";// make into something unique
+		//placeID = "100";// make into something unique
 
 		String[] parishCode = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" };
 
@@ -350,6 +353,7 @@ public class Administrator extends JFrame {
 				"13. Trelawny\n", "Select the Location's Parish Code",
 				JOptionPane.QUESTION_MESSAGE, null, parishCode, parishCode[0]);
 
+		
 		int choice = JOptionPane.showConfirmDialog(null, message, "Enter The Following Location Information",
 				JOptionPane.OK_CANCEL_OPTION);
 

@@ -79,27 +79,28 @@ public class AdminList {
 
 	public void saveFiles(AdminNode pastTail) {
 		try {
-			File file = new File("placeList.txt");
-			
-			FileWriter fileWriter = new FileWriter(file, true);
-
-			AdminNode current = pastTail.getNext();
-			while (current != null) {
-				Administrator adminData = current.getData();
-
-				fileWriter.write(adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
-						+ adminData.getPlaceDescription() + " " + adminData.getPlaceAddress() + " "
-						+ adminData.getPlaceParishCode() + " " + adminData.getPlaceCost() + " "
-						+ adminData.getPlaceOpeningHours() + " " + adminData.getPlaceContact() + " "
-						+ adminData.getPlacePhotoLink() + " " + adminData.getPlaceMain()+"\n");
-
-				saveToSubFile(adminData.getPlaceParishCode(), adminData);
-
-				current = current.getNext();
+			if(pastTail!= null) {
+				File file = new File("placeList.txt");
+				
+				FileWriter fileWriter = new FileWriter(file, true);
+	
+				AdminNode current = pastTail.getNext();
+				while (current != null) {
+					Administrator adminData = current.getData();
+	
+					fileWriter.write(adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
+							+ adminData.getPlaceDescription() + " " + adminData.getPlaceAddress() + " "
+							+ adminData.getPlaceParishCode() + " " + adminData.getPlaceCost() + " "
+							+ adminData.getPlaceOpeningHours() + " " + adminData.getPlaceContact() + " "
+							+ adminData.getPlacePhotoLink() + " " + adminData.getPlaceMain()+"\n");
+	
+					saveToSubFile(adminData.getPlaceParishCode(), adminData);
+	
+					current = current.getNext();
+				}
+	
+				fileWriter.close();
 			}
-
-			fileWriter.close();
-
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Error saving to file");
 		}
