@@ -50,6 +50,7 @@ import javax.swing.table.DefaultTableModel;
 
 import javax.swing.SwingConstants;
 
+
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
 	private static AdminNode pastTail = null;
