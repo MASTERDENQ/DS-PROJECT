@@ -498,7 +498,6 @@ public class Visitor extends JFrame {
 		String[] singleRow, columnNames = { "ID#", "Name", "Description", "Address", "Parish Code", "Entry Cost",
 				"Opening Hours", "Contact #", "Photo Link", "Main Attraction" };
 
-		int i = 0;
 		JTable table;
 		JFrame frame = new JFrame();
 		DefaultTableModel defaultTable = new DefaultTableModel(rowData, columnNames);
@@ -509,8 +508,6 @@ public class Visitor extends JFrame {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			while ((line = bufferedReader.readLine()) != null) {
-				System.out.println(line);
-
 				singleRow = line.split(" ");
 				defaultTable.addRow(singleRow);
 			}
@@ -518,11 +515,19 @@ public class Visitor extends JFrame {
 
 			if(defaultTable.getRowCount() > 0) {
 				table = new JTable(defaultTable);
+				
+				for (int i = 0; i < 10; i++) {
+					table.getColumnModel().getColumn(i).setMinWidth(200);
+				}
+				table.setRowHeight(25);
+				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				
 				JScrollPane scrollPane = new JScrollPane(table);
 				frame.getContentPane().add(scrollPane);
 				
+				frame.setSize(600, 400);				
 				frame.setVisible(true);
-				frame.setSize(500, 300);
+				frame.setLocationRelativeTo(null);
 			}else {
 				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
 			}
@@ -553,14 +558,10 @@ public class Visitor extends JFrame {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			while ((line = bufferedReader.readLine()) != null) {
-				System.out.println(line);
-
 				singleLine = line.split(" ");
 
 				if (singleLine[1].equals(attraction)) {
 					String[] singleRow = { singleLine[1], singleLine[3], singleLine[7], singleLine[9] };
-					JOptionPane.showMessageDialog(null,
-							singleLine[1] + " " + singleLine[3] + " " + singleLine[7] + " " + singleLine[9]);
 					defaultTable.addRow(singleRow);
 				}
 			}
@@ -568,11 +569,19 @@ public class Visitor extends JFrame {
 
 			if(defaultTable.getRowCount() > 0) {
 				table = new JTable(defaultTable);
+				
+				for (int i = 0; i < 4; i++) {
+					table.getColumnModel().getColumn(i).setMinWidth(200);
+				}
+				table.setRowHeight(25);
+				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				
 				JScrollPane scrollPane = new JScrollPane(table);
 				frame.getContentPane().add(scrollPane);
 				
+				frame.setSize(600, 400);
 				frame.setVisible(true);
-				frame.setSize(500, 300);
+				frame.setLocationRelativeTo(null);
 			}else {
 				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
 			}
