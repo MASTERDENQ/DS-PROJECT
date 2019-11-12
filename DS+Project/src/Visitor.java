@@ -475,8 +475,6 @@ public class Visitor extends JFrame {
 					parishCode = 13;
 				} // this is a nested-if to derive the parish code
 
-				JOptionPane.showMessageDialog(null,
-						commandSplit[0] + " | it finish parse | " + parishCode + " " + commandNum);
 				return (parishCode + " " + commandNum);/*
 														 * the Parish name is returned along with the command number in
 														 * string format to better aid in function processing
@@ -491,8 +489,6 @@ public class Visitor extends JFrame {
 				attractionString = attractionString.replace(" ", "");
 				attractionString = attractionString.toLowerCase();
 
-				JOptionPane.showMessageDialog(null,
-						commandSplit[0] + " | it finish parse | " + attractionString + " " + commandNum);
 				return (attractionString + " "
 						+ commandNum);/*
 										 * the Attraction name is returned along with the command number in string
@@ -511,12 +507,10 @@ public class Visitor extends JFrame {
 
 		switch (Integer.parseInt(parameter[1])) {// switches case dependent on the command
 		case 1:
-			JOptionPane.showMessageDialog(null, "it reach case 1");
 			viewParishList(Integer.parseInt(parameter[0]));// view list of attractions in parish specified
 			break;
 
 		case 2:
-			JOptionPane.showMessageDialog(null, "it reach case 2 " + parameter[0]);
 			viewAttraction(parameter[0]);// view attraction details for attraction specified
 			break;
 
@@ -551,18 +545,23 @@ public class Visitor extends JFrame {
 			}
 			bufferedReader.close();
 
-			table = new JTable(defaultTable);
-			JScrollPane scrollPane = new JScrollPane(table);
-			frame.getContentPane().add(scrollPane);
-
-			frame.setVisible(true);
-			frame.setSize(500, 500);
-
-			JOptionPane.showMessageDialog(null, "it reach Table");
+			if(defaultTable.getRowCount() > 0) {
+				table = new JTable(defaultTable);
+				JScrollPane scrollPane = new JScrollPane(table);
+				frame.getContentPane().add(scrollPane);
+				
+				frame.setVisible(true);
+				frame.setSize(500, 300);
+			}else {
+				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
+			}
+			
 		} catch (FileNotFoundException ex) {
 			System.out.println("Unable to open file '" + fileName + "'");
+			JOptionPane.showMessageDialog(null, "File does not exist.");
 		} catch (IOException ex) {
 			System.out.println("Error reading file '" + fileName + "'");
+			JOptionPane.showMessageDialog(null, "File Reading Error.");
 		}
 	}// end of viewParishList
 
@@ -596,18 +595,23 @@ public class Visitor extends JFrame {
 			}
 			bufferedReader.close();
 
-			table = new JTable(defaultTable);
-			JScrollPane scrollPane = new JScrollPane(table);
-			frame.getContentPane().add(scrollPane);
-
-			frame.setVisible(true);
-			frame.setSize(500, 300);
-
-			JOptionPane.showMessageDialog(null, "it reach Table");
+			if(defaultTable.getRowCount() > 0) {
+				table = new JTable(defaultTable);
+				JScrollPane scrollPane = new JScrollPane(table);
+				frame.getContentPane().add(scrollPane);
+				
+				frame.setVisible(true);
+				frame.setSize(500, 300);
+			}else {
+				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
+			}
+			
 		} catch (FileNotFoundException ex) {
 			System.out.println("Unable to open file '" + fileName + "'");
+			JOptionPane.showMessageDialog(null, "File does not exist.");
 		} catch (IOException ex) {
 			System.out.println("Error reading file '" + fileName + "'");
+			JOptionPane.showMessageDialog(null, "File Reading Error.");
 		}
 	}// end of viewAttraction
 }// end of class
