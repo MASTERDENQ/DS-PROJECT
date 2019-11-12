@@ -393,8 +393,7 @@ public class Administrator extends JFrame {
 	}
 
 	// throws exception if all values are cancel
-	public static void signIn() throws FileNotFoundException {
-
+	public static boolean signIn() throws FileNotFoundException {
 		JTextField userName = new JTextField();
 		JTextField passWord = new JPasswordField();
 
@@ -415,11 +414,13 @@ public class Administrator extends JFrame {
 			if (userName.getText().equals(username) && passWord.getText().equals(password)) {
 				JOptionPane.showMessageDialog(null, "Successful login");
 				start();
+				return true;
 			} else {
 				JOptionPane.showMessageDialog(null, "I'M SORRY YOUR ATTEMPT IS INVALID");
-				Driver.initialize();
 			}
 		}
+
+		return false;
 	}// end of signIn
 
 	public String getPlaceID() {

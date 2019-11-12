@@ -2,8 +2,10 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -178,16 +182,17 @@ public class Visitor extends JFrame {
 		textField.setText("Copyright \u00A9 2019");
 		textField.setEditable(false);
 		textField.setColumns(10);
-		
+
 		JButton btnViewCreolePhrases = new JButton("View Creole Phrases");
 		btnViewCreolePhrases.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				viewCreoleTranslation();
 			}
 		});
 		btnViewCreolePhrases.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnViewCreolePhrases.setBounds(10, 464, 297, 47);
 		contentPane.add(btnViewCreolePhrases);
-		
+
 		JButton btnSaveExit = new JButton("Save & Exit");
 		btnSaveExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -236,11 +241,35 @@ public class Visitor extends JFrame {
 		}
 	}
 
+	public static void viewCreoleTranslation() {
+		Image image;
+
+		try {
+			File image2 = new File("creolephrases.jpg");
+			image = ImageIO.read(image2);
+			
+			JFrame frame = new JFrame();
+			frame.setLayout(new FlowLayout());
+			frame.setSize(650, 490);
+			
+			ImageIcon icon = new ImageIcon(image);
+			JLabel lbl = new JLabel();
+			lbl.setIcon(icon);
+			
+			frame.add(lbl);
+			frame.setVisible(true);
+			frame.setLocationRelativeTo(null);
+			frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void viewCreoleList() {
 		hostPanel.removeAll();
 
 		JButton command1 = new JButton("Gimmi all a di place dem inna [Parish Name]");
-		//command1.setToolTipText("");
+		// command1.setToolTipText("");
 		command1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				commandTextField.setText("Gimmi all a di place dem inna ");
@@ -250,7 +279,7 @@ public class Visitor extends JFrame {
 		/* 10, 147, 691, 311 */
 		txtInstructions = new JTextField();
 		txtInstructions.setBounds(0, 0, 691, 35);
-		
+
 		txtInstructions.setHorizontalAlignment(SwingConstants.CENTER);
 		txtInstructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtInstructions.setText("SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
@@ -287,7 +316,7 @@ public class Visitor extends JFrame {
 		});
 		btnCommandEnter.setBounds(280, 200, 151, 44);
 		hostPanel.add(btnCommandEnter);
-		
+
 		hostPanel.revalidate();
 	}// end of viewCreoleList()
 
