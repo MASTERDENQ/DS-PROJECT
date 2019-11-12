@@ -79,12 +79,18 @@ public class AdminList {
 
 	public void saveFiles(AdminNode pastTail) {
 		try {
-			if(pastTail!= null) {
 				File file = new File("placeList.txt");
 				
 				FileWriter fileWriter = new FileWriter(file, true);
 	
-				AdminNode current = pastTail.getNext();
+				AdminNode current;
+				
+				if(pastTail == null) {
+					current = head;
+				}
+				else {
+					current = pastTail.getNext();
+				}
 				while (current != null) {
 					Administrator adminData = current.getData();
 	
@@ -98,9 +104,7 @@ public class AdminList {
 	
 					current = current.getNext();
 				}
-	
 				fileWriter.close();
-			}
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Error saving to file");
 		}
