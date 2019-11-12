@@ -1,4 +1,5 @@
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -86,7 +87,7 @@ public class Visitor extends JFrame {
 
 	public Visitor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 888, 627);
+		setBounds(100, 100, 727, 590);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,7 +100,7 @@ public class Visitor extends JFrame {
 		lblDIGoodPlaceDem.setForeground(Color.BLACK);
 		lblDIGoodPlaceDem.setFont(new Font("Tw Cen MT Condensed", Font.BOLD | Font.ITALIC, 44));
 		lblDIGoodPlaceDem.setBackground(Color.WHITE);
-		lblDIGoodPlaceDem.setBounds(141, 14, 595, 68);
+		lblDIGoodPlaceDem.setBounds(102, 24, 495, 56);
 		contentPane.add(lblDIGoodPlaceDem);
 
 		// Date: Display Current Date
@@ -110,28 +111,28 @@ public class Visitor extends JFrame {
 		dateBox.setText(dateFormat.format(currentDate));
 
 		dateBox.setColumns(10);
-		dateBox.setBounds(57, 14, 86, 22);
+		dateBox.setBounds(54, 4, 86, 22);
 		contentPane.add(dateBox);
 
 		// Date: Label
 		JLabel label = new JLabel("DATE");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		label.setBounds(10, 13, 51, 28);
+		label.setFont(new Font("Tahoma", Font.BOLD, 13));
+		label.setBounds(10, 0, 51, 28);
 		contentPane.add(label);
 
 		// Separates sections of display with a line
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 78, 848, 2);
+		separator.setBounds(10, 78, 691, 2);
 		contentPane.add(separator);
 
 		// Panel in Frame
 		Panel panel = new Panel();
-		panel.setBounds(10, 86, 848, 47);
+		panel.setBounds(10, 86, 691, 47);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		// Display
-		JButton btnUseCreole = new JButton("View Creole Commands");
+		JButton btnUseCreole = new JButton("Enter Creole Commands");
 		btnUseCreole.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -141,8 +142,8 @@ public class Visitor extends JFrame {
 				} // Catches Exception if thrown from function
 			}
 		});
-		btnUseCreole.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnUseCreole.setBounds(0, 0, 411, 47);
+		btnUseCreole.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnUseCreole.setBounds(0, 0, 297, 47);
 		panel.add(btnUseCreole);
 
 		JButton btnMakeRequest = new JButton("Make Request");
@@ -152,31 +153,52 @@ public class Visitor extends JFrame {
 			}
 		});
 
-		btnMakeRequest.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnMakeRequest.setBounds(409, 0, 439, 47);
+		btnMakeRequest.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnMakeRequest.setBounds(395, 0, 297, 47);
 		panel.add(btnMakeRequest);
 
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 139, 848, 2);
+		separator_1.setBounds(10, 139, 691, 2);
 		contentPane.add(separator_1);
 
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setBounds(10, 552, 846, 2);
 		contentPane.add(separator_2);
 
+		hostPanel = new Panel();
+		hostPanel.setBackground(Color.GRAY);
+		hostPanel.setLayout(null);
+		hostPanel.setBounds(10, 147, 691, 311);
+		contentPane.add(hostPanel);
+
 		textField = new JTextField();
+		textField.setBounds(295, 526, 116, 28);
+		contentPane.add(textField);
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setText("Copyright \u00A9 2019");
 		textField.setEditable(false);
 		textField.setColumns(10);
-		textField.setBounds(377, 552, 116, 28);
-		contentPane.add(textField);
-
-		hostPanel = new Panel();
-		hostPanel.setBackground(Color.GRAY);
-		hostPanel.setLayout(null);
-		hostPanel.setBounds(10, 147, 848, 399);
-		contentPane.add(hostPanel);
+		
+		JButton btnViewCreolePhrases = new JButton("View Creole Phrases");
+		btnViewCreolePhrases.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnViewCreolePhrases.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnViewCreolePhrases.setBounds(10, 464, 297, 47);
+		contentPane.add(btnViewCreolePhrases);
+		
+		JButton btnSaveExit = new JButton("Save & Exit");
+		btnSaveExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				requestList.saveFiles();
+				saveID();
+				System.exit(0);
+			}
+		});
+		btnSaveExit.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnSaveExit.setBounds(404, 464, 297, 47);
+		contentPane.add(btnSaveExit);
 	}// end of Visitor
 
 	/**
@@ -200,87 +222,73 @@ public class Visitor extends JFrame {
 		}
 	}
 
+	public void saveID() {
+		try {
+			File file = new File("startingID.txt");
+
+			FileWriter fileWriter = new FileWriter(file, false);
+
+			fileWriter.write(attractionID + " " + reqID);
+
+			fileWriter.close();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error saving to file");
+		}
+	}
+
 	public static void viewCreoleList() {
-		JButton command1 = new JButton(
-				"Gimmi all a di place dem inna [Parish Name]- (Eng: Give me all the places in [Parish Name])");
-		command1.setToolTipText("");
+		hostPanel.removeAll();
+
+		JButton command1 = new JButton("Gimmi all a di place dem inna [Parish Name]");
+		//command1.setToolTipText("");
 		command1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				commandTextField.setText("Gimmi all a di place dem inna ");
 			}
 		});
 
+		/* 10, 147, 691, 311 */
 		txtInstructions = new JTextField();
-		txtInstructions.setBounds(0, 0, 848, 28);
-		hostPanel.add(txtInstructions);
+		txtInstructions.setBounds(0, 0, 691, 35);
+		
 		txtInstructions.setHorizontalAlignment(SwingConstants.CENTER);
-		txtInstructions.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtInstructions.setText("PLEASE SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
+		txtInstructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtInstructions.setText("SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
 		txtInstructions.setEditable(false);
-		txtInstructions.setColumns(10);
+		hostPanel.add(txtInstructions);
+		// txtInstructions.setColumns(10);
 		command1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command1.setBounds(0, 27, 848, 56);
+		command1.setBounds(0, 35, 691, 56);
 		hostPanel.add(command1);
 
-		JButton command2 = new JButton(
-				"Which part have di cheapest [Attraction Name]- (Eng: Which location has the cheapest [Attraction Name])");
+		JButton command2 = new JButton("Which part have di cheapest [Attraction Name]");
 		command2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				commandTextField.setText("Which part have di cheapest ");
 			}
 		});
 		command2.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command2.setBounds(0, 82, 848, 56);
+		command2.setBounds(0, 91, 691, 56);
 		hostPanel.add(command2);
-
-		JButton command3 = new JButton(
-				"Gi mi all a di infamation fi [Attraction Name]- (Eng: Give me all the information for [Attraction Name])");
-		command3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				commandTextField.setText("Gi mi all a di infamation fi ");
-			}
-		});
-		command3.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command3.setBounds(0, 138, 848, 61);
-		hostPanel.add(command3);
-
-		JButton command4 = new JButton("Tell mi bout [Place Name]- (Eng: Tell me about [Place Name])");
-		command4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				commandTextField.setText("Tell mi bout ");
-			}
-		});
-		command4.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command4.setBounds(0, 196, 848, 56);
-		hostPanel.add(command4);
-
-		JButton command5 = new JButton("A wah time di place dem open inna [Parish Name]- "
-				+ "(Eng: What at the opening hours for the places in [Parish Name])");
-		command5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				commandTextField.setText("A wah time di place dem open inna ");
-			}
-		});
-		command5.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command5.setBounds(0, 249, 848, 56);
-		hostPanel.add(command5);
 
 		commandTextField = new JTextField();
 		commandTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		commandTextField.setBounds(0, 304, 848, 53);
+		commandTextField.setBounds(0, 147, 691, 53);
 		hostPanel.add(commandTextField);
 		commandTextField.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		commandTextField.setColumns(10);
 
 		JButton btnCommandEnter = new JButton("ENTER");
-		btnCommandEnter.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnCommandEnter.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnCommandEnter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				onEnter();
 			}
 		});
-		btnCommandEnter.setBounds(352, 355, 151, 44);
+		btnCommandEnter.setBounds(280, 200, 151, 44);
 		hostPanel.add(btnCommandEnter);
+		
+		hostPanel.revalidate();
 	}// end of viewCreoleList()
 
 	public void makeRequest() {
@@ -323,10 +331,6 @@ public class Visitor extends JFrame {
 			JOptionPane.showMessageDialog(null, "Operation Cancelled");
 		}
 	}
-
-	public void saveRequestMade() {
-		
-	}// end of saveRequestMade()
 
 	public static void onEnter() {
 		runCommand(parseCommand());
@@ -520,7 +524,7 @@ public class Visitor extends JFrame {
 
 			table = new JTable(defaultTable);
 			JScrollPane scrollPane = new JScrollPane(table);
-			frame.add(scrollPane);
+			frame.getContentPane().add(scrollPane);
 
 			frame.setVisible(true);
 			frame.setSize(500, 500);
@@ -565,7 +569,7 @@ public class Visitor extends JFrame {
 
 			table = new JTable(defaultTable);
 			JScrollPane scrollPane = new JScrollPane(table);
-			frame.add(scrollPane);
+			frame.getContentPane().add(scrollPane);
 
 			frame.setVisible(true);
 			frame.setSize(500, 300);

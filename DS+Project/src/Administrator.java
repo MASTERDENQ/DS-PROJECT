@@ -364,7 +364,7 @@ public class Administrator extends JFrame {
 						placeAddress.getText(), placeParishCode, placeCost.getText(), placeOpeningHours.getText(),
 						placeContact.getText(), placePhotoLink.getText(), placeMain.getText()));
 				
-				Integer.toString(Integer.parseInt(placeID) + 1);
+				placeID = Integer.toString(Integer.parseInt(placeID) + 1);
 
 				JOptionPane.showMessageDialog(null, "Place successfully added");
 			}

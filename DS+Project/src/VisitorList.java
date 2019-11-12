@@ -129,8 +129,6 @@ public class VisitorList {
 					"UNABLE TO STORE INFORMATION. " + "PLEASE CONTACT SYSTEM ADMINISTRATOR THANK YOU");
 			e.printStackTrace();
 		} // end of try and catch exception handling
-
-		JOptionPane.showMessageDialog(null, "Request successfully saved");
 	}
 
 	public JTable displayHead() {
