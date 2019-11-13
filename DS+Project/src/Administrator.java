@@ -55,11 +55,11 @@ import javax.swing.SwingConstants;
 public class Administrator extends JFrame {
 	private static AdminNode pastTail = null;
 	
-	private String placeID = "0", reqID = "0", placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
+	private String placeID, reqID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placeMain;
 	private static AdminList adminList = new AdminList();
 	private static VisitorList visitorList = new VisitorList();
-	private VisitorStack visitorStack = new VisitorStack();
+	private static VisitorStack visitorStack = new VisitorStack();
 
 	private JPanel contentPane;
 	private JPanel mainView;
@@ -82,6 +82,7 @@ public class Administrator extends JFrame {
 					
 					visitorList.loadFiles();
 					adminList.loadFiles();
+					visitorStack.loadFiles();
 					pastTail = adminList.getTail();
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -116,7 +116,7 @@ public class AdminList {
 			if (file.exists()) {
 				Scanner fileReader;
 				fileReader = new Scanner(file);
-				Administrator adminData = new Administrator();
+				
 				while (fileReader.hasNext()) {
 					String placeID = fileReader.next();
 					String placeName = fileReader.next();
@@ -129,7 +129,7 @@ public class AdminList {
 					String placePhotoLink = fileReader.next();
 					String placeMain = fileReader.next();
 
-					adminData = new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode,
+					Administrator adminData = new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode,
 							placeCost, placeOpeningHours, placeContact, placePhotoLink, placeMain);
 
 					addToBack(adminData);

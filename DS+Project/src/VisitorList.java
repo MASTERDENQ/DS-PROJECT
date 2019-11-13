@@ -81,7 +81,6 @@ public class VisitorList {
 			if (file.exists()) {
 				Scanner fileReader;
 				fileReader = new Scanner(file);
-				Visitor visitorData = new Visitor();
 
 				String reqID, fName, lName, email, attractionID, attractionName, message, dateAndTime;
 				while (fileReader.hasNext()) {
@@ -94,7 +93,7 @@ public class VisitorList {
 					message = fileReader.next();
 					dateAndTime = fileReader.next();
 
-					visitorData = new Visitor(reqID, fName, lName, email, attractionID, attractionName, message,
+					Visitor visitorData = new Visitor(reqID, fName, lName, email, attractionID, attractionName, message,
 							dateAndTime);
 
 					enqueue(visitorData);
