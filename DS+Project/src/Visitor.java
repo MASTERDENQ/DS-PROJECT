@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Panel;
@@ -287,7 +288,9 @@ public class Visitor extends JFrame {
 		hostPanel.add(txtInstructions);
 		// txtInstructions.setColumns(10);
 		command1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command1.setBounds(0, 35, 691, 56);
+		//command1.setBounds(0, 35, 691, 56);
+		
+		hostPanel.setLayout(new GridLayout(5, 1));
 		hostPanel.add(command1);
 
 		JButton command2 = new JButton("Which part have di cheapest [Attraction Name]");
@@ -297,12 +300,12 @@ public class Visitor extends JFrame {
 			}
 		});
 		command2.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		command2.setBounds(0, 91, 691, 56);
+		//command2.setBounds(0, 91, 691, 56);
 		hostPanel.add(command2);
 
 		commandTextField = new JTextField();
 		commandTextField.setHorizontalAlignment(SwingConstants.CENTER);
-		commandTextField.setBounds(0, 147, 691, 53);
+		//commandTextField.setBounds(0, 147, 691, 53);
 		hostPanel.add(commandTextField);
 		commandTextField.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		commandTextField.setColumns(10);
@@ -314,7 +317,7 @@ public class Visitor extends JFrame {
 				onEnter();
 			}
 		});
-		btnCommandEnter.setBounds(280, 200, 151, 44);
+		//btnCommandEnter.setBounds(280, 200, 151, 44);
 		hostPanel.add(btnCommandEnter);
 
 		hostPanel.revalidate();
