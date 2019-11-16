@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -9,6 +13,41 @@ public class VisitorStack {
 		head = null;
 	}
 
+	public void saveFiles() {
+		
+	}
+	
+	public void loadFiles(){
+		try {
+			File file = new File("processRequests.txt");
+			if (file.exists()) {
+				Scanner fileReader;
+				fileReader = new Scanner(file);
+				//Visitor visitorData;
+
+				String reqID, fName, lName, email, attractionID, attractionName, message, dateAndTime;
+				while (fileReader.hasNext()) {
+					reqID = fileReader.next();
+					fName = fileReader.next();
+					lName = fileReader.next();
+					email = fileReader.next();
+					attractionID = fileReader.next();
+					attractionName = fileReader.next();
+					message = fileReader.next();
+					dateAndTime = fileReader.next();
+
+					Visitor visitorData = new Visitor(reqID, fName, lName, email, attractionID, attractionName, message,
+							dateAndTime);
+
+					push(visitorData);
+				}
+				fileReader.close();
+			}
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Failed to read from file");
+		}
+	}
+	
 	public boolean isEmpty() {
 		if (head == null) {
 			return true;

@@ -79,27 +79,32 @@ public class AdminList {
 
 	public void saveFiles(AdminNode pastTail) {
 		try {
-			File file = new File("placeList.txt");
-			
-			FileWriter fileWriter = new FileWriter(file, true);
-
-			AdminNode current = pastTail.getNext();
-			while (current != null) {
-				Administrator adminData = current.getData();
-
-				fileWriter.write(adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
-						+ adminData.getPlaceDescription() + " " + adminData.getPlaceAddress() + " "
-						+ adminData.getPlaceParishCode() + " " + adminData.getPlaceCost() + " "
-						+ adminData.getPlaceOpeningHours() + " " + adminData.getPlaceContact() + " "
-						+ adminData.getPlacePhotoLink() + " " + adminData.getPlaceMain()+"\n");
-
-				saveToSubFile(adminData.getPlaceParishCode(), adminData);
-
-				current = current.getNext();
-			}
-
-			fileWriter.close();
-
+				File file = new File("placeList.txt");
+				
+				FileWriter fileWriter = new FileWriter(file, true);
+	
+				AdminNode current;
+				
+				if(pastTail == null) {
+					current = head;
+				}
+				else {
+					current = pastTail.getNext();
+				}
+				while (current != null) {
+					Administrator adminData = current.getData();
+	
+					fileWriter.write(adminData.getPlaceID() + " " + adminData.getPlaceName() + " "
+							+ adminData.getPlaceDescription() + " " + adminData.getPlaceAddress() + " "
+							+ adminData.getPlaceParishCode() + " " + adminData.getPlaceCost() + " "
+							+ adminData.getPlaceOpeningHours() + " " + adminData.getPlaceContact() + " "
+							+ adminData.getPlacePhotoLink() + " " + adminData.getPlaceMain()+"\n");
+	
+					saveToSubFile(adminData.getPlaceParishCode(), adminData);
+	
+					current = current.getNext();
+				}
+				fileWriter.close();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Error saving to file");
 		}
@@ -111,7 +116,7 @@ public class AdminList {
 			if (file.exists()) {
 				Scanner fileReader;
 				fileReader = new Scanner(file);
-				Administrator adminData = new Administrator();
+				
 				while (fileReader.hasNext()) {
 					String placeID = fileReader.next();
 					String placeName = fileReader.next();
@@ -124,7 +129,7 @@ public class AdminList {
 					String placePhotoLink = fileReader.next();
 					String placeMain = fileReader.next();
 
-					adminData = new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode,
+					Administrator adminData = new Administrator(placeID, placeName, placeDescription, placeAddress, placeParishCode,
 							placeCost, placeOpeningHours, placeContact, placePhotoLink, placeMain);
 
 					addToBack(adminData);

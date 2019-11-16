@@ -50,15 +50,16 @@ import javax.swing.table.DefaultTableModel;
 
 import javax.swing.SwingConstants;
 
+
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
 	private static AdminNode pastTail = null;
 	
-	private String placeID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
+	private String placeID, reqID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
 			placeContact, placePhotoLink, placeMain;
 	private static AdminList adminList = new AdminList();
 	private static VisitorList visitorList = new VisitorList();
-	private VisitorStack visitorStack = new VisitorStack();
+	private static VisitorStack visitorStack = new VisitorStack();
 
 	private JPanel contentPane;
 	private JPanel mainView;
@@ -74,11 +75,14 @@ public class Administrator extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFrame frame = new Administrator();
+					Administrator frame = new Administrator();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
+					frame.loadID();
+					
 					visitorList.loadFiles();
 					adminList.loadFiles();
+					visitorStack.loadFiles();
 					pastTail = adminList.getTail();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -261,6 +265,7 @@ public class Administrator extends JFrame {
 			fileReader = new Scanner(file);
 
 			placeID = fileReader.next();
+			reqID = fileReader.next();
 			
 			fileReader.close();
 
@@ -275,7 +280,7 @@ public class Administrator extends JFrame {
 			
 			FileWriter fileWriter = new FileWriter(file, false);
 
-			fileWriter.write(placeID + " " + (visitorList.getTail().getData().getReqID() + 1));
+			fileWriter.write(placeID + " " + reqID);
 
 			fileWriter.close();
 		} catch (IOException e) {
@@ -326,7 +331,7 @@ public class Administrator extends JFrame {
 				placeCost = new JTextField(), placeOpeningHours = new JTextField(), placeContact = new JTextField(),
 				placePhotoLink = new JTextField(), placeMain = new JTextField();
 
-		placeID = "100";// make into something unique
+		//placeID = "100";// make into something unique
 
 		String[] parishCode = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" };
 
@@ -349,6 +354,7 @@ public class Administrator extends JFrame {
 				"13. Trelawny\n", "Select the Location's Parish Code",
 				JOptionPane.QUESTION_MESSAGE, null, parishCode, parishCode[0]);
 
+		
 		int choice = JOptionPane.showConfirmDialog(null, message, "Enter The Following Location Information",
 				JOptionPane.OK_CANCEL_OPTION);
 
@@ -393,8 +399,7 @@ public class Administrator extends JFrame {
 	}
 
 	// throws exception if all values are cancel
-	public static void signIn() throws FileNotFoundException {
-
+	public static boolean signIn() throws FileNotFoundException {
 		JTextField userName = new JTextField();
 		JTextField passWord = new JPasswordField();
 
@@ -415,11 +420,13 @@ public class Administrator extends JFrame {
 			if (userName.getText().equals(username) && passWord.getText().equals(password)) {
 				JOptionPane.showMessageDialog(null, "Successful login");
 				start();
+				return true;
 			} else {
 				JOptionPane.showMessageDialog(null, "I'M SORRY YOUR ATTEMPT IS INVALID");
-				Driver.initialize();
 			}
 		}
+
+		return false;
 	}// end of signIn
 
 	public String getPlaceID() {
