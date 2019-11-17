@@ -50,13 +50,12 @@ import javax.swing.table.DefaultTableModel;
 
 import javax.swing.SwingConstants;
 
-
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
 	private static AdminNode pastTail = null;
-	
-	private String placeID, reqID, placeName, placeDescription, placeAddress, placeParishCode, placeCost, placeOpeningHours,
-			placeContact, placePhotoLink, placeMain;
+
+	private String placeID, reqID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
+			placeOpeningHours, placeContact, placePhotoLink, placeMain;
 	private static AdminList adminList = new AdminList();
 	private static VisitorList visitorList = new VisitorList();
 	private static VisitorStack visitorStack = new VisitorStack();
@@ -79,7 +78,7 @@ public class Administrator extends JFrame {
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 					frame.loadID();
-					
+
 					visitorList.loadFiles();
 					adminList.loadFiles();
 					visitorStack.loadFiles();
@@ -238,12 +237,14 @@ public class Administrator extends JFrame {
 		mainView.setLayout(null);
 		mainView.setBounds(10, 161, 690, 233);
 		contentPane.add(mainView);
-		
-		//This is the exit button
+
+		// This is the exit button
 		JButton btnNewButton = new JButton("Save & Exit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				adminList.saveFiles(pastTail);
+				visitorList.saveFiles();
+				visitorStack.saveFiles();
 				saveID();
 				System.exit(0);
 			}
@@ -266,18 +267,18 @@ public class Administrator extends JFrame {
 
 			placeID = fileReader.next();
 			reqID = fileReader.next();
-			
+
 			fileReader.close();
 
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Failed to read from file");
 		}
 	}
-	
+
 	public void saveID() {
 		try {
 			File file = new File("startingID.txt");
-			
+
 			FileWriter fileWriter = new FileWriter(file, false);
 
 			fileWriter.write(placeID + " " + reqID);
@@ -287,14 +288,14 @@ public class Administrator extends JFrame {
 			JOptionPane.showMessageDialog(null, "Error saving to file");
 		}
 	}
-	
+
 	public void processRecord() {
 		if (visitorList.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No visitor requests found");
 		} else {
 			JOptionPane.showMessageDialog(null, "You are only able to process the most recently made visitor request");
 			JTable table = visitorList.displayHead();
-			
+
 			addToPanel(table);
 
 			int choice = JOptionPane.showConfirmDialog(null, "Do you wish to process this record?", "Confirmation Form",
@@ -325,13 +326,21 @@ public class Administrator extends JFrame {
 			JOptionPane.showMessageDialog(null, "No records found");
 		}
 	}
+	
+	public String searchFormat(String value) {
+		value = value.toLowerCase();
+		value = value.replace(" ", "_");
+
+		return value;
+	}
+
 
 	public void addPlace() {
 		JTextField placeName = new JTextField(), placeDescription = new JTextField(), placeAddress = new JTextField(),
 				placeCost = new JTextField(), placeOpeningHours = new JTextField(), placeContact = new JTextField(),
 				placePhotoLink = new JTextField(), placeMain = new JTextField();
 
-		//placeID = "100";// make into something unique
+		// placeID = "100";// make into something unique
 
 		String[] parishCode = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" };
 
@@ -339,22 +348,13 @@ public class Administrator extends JFrame {
 				placeCost, "Opening Hours", placeOpeningHours, "Contact Number", placeContact, "Location Photo Link",
 				placePhotoLink, "Main Attraction", placeMain };
 
-		placeParishCode = (String) JOptionPane.showInputDialog(null, "1. Kingston & St. Andrew\n" + 
-				"2. St. Thomas\n" + 
-				"3. Portland\n" + 
-				"4. St. Mary\n" + 
-				"5. St. Catherine\n" + 
-				"6. Clarendon\n" + 
-				"7. Manchester\n" + 
-				"8. St. Ann\n" + 
-				"9. St. Elizabeth\n" + 
-				"10. St. James\n" + 
-				"11. Hanover\n" + 
-				"12. Westmoreland\n" + 
-				"13. Trelawny\n", "Select the Location's Parish Code",
-				JOptionPane.QUESTION_MESSAGE, null, parishCode, parishCode[0]);
+		placeParishCode = (String) JOptionPane.showInputDialog(null,
+				"1. Kingston & St. Andrew\n" + "2. St. Thomas\n" + "3. Portland\n" + "4. St. Mary\n"
+						+ "5. St. Catherine\n" + "6. Clarendon\n" + "7. Manchester\n" + "8. St. Ann\n"
+						+ "9. St. Elizabeth\n" + "10. St. James\n" + "11. Hanover\n" + "12. Westmoreland\n"
+						+ "13. Trelawny\n",
+				"Select the Location's Parish Code", JOptionPane.QUESTION_MESSAGE, null, parishCode, parishCode[0]);
 
-		
 		int choice = JOptionPane.showConfirmDialog(null, message, "Enter The Following Location Information",
 				JOptionPane.OK_CANCEL_OPTION);
 
@@ -366,10 +366,12 @@ public class Administrator extends JFrame {
 
 				JOptionPane.showMessageDialog(null, "No field should be left empty, record adding canceled");
 			} else {
-				adminList.addToBack(new Administrator(placeID, placeName.getText(), placeDescription.getText(),
-						placeAddress.getText(), placeParishCode, placeCost.getText(), placeOpeningHours.getText(),
-						placeContact.getText(), placePhotoLink.getText(), placeMain.getText()));
-				
+				adminList.addToBack(new Administrator(placeID, searchFormat(placeName.getText()),
+						placeDescription.getText().replace(" ", "_"), placeAddress.getText().replace(" ", "_"),
+						placeParishCode, placeCost.getText().replace(" ", "_"),
+						placeOpeningHours.getText().replace(" ", "_"), placeContact.getText().replace(" ", "_"),
+						placePhotoLink.getText(), placeMain.getText().replace(" ", "_")));
+
 				placeID = Integer.toString(Integer.parseInt(placeID) + 1);
 
 				JOptionPane.showMessageDialog(null, "Place successfully added");
@@ -411,7 +413,7 @@ public class Administrator extends JFrame {
 			File adminFile = new File("adminFile.txt");
 			Scanner scan = new Scanner(adminFile);
 			String username = "", password = "";
-		
+
 			username = scan.next();
 			password = scan.next();
 

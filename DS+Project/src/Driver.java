@@ -88,6 +88,7 @@ public class Driver {
 				frame.dispose();
 			}
 		});
+		
 		btnVisitor.setBounds(67, 167, 410, 55);
 		frame.getContentPane().add(btnVisitor);
 		

@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -14,7 +16,30 @@ public class VisitorStack {
 	}
 
 	public void saveFiles() {
-		
+		if(!isEmpty()) {
+			FileWriter rMade;
+			try {
+				File file = new File("processRequests.txt");
+				rMade = new FileWriter(file, false);
+
+				VisitorNode current = head;
+
+				while (current != null) {
+					Visitor data = current.getData();
+
+					rMade.write(data.getReqID() + " " + data.getfName() + " " + data.getlName() + " "
+							+ data.getEmail() + " " + data.getAttractionID() + " " + data.getAttractionName() + " "
+							+ data.getMessage() + " " + data.getDateAndTime()+"\n");
+
+					current = current.getNext();
+				}
+				rMade.close();
+			} catch (IOException e) {
+				JOptionPane.showConfirmDialog(null,
+						"UNABLE TO STORE INFORMATION. " + "PLEASE CONTACT SYSTEM ADMINISTRATOR THANK YOU");
+				e.printStackTrace();
+			} // end of try and catch exception handling
+		}
 	}
 	
 	public void loadFiles(){
@@ -23,7 +48,6 @@ public class VisitorStack {
 			if (file.exists()) {
 				Scanner fileReader;
 				fileReader = new Scanner(file);
-				//Visitor visitorData;
 
 				String reqID, fName, lName, email, attractionID, attractionName, message, dateAndTime;
 				while (fileReader.hasNext()) {

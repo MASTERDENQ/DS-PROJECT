@@ -178,7 +178,7 @@ public class Visitor extends JFrame {
 		textField.setText("Copyright \u00A9 2019");
 		textField.setEditable(false);
 		textField.setColumns(10);
-		
+
 		JButton btnViewCreolePhrases = new JButton("View Creole Phrases");
 		btnViewCreolePhrases.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -187,7 +187,7 @@ public class Visitor extends JFrame {
 		btnViewCreolePhrases.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnViewCreolePhrases.setBounds(10, 464, 297, 47);
 		contentPane.add(btnViewCreolePhrases);
-		
+
 		JButton btnSaveExit = new JButton("Save & Exit");
 		btnSaveExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -240,7 +240,7 @@ public class Visitor extends JFrame {
 		hostPanel.removeAll();
 
 		JButton command1 = new JButton("Gimmi all a di place dem inna [Parish Name]");
-		//command1.setToolTipText("");
+		// command1.setToolTipText("");
 		command1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				commandTextField.setText("Gimmi all a di place dem inna ");
@@ -250,7 +250,7 @@ public class Visitor extends JFrame {
 		/* 10, 147, 691, 311 */
 		txtInstructions = new JTextField();
 		txtInstructions.setBounds(0, 0, 691, 35);
-		
+
 		txtInstructions.setHorizontalAlignment(SwingConstants.CENTER);
 		txtInstructions.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtInstructions.setText("SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
@@ -287,7 +287,7 @@ public class Visitor extends JFrame {
 		});
 		btnCommandEnter.setBounds(280, 200, 151, 44);
 		hostPanel.add(btnCommandEnter);
-		
+
 		hostPanel.revalidate();
 	}// end of viewCreoleList()
 
@@ -319,8 +319,10 @@ public class Visitor extends JFrame {
 
 				JOptionPane.showMessageDialog(null, "No field should be left empty, request adding canceled");
 			} else {
-				Visitor data = new Visitor(reqID, fName.getText(), lName.getText(), email.getText(),
-						requestAttractionID, attractionName.getText(), message.getText(), dateBox.getText());
+				Visitor data = new Visitor(reqID, fName.getText().replace(" ", "_"), lName.getText().replace(" ", "_"),
+						email.getText().replace(" ", "_"), requestAttractionID.replace(" ", "_"),
+						attractionName.getText().replace(" ", "_"), message.getText().replace(" ", "_"),
+						dateBox.getText());
 				requestList.enqueue(data);
 
 				reqID = Integer.toString(Integer.parseInt(reqID) + 1);
@@ -513,25 +515,25 @@ public class Visitor extends JFrame {
 			}
 			bufferedReader.close();
 
-			if(defaultTable.getRowCount() > 0) {
+			if (defaultTable.getRowCount() > 0) {
 				table = new JTable(defaultTable);
-				
+
 				for (int i = 0; i < 10; i++) {
 					table.getColumnModel().getColumn(i).setMinWidth(200);
 				}
 				table.setRowHeight(25);
 				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				
+
 				JScrollPane scrollPane = new JScrollPane(table);
 				frame.getContentPane().add(scrollPane);
-				
-				frame.setSize(600, 400);				
+
+				frame.setSize(600, 400);
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
 			}
-			
+
 		} catch (FileNotFoundException ex) {
 			System.out.println("Unable to open file '" + fileName + "'");
 			JOptionPane.showMessageDialog(null, "File does not exist.");
@@ -567,25 +569,25 @@ public class Visitor extends JFrame {
 			}
 			bufferedReader.close();
 
-			if(defaultTable.getRowCount() > 0) {
+			if (defaultTable.getRowCount() > 0) {
 				table = new JTable(defaultTable);
-				
+
 				for (int i = 0; i < 4; i++) {
 					table.getColumnModel().getColumn(i).setMinWidth(200);
 				}
 				table.setRowHeight(25);
 				table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-				
+
 				JScrollPane scrollPane = new JScrollPane(table);
 				frame.getContentPane().add(scrollPane);
-				
+
 				frame.setSize(600, 400);
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
 			}
-			
+
 		} catch (FileNotFoundException ex) {
 			System.out.println("Unable to open file '" + fileName + "'");
 			JOptionPane.showMessageDialog(null, "File does not exist.");

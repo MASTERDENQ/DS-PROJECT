@@ -109,7 +109,7 @@ public class VisitorList {
 		FileWriter rMade;
 		try {
 			File file = new File("requestMade.txt");
-			rMade = new FileWriter(file, true);
+			rMade = new FileWriter(file, false);
 
 			VisitorNode current = head;
 
