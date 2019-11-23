@@ -3,7 +3,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
@@ -239,7 +238,6 @@ public class Visitor extends JFrame {
 
 	public static void viewCreoleList() {
 		hostPanel.removeAll();
-		hostPanel.setLayout(new GridLayout(5, 1));
 
 		JButton command1 = new JButton("Gimmi all a di place dem inna [Parish Name]");
 		// command1.setToolTipText("");
@@ -416,16 +414,16 @@ public class Visitor extends JFrame {
 		int commandNum = 0, parishCode = 0, commandLen = commandSplit.length;// gets the length of words in the command
 		String attractionString = "";
 
-		if (commandSplit[0].equals("Gimmi")) {
+		if (commandSplit[0].equals("Gimmi")) {// looks for the first command
 			commandNum = 1;
 
 			try {
 				if (commandSplit[7].equals("St") || commandSplit[7].equals("St.") || commandSplit[7].equals("st")
-						|| commandSplit[7].equals("st.")) {
+						|| commandSplit[7].equals("st.")) {// edits the string for ease of selection
 					commandSplit[7] = "St" + commandSplit[8];
 				}
 
-				commandSplit[7] = commandSplit[7].toLowerCase();
+				commandSplit[7] = commandSplit[7].toLowerCase();// all information is kept in lower case to increase efficiency of search
 
 				if (commandSplit[7].equals("kingston") || commandSplit[7].equals("standrew")
 						|| commandSplit[7].equals("st.andrew")) {
@@ -463,12 +461,12 @@ public class Visitor extends JFrame {
 			} catch (Exception e) {
 				System.out.println("Error in parish name parsing");
 			}
-		} else if (commandSplit[0].equals("Which")) {
+		} else if (commandSplit[0].equals("Which")) {// looks for the second command
 			commandNum = 2;
 			try {
-				attractionString = command.replace("Which part have di cheapest ", "");
-				attractionString = attractionString.replace(" ", "");
-				attractionString = attractionString.toLowerCase();
+				attractionString = command.replace("Which part have di cheapest ", "");// removes unwanted section of string
+				attractionString = attractionString.replace(" ", "");// removes spaces to make search easier
+				attractionString = attractionString.toLowerCase();// all information is kept in lower case to increase efficiency of search
 
 				return (attractionString + " "
 						+ commandNum);/*
@@ -479,11 +477,11 @@ public class Visitor extends JFrame {
 				System.out.println("Error in attraction name parsing");
 			}
 		} // this nested-if is to derive which function has been inputed by the user
-		return (attractionString + " " + 0);
+		return (attractionString + " " + 0);// returns the string to search for along with the command number default to call onto an error
 
 	}// end of parseCommand
 
-	public static void runCommand(String commandInfo) {
+	public static void runCommand(String commandInfo) {// runs the command called onto 
 		String[] parameter = commandInfo.split(" ");
 
 		switch (Integer.parseInt(parameter[1])) {// switches case dependent on the command
@@ -492,17 +490,17 @@ public class Visitor extends JFrame {
 			break;
 
 		case 2:
-			viewAttraction(parameter[0]);// view attraction details for attraction specified
+			viewAttraction(parameter[0]);// view attraction details for cheapest attraction specified
 			break;
 
 		default:
 			JOptionPane.showMessageDialog(null,
-					"Statement Incorrect...\n\nPlease re-check statement before pressing Enter again.");// error message
+					"Statement Incorrect...\n\nPlease re-check statement before pressing Enter again.");// error message displayed
 			break;
 		}
 	}// end of runCommand
 
-	public static void viewParishList(int parishCode) {
+	public static void viewParishList(int parishCode) {// makes a table with all the attractions in a parish
 		String line, fileName = parishCode + ".txt";
 		Object[][] rowData = {};
 		String[] singleRow, columnNames = { "ID#", "Name", "Description", "Address", "Parish Code", "Entry Cost",
@@ -517,13 +515,13 @@ public class Visitor extends JFrame {
 			FileReader fileReader = new FileReader(fileName);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-			while ((line = bufferedReader.readLine()) != null) {
+			while ((line = bufferedReader.readLine()) != null) {// adds all lines of the parish file to the table
 				singleRow = line.split(" ");
 				defaultTable.addRow(singleRow);
 			}
 			bufferedReader.close();
 
-			if (defaultTable.getRowCount() > 0) {
+			if (defaultTable.getRowCount() > 0) {// formats table
 				table = new JTable(defaultTable);
 
 				for (int i = 0; i < 10; i++) {
@@ -539,7 +537,7 @@ public class Visitor extends JFrame {
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 			} else {
-				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
+				JOptionPane.showMessageDialog(null, "Table does not contain any data.");//error message to warn user of an empty parish
 			}
 
 		} catch (FileNotFoundException ex) {
@@ -551,13 +549,13 @@ public class Visitor extends JFrame {
 		}
 	}// end of viewParishList
 
-	public static void viewAttraction(String attraction) {
+	public static void viewAttraction(String attraction) {// searches for the attraction name in a file containng all attractions then sorts the cheapest of the attraction into the table
 		attraction = attraction.toLowerCase();
 		String[] singleLine, columnNames = { "Name", "Address", "Contact #", "Main Attraction" };
 		Object[][] rowData = {};
 		String line, fileName = "placeList.txt";
 
-		int parishCode = 0;
+		int cheapest = 0;
 		JTable table;
 		JFrame frame = new JFrame();
 		DefaultTableModel defaultTable = new DefaultTableModel(rowData, columnNames);
@@ -567,17 +565,30 @@ public class Visitor extends JFrame {
 			FileReader fileReader = new FileReader(fileName);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-			while ((line = bufferedReader.readLine()) != null) {
+			while ((line = bufferedReader.readLine()) != null) {//reads from the file
 				singleLine = line.split(" ");
 
-				if (singleLine[1].equals(attraction)) {
-					String[] singleRow = { singleLine[1], singleLine[3], singleLine[7], singleLine[9] };
-					defaultTable.addRow(singleRow);
+				if (singleLine[1].equals(attraction)) {// confirms the attraction name is equivalent
+					if(cheapest == 0) {// sets the cheapest of the attraction based on the first of its name
+						cheapest = Integer.parseInt(singleLine[5]);
+						String[] singleRow = { singleLine[1], singleLine[3], singleLine[7], singleLine[9] };
+						defaultTable.addRow(singleRow);
+					} else if(Integer.parseInt(singleLine[5]) < cheapest) {// finds cheaper attractions of its name
+						cheapest = Integer.parseInt(singleLine[5]);
+						defaultTable.setRowCount(0);
+						String[] singleRow = { singleLine[1], singleLine[3], singleLine[7], singleLine[9] };
+						defaultTable.addRow(singleRow);
+					} else if(Integer.parseInt(singleLine[5]) == cheapest) {// adds more of the attraction to the cheapest table given they have the same cost
+						cheapest = Integer.parseInt(singleLine[5]);
+						String[] singleRow = { singleLine[1], singleLine[3], singleLine[7], singleLine[9] };
+						defaultTable.addRow(singleRow);
+					}
 				}
 			}
+
 			bufferedReader.close();
 
-			if (defaultTable.getRowCount() > 0) {
+			if (defaultTable.getRowCount() > 0) {// formats table
 				table = new JTable(defaultTable);
 
 				for (int i = 0; i < 4; i++) {
@@ -593,7 +604,7 @@ public class Visitor extends JFrame {
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 			} else {
-				JOptionPane.showMessageDialog(null, "Table does not contain any data.");
+				JOptionPane.showMessageDialog(null, "Table does not contain any data.");// error message to warn the user that no attractions were found
 			}
 
 		} catch (FileNotFoundException ex) {
