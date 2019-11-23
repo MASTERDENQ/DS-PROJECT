@@ -294,45 +294,51 @@ public class Visitor extends JFrame {
 	}// end of viewCreoleList()
 
 	public void makeRequest() {
-
-		JTextField fName = new JTextField(), lName = new JTextField(), email = new JTextField(),
-				attractionName = new JTextField(), message = new JTextField();
-
-		int arrSize = Integer.parseInt(attractionID) - 99;
-		String[] availableID = new String[arrSize];
-
-		for (int i = 0; i < arrSize; i++) {
-			availableID[i] = Integer.toString(100 + i);
+		int arrSize = Integer.parseInt(attractionID) - 100;
+		
+		if(arrSize == 0) {
+			JOptionPane.showMessageDialog(null, "No places have been added to request information for");
 		}
-
-		Object form[] = { "First Name", fName, "Last Name", lName, "Email Address", email, "Attraction Name",
-				attractionName, "Message", message };
-
-		String requestAttractionID = (String) JOptionPane.showInputDialog(null,
-				"Select attraction ID# from list below\n\n", "Attraction ID's Found", JOptionPane.QUESTION_MESSAGE,
-				null, availableID, availableID[0]);
-
-		int choice = JOptionPane.showConfirmDialog(null, form, "Enter The Following Location Information",
-				JOptionPane.OK_CANCEL_OPTION);
-
-		if (choice == JOptionPane.OK_OPTION) {
-			if ((fName.getText()).isEmpty() || (lName.getText()).isEmpty() || (email.getText()).isEmpty()
-					|| (attractionName.getText()).isEmpty() || (message.getText()).isEmpty()) {
-
-				JOptionPane.showMessageDialog(null, "No field should be left empty, request adding canceled");
-			} else {
-				Visitor data = new Visitor(reqID, fName.getText().replace(" ", "_"), lName.getText().replace(" ", "_"),
-						email.getText().replace(" ", "_"), requestAttractionID.replace(" ", "_"),
-						attractionName.getText().replace(" ", "_"), message.getText().replace(" ", "_"),
-						dateBox.getText());
-				requestList.enqueue(data);
-
-				reqID = Integer.toString(Integer.parseInt(reqID) + 1);
-
-				JOptionPane.showMessageDialog(null, "Request successfully made");
+		else {
+			//populateTree();
+			String[] availableID = new String[arrSize];
+	
+			for (int i = 0; i < arrSize; i++) {
+				availableID[i] = Integer.toString(100 + i);
 			}
-		} else {
-			JOptionPane.showMessageDialog(null, "Operation Cancelled");
+			
+			JTextField fName = new JTextField(), lName = new JTextField(), email = new JTextField(),
+					attractionName = new JTextField(), message = new JTextField();
+	
+			Object form[] = { "First Name", fName, "Last Name", lName, "Email Address", email, "Attraction Name",
+					attractionName, "Message", message };
+	
+			String requestAttractionID = (String) JOptionPane.showInputDialog(null,
+					"Select attraction ID# from list below\n\n", "Attraction ID's Found", JOptionPane.QUESTION_MESSAGE,
+					null, availableID, availableID[0]);
+	
+			int choice = JOptionPane.showConfirmDialog(null, form, "Enter The Following Location Information",
+					JOptionPane.OK_CANCEL_OPTION);
+	
+			if (choice == JOptionPane.OK_OPTION) {
+				if ((fName.getText()).isEmpty() || (lName.getText()).isEmpty() || (email.getText()).isEmpty()
+						|| (attractionName.getText()).isEmpty() || (message.getText()).isEmpty()) {
+	
+					JOptionPane.showMessageDialog(null, "No field should be left empty, request adding canceled");
+				} else {
+					Visitor data = new Visitor(reqID, fName.getText().replace(" ", "_"), lName.getText().replace(" ", "_"),
+							email.getText().replace(" ", "_"), requestAttractionID.replace(" ", "_"),
+							attractionName.getText().replace(" ", "_"), message.getText().replace(" ", "_"),
+							dateBox.getText());
+					requestList.enqueue(data);
+	
+					reqID = Integer.toString(Integer.parseInt(reqID) + 1);
+	
+					JOptionPane.showMessageDialog(null, "Request successfully made");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Operation Cancelled");
+			}
 		}
 	}
 
