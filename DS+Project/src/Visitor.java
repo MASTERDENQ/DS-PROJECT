@@ -3,7 +3,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
@@ -239,7 +238,6 @@ public class Visitor extends JFrame {
 
 	public static void viewCreoleList() {
 		hostPanel.removeAll();
-		hostPanel.setLayout(new GridLayout(5, 1));
 
 		JButton command1 = new JButton("Gimmi all a di place dem inna [Parish Name]");
 		// command1.setToolTipText("");

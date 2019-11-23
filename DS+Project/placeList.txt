@@ -2,7 +2,7 @@ Place_ID1 placename1 Description1 Address1 1 3 Opening_Hours1 Contact_Number1 Ph
 Place_ID2 placename1 Description2 Address2 12 3 Opening_Hours2 Contact_Number2 Photo_Link2 Main_Attraction2
 Place_ID3 placename1 Description3 Address3 6 2 Opening_Hours3 Contact_Number3 Photo_Link3 Main_Attraction3
 Place_ID4 placename1 Description4 Address4 3 3 Opening_Hours4 Contact_Number4 Photo_Link4 Main_Attraction4
-Place_ID5 placename1 Description5 Address5 3 2 Opening_Hours5 Contact_Number5 Photo_Link5 Main_Attraction5
+Place_ID5 placename1 Description5 Address5 3 2 Opening_Hours5 Contact_Number5 Photo_Link5 Main_Attractio5
 100 baptist Church uptown 12 7000 9AM-6PM (876)504-1145 N/A praise
 100 baptist Church uptown 12 9000 9AM-6PM (876)504-1145 N/A praise
 100 hellshire Hellshire Hellshire 1 Hellshire Hellshire Hellshire Hellshire Hellshire
