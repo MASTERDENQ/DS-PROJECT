@@ -13,6 +13,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +46,7 @@ public class Visitor extends JFrame {
 
 	private String attractionID, reqID, fName, lName, email, attractionName, message, dateAndTime;
 	private VisitorList requestList = new VisitorList();
+	private Tree locationTree = new Tree();
 
 	/**
 	 * Launch the Visitor Frame. Default constructors are the main display.
@@ -183,6 +186,7 @@ public class Visitor extends JFrame {
 		JButton btnViewCreolePhrases = new JButton("View Creole Phrases");
 		btnViewCreolePhrases.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				viewCreoleTranslation();
 			}
 		});
 		btnViewCreolePhrases.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -206,6 +210,10 @@ public class Visitor extends JFrame {
 	 * Utilities .
 	 */
 
+	public void viewCreoleTranslation() {
+		
+	}
+	
 	public void loadID() {
 		try {
 			File file = new File("startingID.txt");
@@ -292,6 +300,20 @@ public class Visitor extends JFrame {
 		hostPanel.revalidate();
 	}// end of viewCreoleList()
 
+	public int displayPlace(int line) {
+		int choice = 0;
+		try {
+			String location = Files.readAllLines(Paths.get("placeList.txt")).get(line);
+			choice = JOptionPane.showConfirmDialog(null, location, "Is this the location you are requesting for?",JOptionPane.YES_NO_OPTION);
+			//JOptionPane.showMessageDialog(null, specific_line_text);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return choice;
+	}
+	
 	public void makeRequest() {
 		int arrSize = Integer.parseInt(attractionID) - 100;
 		
@@ -300,6 +322,8 @@ public class Visitor extends JFrame {
 		}
 		else {
 			//populateTree();
+			locationTree.populate();
+			
 			String[] availableID = new String[arrSize];
 	
 			for (int i = 0; i < arrSize; i++) {
@@ -315,28 +339,40 @@ public class Visitor extends JFrame {
 			String requestAttractionID = (String) JOptionPane.showInputDialog(null,
 					"Select attraction ID# from list below\n\n", "Attraction ID's Found", JOptionPane.QUESTION_MESSAGE,
 					null, availableID, availableID[0]);
-	
-			int choice = JOptionPane.showConfirmDialog(null, form, "Enter The Following Location Information",
-					JOptionPane.OK_CANCEL_OPTION);
-	
-			if (choice == JOptionPane.OK_OPTION) {
-				if ((fName.getText()).isEmpty() || (lName.getText()).isEmpty() || (email.getText()).isEmpty()
-						|| (attractionName.getText()).isEmpty() || (message.getText()).isEmpty()) {
-	
-					JOptionPane.showMessageDialog(null, "No field should be left empty, request adding canceled");
-				} else {
-					Visitor data = new Visitor(reqID, fName.getText().replace(" ", "_"), lName.getText().replace(" ", "_"),
-							email.getText().replace(" ", "_"), requestAttractionID.replace(" ", "_"),
-							attractionName.getText().replace(" ", "_"), message.getText().replace(" ", "_"),
-							dateBox.getText());
-					requestList.enqueue(data);
-	
-					reqID = Integer.toString(Integer.parseInt(reqID) + 1);
-	
-					JOptionPane.showMessageDialog(null, "Request successfully made");
+			
+			if(requestAttractionID == null)
+				JOptionPane.showMessageDialog(null, "Operation cancelled");
+			else {
+				int locationInFile = locationTree.search(Integer.parseInt(requestAttractionID));
+				int choice = displayPlace(locationInFile);
+				
+				if(choice == JOptionPane.OK_OPTION) {
+					choice = JOptionPane.showConfirmDialog(null, form, "Enter The Following Location Information",
+							JOptionPane.OK_CANCEL_OPTION);
+			
+					if (choice == JOptionPane.OK_OPTION) {
+						if ((fName.getText()).isEmpty() || (lName.getText()).isEmpty() || (email.getText()).isEmpty()
+								|| (attractionName.getText()).isEmpty() || (message.getText()).isEmpty()) {
+			
+							JOptionPane.showMessageDialog(null, "No field should be left empty, request adding canceled");
+						} else {
+							Visitor data = new Visitor(reqID, fName.getText().replace(" ", "_"), lName.getText().replace(" ", "_"),
+									email.getText().replace(" ", "_"), requestAttractionID.replace(" ", "_"),
+									attractionName.getText().replace(" ", "_"), message.getText().replace(" ", "_"),
+									dateBox.getText());
+							requestList.enqueue(data);
+			
+							reqID = Integer.toString(Integer.parseInt(reqID) + 1);
+			
+							JOptionPane.showMessageDialog(null, "Request successfully made");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Operation Cancelled");
+					}
 				}
-			} else {
-				JOptionPane.showMessageDialog(null, "Operation Cancelled");
+				else {
+					JOptionPane.showMessageDialog(null, "Confirm location id and retry");
+				}
 			}
 		}
 	}

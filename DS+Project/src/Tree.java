@@ -1,8 +1,34 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 public class Tree {
 	private LeafNode root;
 
+	public void populate() {
+		int placeID = 0;
+		try {
+			File file = new File("startingID.txt");
+
+			Scanner fileReader;
+			fileReader = new Scanner(file);
+
+			placeID = Integer.parseInt(fileReader.next());
+
+			fileReader.close();
+
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Failed to read from file");
+		}
+		
+		for(int i=100; i < placeID; i++) {
+			setRoot(insert(getRoot(), i)); 
+		}
+	}
 	
-	public int Search(int searchFor) {
+	public int search(int searchFor) {
 		LeafNode current = root;
 
 		while (true) {
@@ -101,13 +127,5 @@ public class Tree {
 
 	public void setRoot(LeafNode node) {
 		root = node;
-	}
-
-	public void preOrder(LeafNode LeafNode) {
-		if (LeafNode != null) {
-			System.out.print(LeafNode.getKey() + " ");
-			preOrder(LeafNode.getLeft());
-			preOrder(LeafNode.getRight());
-		}
 	}
 }

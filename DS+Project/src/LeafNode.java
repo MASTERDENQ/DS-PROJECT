@@ -4,7 +4,7 @@ public class LeafNode {
 
 	public LeafNode(int k) {
 		key = k;
-		fileLine = k + 100;
+		fileLine = k - 99;
 		height = 1;
 	}
 
