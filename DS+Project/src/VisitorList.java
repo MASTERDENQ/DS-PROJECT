@@ -1,3 +1,10 @@
+/**
+ * Written By :
+ * Tyrone Wallace - 1706903
+ * Dimitri Russell - 1801488
+ * Reinaldo Peno - 1803640
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

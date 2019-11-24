@@ -1,4 +1,9 @@
-
+/**
+ * Written By :
+ * Tyrone Wallace - 1706903
+ * Dimitri Russell - 1801488
+ * Reinaldo Peno - 1803640
+ */
 import java.io.*;
 import java.applet.*;
 import java.awt.BorderLayout;
@@ -52,6 +57,7 @@ import javax.swing.SwingConstants;
 
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
+	
 	private static AdminNode pastTail = null;
 
 	private String placeID, reqID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
@@ -165,6 +171,7 @@ public class Administrator extends JFrame {
 				try {
 					viewAllPlaces();
 				} catch (Exception e) {
+					
 					e.printStackTrace();
 				} // Catches Exception if thrown from function
 			}
