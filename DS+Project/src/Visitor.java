@@ -515,7 +515,7 @@ public class Visitor extends JFrame {
 														 * string format to better aid in function processing
 														 */
 			} catch (Exception e) {
-				System.out.println("Error in parish name parsing");
+				JOptionPane.showMessageDialog(null,"Error in parish name parsing");
 			}
 		} else if (commandSplit[0].equals("Which")) {// looks for the second command
 			commandNum = 2;
@@ -532,7 +532,7 @@ public class Visitor extends JFrame {
 										 * format to better aid in function processing
 										 */
 			} catch (Exception e) {
-				System.out.println("Error in attraction name parsing");
+				JOptionPane.showMessageDialog(null,"Error in attraction name parsing");
 			}
 		} // this nested-if is to derive which function has been inputed by the user
 		return (attractionString + " " + 0);// returns the string to search for along with the command number default to
@@ -602,10 +602,8 @@ public class Visitor extends JFrame {
 			}
 
 		} catch (FileNotFoundException ex) {
-			System.out.println("Unable to open file '" + fileName + "'");
 			JOptionPane.showMessageDialog(null, "File does not exist.");
 		} catch (IOException ex) {
-			System.out.println("Error reading file '" + fileName + "'");
 			JOptionPane.showMessageDialog(null, "File Reading Error.");
 		}
 	}// end of viewParishList
@@ -675,10 +673,8 @@ public class Visitor extends JFrame {
 			}
 
 		} catch (FileNotFoundException ex) {
-			System.out.println("Unable to open file '" + fileName + "'");
 			JOptionPane.showMessageDialog(null, "File does not exist.");
 		} catch (IOException ex) {
-			System.out.println("Error reading file '" + fileName + "'");
 			JOptionPane.showMessageDialog(null, "File Reading Error.");
 		}
 	}// end of viewAttraction
