@@ -138,6 +138,7 @@ public class Driver {
 		separator_3.setBounds(34, 98, 474, 2);
 		frame.getContentPane().add(separator_3);
 	}//End of initialize()
+	
 }//End of class
 
 
