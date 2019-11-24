@@ -329,7 +329,7 @@ public class Administrator extends JFrame {
 	
 	public String searchFormat(String value) {
 		value = value.toLowerCase();
-		value = value.replace(" ", "_");
+		value = value.replace(" ", "");
 
 		return value;
 	}

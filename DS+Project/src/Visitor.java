@@ -3,7 +3,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,7 +36,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 
 @SuppressWarnings({ "serial", "unused" })
 public class Visitor extends JFrame {
@@ -211,9 +214,25 @@ public class Visitor extends JFrame {
 	 */
 
 	public void viewCreoleTranslation() {
-		
+		try{
+            File image2 = new File("creolephrases.jpg");
+            final Image image;
+            image = ImageIO.read(image2);
+            
+            final JLabel imageLabel = new JLabel(new ImageIcon(image));
+    		final JScrollPane scroll = new JScrollPane(imageLabel);
+    		
+    		hostPanel.removeAll();
+    		hostPanel.setLayout(new BorderLayout());
+    		hostPanel.add(scroll);
+    		hostPanel.revalidate();
+    		//hostPanel.setLayout()
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
 	}
-	
+
 	public void loadID() {
 		try {
 			File file = new File("startingID.txt");
@@ -247,16 +266,16 @@ public class Visitor extends JFrame {
 
 	public static void viewCreoleList() {
 		hostPanel.removeAll();
+		hostPanel.setLayout(new GridLayout(5,1));
 
 		JButton command1 = new JButton("Gimmi all a di place dem inna [Parish Name]");
-		// command1.setToolTipText("");
+
 		command1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				commandTextField.setText("Gimmi all a di place dem inna ");
 			}
 		});
 
-		/* 10, 147, 691, 311 */
 		txtInstructions = new JTextField();
 		txtInstructions.setBounds(0, 0, 691, 35);
 
@@ -265,7 +284,7 @@ public class Visitor extends JFrame {
 		txtInstructions.setText("SELECT ONE OF THE OPTIONS BELOW OR TYPE COMMAND MANUALLY, THEN PRESS ENTER.");
 		txtInstructions.setEditable(false);
 		hostPanel.add(txtInstructions);
-		// txtInstructions.setColumns(10);
+
 		command1.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		command1.setBounds(0, 35, 691, 56);
 		hostPanel.add(command1);
@@ -304,73 +323,73 @@ public class Visitor extends JFrame {
 		int choice = 0;
 		try {
 			String location = Files.readAllLines(Paths.get("placeList.txt")).get(line);
-			choice = JOptionPane.showConfirmDialog(null, location, "Is this the location you are requesting for?",JOptionPane.YES_NO_OPTION);
-			//JOptionPane.showMessageDialog(null, specific_line_text);
+			choice = JOptionPane.showConfirmDialog(null, location, "Is this the location you are requesting for?",
+					JOptionPane.YES_NO_OPTION);
+			// JOptionPane.showMessageDialog(null, specific_line_text);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		return choice;
 	}
-	
+
 	public void makeRequest() {
 		int arrSize = Integer.parseInt(attractionID) - 100;
-		
-		if(arrSize == 0) {
+
+		if (arrSize == 0) {
 			JOptionPane.showMessageDialog(null, "No places have been added to request information for");
-		}
-		else {
-			//populateTree();
+		} else {
+			// populateTree();
 			locationTree.populate();
-			
+
 			String[] availableID = new String[arrSize];
-	
+
 			for (int i = 0; i < arrSize; i++) {
 				availableID[i] = Integer.toString(100 + i);
 			}
-			
+
 			JTextField fName = new JTextField(), lName = new JTextField(), email = new JTextField(),
 					attractionName = new JTextField(), message = new JTextField();
-	
+
 			Object form[] = { "First Name", fName, "Last Name", lName, "Email Address", email, "Attraction Name",
 					attractionName, "Message", message };
-	
+
 			String requestAttractionID = (String) JOptionPane.showInputDialog(null,
 					"Select attraction ID# from list below\n\n", "Attraction ID's Found", JOptionPane.QUESTION_MESSAGE,
 					null, availableID, availableID[0]);
-			
-			if(requestAttractionID == null)
+
+			if (requestAttractionID == null)
 				JOptionPane.showMessageDialog(null, "Operation cancelled");
 			else {
 				int locationInFile = locationTree.search(Integer.parseInt(requestAttractionID));
 				int choice = displayPlace(locationInFile);
-				
-				if(choice == JOptionPane.OK_OPTION) {
+
+				if (choice == JOptionPane.OK_OPTION) {
 					choice = JOptionPane.showConfirmDialog(null, form, "Enter The Following Location Information",
 							JOptionPane.OK_CANCEL_OPTION);
-			
+
 					if (choice == JOptionPane.OK_OPTION) {
 						if ((fName.getText()).isEmpty() || (lName.getText()).isEmpty() || (email.getText()).isEmpty()
 								|| (attractionName.getText()).isEmpty() || (message.getText()).isEmpty()) {
-			
-							JOptionPane.showMessageDialog(null, "No field should be left empty, request adding canceled");
+
+							JOptionPane.showMessageDialog(null,
+									"No field should be left empty, request adding canceled");
 						} else {
-							Visitor data = new Visitor(reqID, fName.getText().replace(" ", "_"), lName.getText().replace(" ", "_"),
-									email.getText().replace(" ", "_"), requestAttractionID.replace(" ", "_"),
-									attractionName.getText().replace(" ", "_"), message.getText().replace(" ", "_"),
-									dateBox.getText());
+							Visitor data = new Visitor(reqID, fName.getText().replace(" ", "_"),
+									lName.getText().replace(" ", "_"), email.getText().replace(" ", "_"),
+									requestAttractionID.replace(" ", "_"), attractionName.getText().replace(" ", "_"),
+									message.getText().replace(" ", "_"), dateBox.getText());
 							requestList.enqueue(data);
-			
+
 							reqID = Integer.toString(Integer.parseInt(reqID) + 1);
-			
+
 							JOptionPane.showMessageDialog(null, "Request successfully made");
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, "Operation Cancelled");
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Confirm location id and retry");
 				}
 			}
@@ -460,7 +479,8 @@ public class Visitor extends JFrame {
 					commandSplit[7] = "St" + commandSplit[8];
 				}
 
-				commandSplit[7] = commandSplit[7].toLowerCase();// all information is kept in lower case to increase efficiency of search
+				commandSplit[7] = commandSplit[7].toLowerCase();// all information is kept in lower case to increase
+																// efficiency of search
 
 				if (commandSplit[7].equals("kingston") || commandSplit[7].equals("standrew")
 						|| commandSplit[7].equals("st.andrew")) {
@@ -501,9 +521,11 @@ public class Visitor extends JFrame {
 		} else if (commandSplit[0].equals("Which")) {// looks for the second command
 			commandNum = 2;
 			try {
-				attractionString = command.replace("Which part have di cheapest ", "");// removes unwanted section of string
+				attractionString = command.replace("Which part have di cheapest ", "");// removes unwanted section of
+																						// string
 				attractionString = attractionString.replace(" ", "");// removes spaces to make search easier
-				attractionString = attractionString.toLowerCase();// all information is kept in lower case to increase efficiency of search
+				attractionString = attractionString.toLowerCase();// all information is kept in lower case to increase
+																	// efficiency of search
 
 				return (attractionString + " "
 						+ commandNum);/*
@@ -514,11 +536,12 @@ public class Visitor extends JFrame {
 				System.out.println("Error in attraction name parsing");
 			}
 		} // this nested-if is to derive which function has been inputed by the user
-		return (attractionString + " " + 0);// returns the string to search for along with the command number default to call onto an error
+		return (attractionString + " " + 0);// returns the string to search for along with the command number default to
+											// call onto an error
 
 	}// end of parseCommand
 
-	public static void runCommand(String commandInfo) {// runs the command called onto 
+	public static void runCommand(String commandInfo) {// runs the command called onto
 		String[] parameter = commandInfo.split(" ");
 
 		switch (Integer.parseInt(parameter[1])) {// switches case dependent on the command
@@ -532,7 +555,8 @@ public class Visitor extends JFrame {
 
 		default:
 			JOptionPane.showMessageDialog(null,
-					"Statement Incorrect...\n\nPlease re-check statement before pressing Enter again.");// error message displayed
+					"Statement Incorrect...\n\nPlease re-check statement before pressing Enter again.");// error message
+																										// displayed
 			break;
 		}
 	}// end of runCommand
@@ -574,7 +598,8 @@ public class Visitor extends JFrame {
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 			} else {
-				JOptionPane.showMessageDialog(null, "Table does not contain any data.");//error message to warn user of an empty parish
+				JOptionPane.showMessageDialog(null, "Table does not contain any data.");// error message to warn user of
+																						// an empty parish
 			}
 
 		} catch (FileNotFoundException ex) {
@@ -586,7 +611,9 @@ public class Visitor extends JFrame {
 		}
 	}// end of viewParishList
 
-	public static void viewAttraction(String attraction) {// searches for the attraction name in a file containng all attractions then sorts the cheapest of the attraction into the table
+	public static void viewAttraction(String attraction) {// searches for the attraction name in a file containng all
+															// attractions then sorts the cheapest of the attraction
+															// into the table
 		attraction = attraction.toLowerCase();
 		String[] singleLine, columnNames = { "Name", "Address", "Contact #", "Main Attraction" };
 		Object[][] rowData = {};
@@ -602,20 +629,22 @@ public class Visitor extends JFrame {
 			FileReader fileReader = new FileReader(fileName);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-			while ((line = bufferedReader.readLine()) != null) {//reads from the file
+			while ((line = bufferedReader.readLine()) != null) {// reads from the file
 				singleLine = line.split(" ");
 
 				if (singleLine[1].equals(attraction)) {// confirms the attraction name is equivalent
-					if(cheapest == 0) {// sets the cheapest of the attraction based on the first of its name
+					if (cheapest == 0) {// sets the cheapest of the attraction based on the first of its name
 						cheapest = Integer.parseInt(singleLine[5]);
 						String[] singleRow = { singleLine[1], singleLine[3], singleLine[7], singleLine[9] };
 						defaultTable.addRow(singleRow);
-					} else if(Integer.parseInt(singleLine[5]) < cheapest) {// finds cheaper attractions of its name
+					} else if (Integer.parseInt(singleLine[5]) < cheapest) {// finds cheaper attractions of its name
 						cheapest = Integer.parseInt(singleLine[5]);
 						defaultTable.setRowCount(0);
 						String[] singleRow = { singleLine[1], singleLine[3], singleLine[7], singleLine[9] };
 						defaultTable.addRow(singleRow);
-					} else if(Integer.parseInt(singleLine[5]) == cheapest) {// adds more of the attraction to the cheapest table given they have the same cost
+					} else if (Integer.parseInt(singleLine[5]) == cheapest) {// adds more of the attraction to the
+																				// cheapest table given they have the
+																				// same cost
 						cheapest = Integer.parseInt(singleLine[5]);
 						String[] singleRow = { singleLine[1], singleLine[3], singleLine[7], singleLine[9] };
 						defaultTable.addRow(singleRow);
@@ -641,7 +670,9 @@ public class Visitor extends JFrame {
 				frame.setVisible(true);
 				frame.setLocationRelativeTo(null);
 			} else {
-				JOptionPane.showMessageDialog(null, "Table does not contain any data.");// error message to warn the user that no attractions were found
+				JOptionPane.showMessageDialog(null, "Table does not contain any data.");// error message to warn the
+																						// user that no attractions were
+																						// found
 			}
 
 		} catch (FileNotFoundException ex) {
