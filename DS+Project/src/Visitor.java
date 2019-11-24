@@ -324,7 +324,6 @@ public class Visitor extends JFrame {
 			String location = Files.readAllLines(Paths.get("placeList.txt")).get(line);
 			choice = JOptionPane.showConfirmDialog(null, location, "Is this the location you are requesting for?",
 					JOptionPane.YES_NO_OPTION);
-			// JOptionPane.showMessageDialog(null, specific_line_text);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

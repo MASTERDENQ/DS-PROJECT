@@ -221,7 +221,7 @@ public class Administrator extends JFrame {
 				if (answer == JOptionPane.OK_OPTION)
 					addPlace();
 				else
-					JOptionPane.showMessageDialog(null, "");
+					JOptionPane.showMessageDialog(null, "Operation Canceled");
 			}
 		});
 		btnAddPlace.setFont(new Font("Tahoma", Font.BOLD, 14));
