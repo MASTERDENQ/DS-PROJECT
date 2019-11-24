@@ -75,6 +75,7 @@ public class VisitorList {
 		return deletedData;
 	}
 
+	//loads in requests made from file
 	public void loadFiles() {
 		try {
 			File file = new File("requestMade.txt");
@@ -105,6 +106,7 @@ public class VisitorList {
 		}
 	}
 
+	//saves requests made by visitor to file
 	public void saveFiles() {
 		FileWriter rMade;
 		try {
@@ -130,6 +132,7 @@ public class VisitorList {
 		} // end of try and catch exception handling
 	}
 
+	//Outputs the visitor request at the head of the list to the main panel in GUI
 	public JTable displayHead() {
 		Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID", "Attraction Name",
 				"Message", "Date and Time" };
@@ -150,6 +153,7 @@ public class VisitorList {
 		return table;
 	}
 
+	//Outputs all requests made by visitor to main panel in GUI
 	public JTable display() {
 		if (!isEmpty()) {
 			Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID",

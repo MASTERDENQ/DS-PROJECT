@@ -52,6 +52,7 @@ import javax.swing.SwingConstants;
 
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
+	//keeps track of the tail of place list when file is initially loaded in 
 	private static AdminNode pastTail = null;
 
 	private String placeID, reqID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
@@ -158,7 +159,7 @@ public class Administrator extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		// Display
+		//View all places added by admin
 		JButton btnViewAllPlace = new JButton("Place Listings");
 		btnViewAllPlace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -174,7 +175,7 @@ public class Administrator extends JFrame {
 		btnViewAllPlace.setBounds(0, 0, 227, 47);
 		panel.add(btnViewAllPlace);
 
-		// Display
+		//View the requests made by visitors
 		JButton btnViewRequest = new JButton("Visitor Requests");
 		btnViewRequest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -185,7 +186,7 @@ public class Administrator extends JFrame {
 		btnViewRequest.setBounds(227, 0, 237, 47);
 		panel.add(btnViewRequest);
 
-		// Display
+		// View all processed visitor requests
 		JButton btnViewProcessLog = new JButton("View Processed Requests");
 		btnViewProcessLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -200,6 +201,7 @@ public class Administrator extends JFrame {
 		separator_1.setBounds(42, 153, 624, 2);
 		contentPane.add(separator_1);
 
+		//Allows admin to process record
 		JButton btnProcess = new JButton("Process Visitor Request");
 		btnProcess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -240,7 +242,7 @@ public class Administrator extends JFrame {
 		mainView.setBounds(10, 161, 690, 233);
 		contentPane.add(mainView);
 
-		// This is the exit button
+		//Saves all data to file and ends program
 		JButton btnNewButton = new JButton("Save & Exit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -260,6 +262,7 @@ public class Administrator extends JFrame {
 	 * Utilities .
 	 */
 
+	//loads in starting id numbers for location and request
 	public void loadID() {
 		try {
 			File file = new File("startingID.txt");
@@ -277,6 +280,7 @@ public class Administrator extends JFrame {
 		}
 	}
 
+	//Saves next id numbers to be assigned
 	public void saveID() {
 		try {
 			File file = new File("startingID.txt");
@@ -291,6 +295,7 @@ public class Administrator extends JFrame {
 		}
 	}
 
+	//processes a visitor request
 	public void processRecord() {
 		if (visitorList.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No visitor requests found");
@@ -312,6 +317,8 @@ public class Administrator extends JFrame {
 		}
 	}
 
+	
+	//view all visitor requests processed by admin
 	public void viewProcessed() {
 		JTable table = visitorStack.display();
 		addToPanel(table);
@@ -320,6 +327,7 @@ public class Administrator extends JFrame {
 		}
 	}
 
+	//view all requests made by visitors
 	public void viewRequest() {
 		JTable table = visitorList.display();
 		addToPanel(table);
@@ -329,6 +337,7 @@ public class Administrator extends JFrame {
 		}
 	}
 	
+	//sets the location name added by admin to a format that makes it easier to be queried by visitor with creole commands
 	public String searchFormat(String value) {
 		value = value.toLowerCase();
 		value = value.replace(" ", "");
@@ -336,7 +345,7 @@ public class Administrator extends JFrame {
 		return value;
 	}
 
-
+	//allows the admin to add a location 
 	public void addPlace() {
 		JTextField placeName = new JTextField(), placeDescription = new JTextField(), placeAddress = new JTextField(),
 				placeCost = new JTextField(), placeOpeningHours = new JTextField(), placeContact = new JTextField(),
@@ -384,6 +393,7 @@ public class Administrator extends JFrame {
 		}
 	}
 
+	//Shows all places added to the system by admin
 	public void viewAllPlaces() {
 		JTable table = adminList.display();
 		addToPanel(table);
@@ -393,6 +403,7 @@ public class Administrator extends JFrame {
 		}
 	}
 
+	//adds table to main panel of administrator frame in GUI
 	public void addToPanel(JTable table) {
 		JScrollPane tableContainer = new JScrollPane(table);
 
@@ -403,6 +414,7 @@ public class Administrator extends JFrame {
 	}
 
 	// throws exception if all values are cancel
+	//sign in for users trying to access administrator
 	public static boolean signIn() throws FileNotFoundException {
 		JTextField userName = new JTextField();
 		JTextField passWord = new JPasswordField();

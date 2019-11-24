@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 public class Tree {
 	private LeafNode root;
 
+	//populates the tree with location id numbers
 	public void populate() {
 		int placeID = 0;
 		try {
@@ -28,6 +29,7 @@ public class Tree {
 		}
 	}
 	
+	//Searches the tree for a locations id number and returns the line that the locations information is saved to in file
 	public int search(int searchFor) {
 		LeafNode current = root;
 

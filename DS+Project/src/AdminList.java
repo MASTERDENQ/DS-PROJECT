@@ -59,6 +59,7 @@ public class AdminList {
 		}
 	}
 
+	//Takes locations saved to the main place list file and divides them into separate files based on parish
 	public void saveToSubFile(String parishCode, Administrator adminData) {
 		try {
 			File file = new File(parishCode + ".txt");
@@ -77,6 +78,7 @@ public class AdminList {
 		}
 	}
 
+	//Saves locations added by admin to file
 	public void saveFiles(AdminNode pastTail) {
 		try {
 				File file = new File("placeList.txt");
@@ -109,7 +111,8 @@ public class AdminList {
 			JOptionPane.showMessageDialog(null, "Error saving to file");
 		}
 	}
-
+	
+	//loads in locations added by admin from file
 	public void loadFiles() {
 		try {
 			File file = new File("placeList.txt");
@@ -141,6 +144,7 @@ public class AdminList {
 		}
 	}
 
+	//Returns the parish name based on the parish code passed as an argument
 	public String getParishName(String parishCode) {
 		int choice = Integer.parseInt(parishCode);
 		String parish = "";
@@ -191,6 +195,7 @@ public class AdminList {
 		return parish;
 	}
 
+	//Outputs locations added to system onto main panel in GUI
 	public JTable display() {
 		if (!isEmpty()) {
 			Object[] columnNames = { "ID #", "Name", "Description", "Address", "Parish Code", "Cost", "Opening Hours",

@@ -45,6 +45,8 @@ public class Driver {
 		});
 	}
 	
+	
+	//Plays the good ting dem song
 	public static void playMusic() {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("goodtingdem.wav").getAbsoluteFile());

@@ -15,6 +15,7 @@ public class VisitorStack {
 		head = null;
 	}
 
+	//Saves requests processed by admin to file
 	public void saveFiles() {
 		if(!isEmpty()) {
 			FileWriter rMade;
@@ -42,6 +43,7 @@ public class VisitorStack {
 		}
 	}
 	
+	//loads in requests previously processed by admin
 	public void loadFiles(){
 		try {
 			File file = new File("processRequests.txt");
@@ -108,6 +110,7 @@ public class VisitorStack {
 		}
 	}
 
+	//Displays all records processed by admin
 	public JTable display() {
 		if (!isEmpty()) {
 			Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID",
