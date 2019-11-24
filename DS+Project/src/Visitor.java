@@ -226,7 +226,6 @@ public class Visitor extends JFrame {
     		hostPanel.setLayout(new BorderLayout());
     		hostPanel.add(scroll);
     		hostPanel.revalidate();
-    		//hostPanel.setLayout()
         }
         catch (IOException e){
             e.printStackTrace();

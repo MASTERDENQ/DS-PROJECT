@@ -220,6 +220,8 @@ public class Administrator extends JFrame {
 						"Confirmation form", JOptionPane.OK_CANCEL_OPTION);
 				if (answer == JOptionPane.OK_OPTION)
 					addPlace();
+				else
+					JOptionPane.showMessageDialog(null, "");
 			}
 		});
 		btnAddPlace.setFont(new Font("Tahoma", Font.BOLD, 14));
