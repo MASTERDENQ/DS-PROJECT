@@ -1,3 +1,10 @@
+/**
+ * Written By :
+ * Tyrone Wallace - 1706903
+ * Dimitri Russell - 1801488
+ * Reinaldo Peno - 1803640
+ */
+
 public class AdminNode {
 	private Administrator data;
 	private AdminNode next;

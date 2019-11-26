@@ -2,7 +2,7 @@
  * Written By :
  * Tyrone Wallace - 1706903
  * Dimitri Russell - 1801488
- * Reinaldo Peno - 180
+ * Reinaldo Peno - 1803640
  */
 
 
@@ -36,16 +36,19 @@ public class Driver {
 				try {
 					@SuppressWarnings("unused")
 					Driver window = new Driver();
-					Driver.frame.setLocationRelativeTo(null);
+					Driver.frame.setLocationRelativeTo(null);//centers GUI JFrame
 					Driver.frame.setVisible(true);
 					playMusic();
 				} catch (Exception e) {
+					//Display if Error at Launch
+					JOptionPane.showMessageDialog(null, "App Nah Wok- Application Not Working");
 					e.printStackTrace();
 				}
 			}
 		});
 	}
 	
+	// Play Jamaican Music "Good Thing Dem".
 	
 	//Plays the good ting dem song
 	public static void playMusic() {
@@ -66,6 +69,7 @@ public class Driver {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * Contain Code to choose User access
 	 */
 	public static void initialize() {
 		frame = new JFrame();
@@ -82,7 +86,8 @@ public class Driver {
 		lblDiGoodPlaceDem.setForeground(Color.BLACK);
 		lblDiGoodPlaceDem.setBounds(47, 23, 456, 64);
 		frame.getContentPane().add(lblDiGoodPlaceDem);
-			
+		
+		//Call Visitor class code on click
 		JButton btnVisitor = new JButton("VISITOR");
 		btnVisitor.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		btnVisitor.addActionListener(new ActionListener() {
@@ -91,10 +96,10 @@ public class Driver {
 				frame.dispose();
 			}
 		});
-		
 		btnVisitor.setBounds(67, 167, 410, 55);
 		frame.getContentPane().add(btnVisitor);
 		
+		//Call Administrator code on click
 		JButton btnAdministrator = new JButton("ADMINISTRATOR");
 		btnAdministrator.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		btnAdministrator.addActionListener(new ActionListener() {
@@ -136,6 +141,7 @@ public class Driver {
 		separator_3.setBounds(34, 98, 474, 2);
 		frame.getContentPane().add(separator_3);
 	}//End of initialize()
+	
 }//End of class
 
 
