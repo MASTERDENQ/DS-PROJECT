@@ -57,11 +57,9 @@ import javax.swing.SwingConstants;
 
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
-<<<<<<< HEAD
-	
-=======
+
 	//keeps track of the tail of place list when file is initially loaded in 
->>>>>>> branch 'master' of https://github.com/MASTERDENQ/DS-PROJECT
+
 	private static AdminNode pastTail = null;
 
 	private String placeID, reqID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,

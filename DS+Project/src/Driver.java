@@ -48,12 +48,9 @@ public class Driver {
 		});
 	}
 	
-<<<<<<< HEAD
 	// Play Jamaican Music "Good Thing Dem".
-=======
 	
 	//Plays the good ting dem song
->>>>>>> branch 'master' of https://github.com/MASTERDENQ/DS-PROJECT
 	public static void playMusic() {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("goodtingdem.wav").getAbsoluteFile());
