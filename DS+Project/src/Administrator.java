@@ -58,9 +58,7 @@ import javax.swing.SwingConstants;
 //class: O(n)
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
-
 	//keeps track of the tail of place list when file is initially loaded in 
-
 	private static AdminNode pastTail = null;
 
 	private String placeID, reqID, placeName, placeDescription, placeAddress, placeParishCode, placeCost,
