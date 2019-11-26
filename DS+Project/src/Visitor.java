@@ -49,7 +49,7 @@ public class Visitor extends JFrame {
 
 	private String attractionID, reqID, fName, lName, email, attractionName, message, dateAndTime;
 	private VisitorList requestList = new VisitorList();
-	private Tree locationTree = new Tree();
+	private static Tree locationTree = new Tree();
 
 	/**
 	 * Launch the Visitor Frame. Default constructors are the main display.
@@ -63,6 +63,8 @@ public class Visitor extends JFrame {
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 					frame.loadID();
+					// populateTree();
+					locationTree.populate();
 				} catch (Exception e) {
 					e.printStackTrace();
 				} // Exception Handling
@@ -327,7 +329,7 @@ public class Visitor extends JFrame {
 	public int displayPlace(int line) {
 		int choice = 0;
 		try {
-			String location = Files.readAllLines(Paths.get("placeList.txt")).get(line);
+			String location = Files.readAllLines(Paths.get("placeList.txt")).get(line-1);
 			choice = JOptionPane.showConfirmDialog(null, location, "Is this the location you are requesting for?",
 					JOptionPane.YES_NO_OPTION);
 		} catch (IOException e1) {
@@ -345,8 +347,6 @@ public class Visitor extends JFrame {
 		if (arrSize == 0) {
 			JOptionPane.showMessageDialog(null, "No places have been added to request information for");
 		} else {
-			// populateTree();
-			locationTree.populate();
 
 			String[] availableID = new String[arrSize];
 
