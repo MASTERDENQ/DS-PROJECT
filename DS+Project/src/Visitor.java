@@ -98,6 +98,7 @@ public class Visitor extends JFrame {
 		this.dateAndTime = dateAndTime;
 	}
 
+	/*Creates visitor frame in GUI*/
 	public Visitor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 727, 590);
@@ -219,6 +220,7 @@ public class Visitor extends JFrame {
 	 * Utilities .
 	 */
 
+	//Outputs image of creole statements and their translations to the main Panel in GUI
 	public void viewCreoleTranslation() {
 		try{
             File image2 = new File("creolephrases.jpg");
@@ -238,6 +240,7 @@ public class Visitor extends JFrame {
         }
 	}
 
+	//Loads id number from file
 	public void loadID() {
 		try {
 			File file = new File("startingID.txt");
@@ -255,6 +258,7 @@ public class Visitor extends JFrame {
 		}
 	}
 
+	//Saves id number to file
 	public void saveID() {
 		try {
 			File file = new File("startingID.txt");
@@ -269,6 +273,7 @@ public class Visitor extends JFrame {
 		}
 	}
 
+	//Outputs the creole commands used to search for certain criteria to the main panel in GUI
 	public static void viewCreoleList() {
 		hostPanel.removeAll();
 		hostPanel.setLayout(new GridLayout(5,1));
@@ -324,6 +329,7 @@ public class Visitor extends JFrame {
 		hostPanel.revalidate();
 	}// end of viewCreoleList()
 
+	//Displays the information of the location that is at the file line passed as an argument
 	public int displayPlace(int line) {
 		int choice = 0;
 		try {
@@ -338,6 +344,7 @@ public class Visitor extends JFrame {
 		return choice;
 	}
 
+	//Allows visitor to make request on place added to system
 	public void makeRequest() {
 		int arrSize = Integer.parseInt(attractionID) - 100;
 
