@@ -14,20 +14,23 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+//function: O(1)
 public class VisitorList {
 	private VisitorNode head, tail;
 
+	//function: O(1)
 	public VisitorList() {
 		this(null, null);
 	}
 
+	//function: O(1)
 	public VisitorList(VisitorNode head, VisitorNode tail) {
 		super();
 		this.head = head;
 		this.tail = tail;
 	}
 
+	//function: O(1)
 	public boolean isEmpty() {
 		if (head == null) {
 			return true;
@@ -36,6 +39,7 @@ public class VisitorList {
 		}
 	}
 
+	//function: O(1)
 	@SuppressWarnings("unused")
 	public boolean isFull() {
 		VisitorNode temp = new VisitorNode();
@@ -48,6 +52,7 @@ public class VisitorList {
 		}
 	}
 
+	//function: O(1)
 	public void enqueue(Visitor data) {
 		if (isFull()) {
 			JOptionPane.showMessageDialog(null, "List is Full, unable to add item");
@@ -65,6 +70,7 @@ public class VisitorList {
 		}
 	}
 
+	//function: O(1)
 	@SuppressWarnings("unused")
 	public Visitor dequeue() {
 		Visitor deletedData = head.getData();
@@ -83,6 +89,7 @@ public class VisitorList {
 	}
 
 	//loads in requests made from file
+	//function: O(n)
 	public void loadFiles() {
 		try {
 			File file = new File("requestMade.txt");
@@ -114,6 +121,7 @@ public class VisitorList {
 	}
 
 	//saves requests made by visitor to file
+	//function: O(n)
 	public void saveFiles() {
 		FileWriter rMade;
 		try {
@@ -140,6 +148,7 @@ public class VisitorList {
 	}
 
 	//Outputs the visitor request at the head of the list to the main panel in GUI
+	//function: O(1)
 	public JTable displayHead() {
 		Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID", "Attraction Name",
 				"Message", "Date and Time" };
@@ -161,6 +170,7 @@ public class VisitorList {
 	}
 
 	//Outputs all requests made by visitor to main panel in GUI
+	//function: O(n)
 	public JTable display() {
 		if (!isEmpty()) {
 			Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID",
@@ -192,18 +202,22 @@ public class VisitorList {
 		return null;
 	}
 
+	//function: O(1)
 	public VisitorNode getHead() {
 		return head;
 	}
 
+	//function: O(1)
 	public void setHead(VisitorNode head) {
 		this.head = head;
 	}
 
+	//function: O(1)
 	public VisitorNode getTail() {
 		return tail;
 	}
 
+	//function: O(1)
 	public void setTail(VisitorNode tail) {
 		this.tail = tail;
 	}

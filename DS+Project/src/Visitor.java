@@ -44,6 +44,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings({ "serial", "unused" })
+//class: O(n)
 public class Visitor extends JFrame {
 
 	private JPanel contentPane;
@@ -62,7 +63,7 @@ public class Visitor extends JFrame {
 	 * Launch the Visitor Frame. Default constructors are the main display.
 	 */
 
-	
+	//function: O(nlog(n))
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -84,11 +85,13 @@ public class Visitor extends JFrame {
 	 * Create the frame.
 	 */
 
+	//function: O(1)
 	public Visitor(String defaultValue) {
 		this(defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue,
 				defaultValue);
 	}
 
+	//function: O(1)
 	public Visitor(String reqID, String fName, String lName, String email, String attractionID, String attractionName,
 			String message, String dateAndTime) throws HeadlessException {
 		super();
@@ -103,6 +106,7 @@ public class Visitor extends JFrame {
 	}
 
 	/*Creates visitor frame in GUI*/
+	//function: O(1)
 	public Visitor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 727, 590);
@@ -225,6 +229,7 @@ public class Visitor extends JFrame {
 	 */
 
 	//Outputs image of creole statements and their translations to the main Panel in GUI
+	//function: O(1)
 	public void viewCreoleTranslation() {
 		try{
             File image2 = new File("creolephrases.jpg");
@@ -245,6 +250,7 @@ public class Visitor extends JFrame {
 	}
 
 	//Loads id number from file
+	//function: O(1)
 	public void loadID() {
 		try {
 			File file = new File("startingID.txt");
@@ -263,6 +269,7 @@ public class Visitor extends JFrame {
 	}
 
 	//Saves id number to file
+	//function: O(1)
 	public void saveID() {
 		try {
 			File file = new File("startingID.txt");
@@ -278,6 +285,7 @@ public class Visitor extends JFrame {
 	}
 
 	//Outputs the creole commands used to search for certain criteria to the main panel in GUI
+	//function: O(1)
 	public static void viewCreoleList() {
 		hostPanel.removeAll();
 		hostPanel.setLayout(new GridLayout(5,1));
@@ -334,6 +342,7 @@ public class Visitor extends JFrame {
 	}// end of viewCreoleList()
 
 	//Displays the information of the location that is at the file line passed as an argument
+	//function: O(1)
 	public int displayPlace(int line) {
 		int choice = 0;
 		try {
@@ -341,7 +350,7 @@ public class Visitor extends JFrame {
 			choice = JOptionPane.showConfirmDialog(null, location, "Is this the location you are requesting for?",
 					JOptionPane.YES_NO_OPTION);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Cause not display");
 			e1.printStackTrace();
 		}
 
@@ -349,6 +358,7 @@ public class Visitor extends JFrame {
 	}
 
 	//Allows visitor to make request on place added to system
+	//function: O(n)
 	public void makeRequest() {
 		int arrSize = Integer.parseInt(attractionID) - 100;
 
@@ -574,6 +584,7 @@ public class Visitor extends JFrame {
 		}
 	}// end of runCommand
 
+	//function: O(n)
 	public static void viewParishList(int parishCode) {// makes a table with all the attractions in a parish
 		String line, fileName = parishCode + ".txt";
 		Object[][] rowData = {};
@@ -622,7 +633,8 @@ public class Visitor extends JFrame {
 		}
 	}// end of viewParishList
 
-	public static void viewAttraction(String attraction) {// searches for the attraction name in a file containng all
+	//function: O(n)
+	public static void viewAttraction(String attraction) {// searches for the attraction name in a file containing all
 															// attractions then sorts the cheapest of the attraction
 															// into the table
 		attraction = attraction.toLowerCase();

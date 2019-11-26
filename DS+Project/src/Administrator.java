@@ -55,6 +55,7 @@ import javax.swing.table.DefaultTableModel;
 
 import javax.swing.SwingConstants;
 
+//class: O(n)
 @SuppressWarnings({ "serial", "unused" })
 public class Administrator extends JFrame {
 
@@ -78,6 +79,7 @@ public class Administrator extends JFrame {
 	 * display.
 	 ***/
 
+	//function: O(n)
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -98,11 +100,13 @@ public class Administrator extends JFrame {
 		});
 	}
 
+	//function: O(1)
 	public Administrator(String defaultValue) {
 		this(defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue, defaultValue,
 				defaultValue, defaultValue, defaultValue);
 	}
 
+	//function: O(1)
 	public Administrator(String placeID, String placeName, String placeDescription, String placeAddress,
 			String placeParishCode, String placeCost, String placeOpeningHours, String placeContact,
 			String placePhotoLink, String placeMain) throws HeadlessException {
@@ -120,6 +124,7 @@ public class Administrator extends JFrame {
 	}
 
 	/*** Create the frame ***/
+	//function: O(n)
 	public Administrator() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 727, 549);
@@ -271,6 +276,7 @@ public class Administrator extends JFrame {
 	 */
 
 	//loads in starting id numbers for location and request
+	//function: O(1)
 	public void loadID() {
 		try {
 			File file = new File("startingID.txt");
@@ -289,6 +295,7 @@ public class Administrator extends JFrame {
 	}
 
 	//Saves next id numbers to be assigned
+	//function: O(1)
 	public void saveID() {
 		try {
 			File file = new File("startingID.txt");
@@ -304,6 +311,7 @@ public class Administrator extends JFrame {
 	}
 
 	//processes a visitor request
+	//function: O(1)
 	public void processRecord() {
 		if (visitorList.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "No visitor requests found");
@@ -327,6 +335,7 @@ public class Administrator extends JFrame {
 
 	
 	//view all visitor requests processed by admin
+	//function: O(n)
 	public void viewProcessed() {
 		JTable table = visitorStack.display();
 		addToPanel(table);
@@ -336,6 +345,7 @@ public class Administrator extends JFrame {
 	}
 
 	//view all requests made by visitors
+	//function: O(n)
 	public void viewRequest() {
 		JTable table = visitorList.display();
 		addToPanel(table);
@@ -346,6 +356,7 @@ public class Administrator extends JFrame {
 	}
 	
 	//sets the location name added by admin to a format that makes it easier to be queried by visitor with creole commands
+	//function: O(1)
 	public String searchFormat(String value) {
 		value = value.toLowerCase();
 		value = value.replace(" ", "");
@@ -354,6 +365,7 @@ public class Administrator extends JFrame {
 	}
 
 	//allows the admin to add a location 
+	//function: O(1)
 	public void addPlace() {
 		JTextField placeName = new JTextField(), placeDescription = new JTextField(), placeAddress = new JTextField(),
 				placeCost = new JTextField(), placeOpeningHours = new JTextField(), placeContact = new JTextField(),
@@ -402,6 +414,7 @@ public class Administrator extends JFrame {
 	}
 
 	//Shows all places added to the system by admin
+	//function: O(n)
 	public void viewAllPlaces() {
 		JTable table = adminList.display();
 		addToPanel(table);
@@ -412,6 +425,7 @@ public class Administrator extends JFrame {
 	}
 
 	//adds table to main panel of administrator frame in GUI
+	//function: O(1)
 	public void addToPanel(JTable table) {
 		JScrollPane tableContainer = new JScrollPane(table);
 
@@ -423,6 +437,7 @@ public class Administrator extends JFrame {
 
 	// throws exception if all values are cancel
 	//sign in for users trying to access administrator
+	//function: O(1)
 	public static boolean signIn() throws FileNotFoundException {
 		JTextField userName = new JTextField();
 		JTextField passWord = new JPasswordField();
@@ -453,82 +468,102 @@ public class Administrator extends JFrame {
 		return false;
 	}// end of signIn
 
+	//function: O(1)
 	public String getPlaceID() {
 		return placeID;
 	}
 
+	//function: O(1)
 	public void setPlaceID(String placeID) {
 		this.placeID = placeID;
 	}
 
+	//function: O(1)
 	public String getPlaceName() {
 		return placeName;
 	}
 
+	//function: O(1)
 	public void setPlaceName(String placeName) {
 		this.placeName = placeName;
 	}
 
+	//function: O(1)
 	public String getPlaceDescription() {
 		return placeDescription;
 	}
 
+	//function: O(1)
 	public void setPlaceDescription(String placeDescription) {
 		this.placeDescription = placeDescription;
 	}
 
+	//function: O(1)
 	public String getPlaceAddress() {
 		return placeAddress;
 	}
 
+	//function: O(1)
 	public void setPlaceAddress(String placeAddress) {
 		this.placeAddress = placeAddress;
 	}
 
+	//function: O(1)
 	public String getPlaceParishCode() {
 		return placeParishCode;
 	}
 
+	//function: O(1)
 	public void setPlaceParishCode(String placeParishCode) {
 		this.placeParishCode = placeParishCode;
 	}
 
+	//function: O(1)
 	public String getPlaceCost() {
 		return placeCost;
 	}
 
+	//function: O(1)
 	public void setPlaceCost(String placeCost) {
 		this.placeCost = placeCost;
 	}
 
+	//function: O(1)
 	public String getPlaceOpeningHours() {
 		return placeOpeningHours;
 	}
 
+	//function: O(1)
 	public void setPlaceOpeningHours(String placeOpeningHours) {
 		this.placeOpeningHours = placeOpeningHours;
 	}
 
+	//function: O(1)
 	public String getPlaceContact() {
 		return placeContact;
 	}
 
+	//function: O(1)
 	public void setPlaceContact(String placeContact) {
 		this.placeContact = placeContact;
 	}
 
+	//function: O(1)
 	public String getPlacePhotoLink() {
 		return placePhotoLink;
 	}
 
+	//function: O(1)
 	public void setPlacePhotoLink(String placePhotoLink) {
 		this.placePhotoLink = placePhotoLink;
 	}
 
+	//function: O(1)
 	public String getPlaceMain() {
 		return placeMain;
 	}
 
+	//function: O(1)
 	public void setPlaceMain(String placeMain) {
 		this.placeMain = placeMain;
 	}

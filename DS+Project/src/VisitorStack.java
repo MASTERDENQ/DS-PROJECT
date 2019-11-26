@@ -14,15 +14,17 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+//class: O(n)
 public class VisitorStack {
 	private VisitorNode head;
 
+	//function: O(1)
 	VisitorStack() {
 		head = null;
 	}
 
 	//Saves requests processed by admin to file
+	//function: O(n)
 	public void saveFiles() {
 		if(!isEmpty()) {
 			FileWriter rMade;
@@ -51,6 +53,7 @@ public class VisitorStack {
 	}
 	
 	//loads in requests previously processed by admin
+	//function: O(n)
 	public void loadFiles(){
 		try {
 			File file = new File("processRequests.txt");
@@ -81,6 +84,7 @@ public class VisitorStack {
 		}
 	}
 	
+	//function: O(1)
 	public boolean isEmpty() {
 		if (head == null) {
 			return true;
@@ -89,6 +93,7 @@ public class VisitorStack {
 		}
 	}
 
+	//function: O(1)
 	@SuppressWarnings("unused")
 	public boolean isFull() {
 		VisitorNode temp = new VisitorNode();
@@ -101,6 +106,7 @@ public class VisitorStack {
 		}
 	}
 
+	//function: O(1)
 	public void push(Visitor data) {
 		if (isFull()) {
 			JOptionPane.showMessageDialog(null, "Unable to add data to stack");
@@ -118,6 +124,7 @@ public class VisitorStack {
 	}
 
 	//Displays all records processed by admin
+	//function: O(n)
 	public JTable display() {
 		if (!isEmpty()) {
 			Object[] columnNames = { "Request ID", "First Name", "Last Name", "Email", "Attraction ID",

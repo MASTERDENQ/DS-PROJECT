@@ -24,12 +24,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+//class: O(1)
 public class Driver {
 	
 	private static JFrame frame;
 	private static JTextField txtCopyright;
 	
 	/*** Launch the application ***/
+	//function: O(1)
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,6 +53,7 @@ public class Driver {
 	// Play Jamaican Music "Good Thing Dem".
 	
 	//Plays the good ting dem song
+	//function: O(1)
 	public static void playMusic() {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("goodtingdem.wav").getAbsoluteFile());
@@ -63,6 +66,7 @@ public class Driver {
 		}
 	}
 	
+	//function: O(1)
 	public Driver() {
 		initialize();
 	}
@@ -71,6 +75,7 @@ public class Driver {
 	 * Initialize the contents of the frame.
 	 * Contain Code to choose User access
 	 */
+	//function: O(1)
 	public static void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);

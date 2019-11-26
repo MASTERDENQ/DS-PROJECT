@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+//function: O(n)
 public class AdminList {
 	private AdminNode head, tail;
 
@@ -22,12 +23,14 @@ public class AdminList {
 		this(null, null);
 	}
 
+	//function: O(1)
 	public AdminList(AdminNode head, AdminNode tail) {
 		super();
 		this.head = head;
 		this.tail = tail;
 	}
 
+	//function: O(1)
 	public boolean isEmpty() {
 		if (head == null) {
 			return true;
@@ -36,6 +39,7 @@ public class AdminList {
 		}
 	}
 
+	//function: O(1)
 	@SuppressWarnings("unused")
 	public boolean isFull() {
 		AdminNode temp = new AdminNode();
@@ -48,6 +52,7 @@ public class AdminList {
 		}
 	}
 
+	//function: O(1)
 	public void addToBack(Administrator data) {
 		if (isFull()) {
 			JOptionPane.showMessageDialog(null, "List is Full, unable to add item");
@@ -66,6 +71,7 @@ public class AdminList {
 	}
 
 	//Takes locations saved to the main place list file and divides them into separate files based on parish
+	//function: O(1)
 	public void saveToSubFile(String parishCode, Administrator adminData) {
 		try {
 			File file = new File(parishCode + ".txt");
@@ -85,6 +91,7 @@ public class AdminList {
 	}
 
 	//Saves locations added by admin to file
+	//function: O(n)
 	public void saveFiles(AdminNode pastTail) {
 		try {
 				File file = new File("placeList.txt");
@@ -119,6 +126,7 @@ public class AdminList {
 	}
 	
 	//loads in locations added by admin from file
+	//function: O(n)
 	public void loadFiles() {
 		try {
 			File file = new File("placeList.txt");
@@ -151,6 +159,7 @@ public class AdminList {
 	}
 
 	//Returns the parish name based on the parish code passed as an argument
+	//function: O(1)
 	public String getParishName(String parishCode) {
 		int choice = Integer.parseInt(parishCode);
 		String parish = "";
@@ -202,6 +211,7 @@ public class AdminList {
 	}
 
 	//Outputs locations added to system onto main panel in GUI
+	//function: O(n)
 	public JTable display() {
 		if (!isEmpty()) {
 			Object[] columnNames = { "ID #", "Name", "Description", "Address", "Parish Code", "Cost", "Opening Hours",
@@ -234,18 +244,22 @@ public class AdminList {
 		return null;
 	}
 
+	//function: O(1)
 	public AdminNode getHead() {
 		return head;
 	}
 
+	//function: O(1)
 	public void setHead(AdminNode head) {
 		this.head = head;
 	}
 
+	//function: O(1)
 	public AdminNode getTail() {
 		return tail;
 	}
 
+	//function: O(1)
 	public void setTail(AdminNode tail) {
 		this.tail = tail;
 	}
