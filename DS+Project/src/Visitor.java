@@ -56,6 +56,7 @@ public class Visitor extends JFrame {
 	 * Launch the Visitor Frame. Default constructors are the main display.
 	 */
 
+	
 	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
