@@ -23,6 +23,7 @@ public class VisitorStack {
 		head = null;
 	}
 	
+	
 	//Saves requests processed by admin to file
 	//function: O(n)
 	public void saveFiles() {
