@@ -51,6 +51,7 @@ public class Visitor extends JFrame {
 	private VisitorList requestList = new VisitorList();
 	private static Tree locationTree = new Tree();
 
+	
 	/**
 	 * Launch the Visitor Frame. Default constructors are the main display.
 	 */
